@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./home.module.scss";
-import Towers from "@/components/Towers";
+import Interactive from "@/components/Interactive";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className={classes.main}>
-      <Towers />
+      <Interactive />
     </div>
   );
 }

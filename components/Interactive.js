@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { MapControls } from "three/addons/controls/MapControls.js";
 import map from "@/assets/map.jpg";
 
-const Towers = () => {
+const Interactive = () => {
   const mountRef = useRef(null);
   const [popupData, setPopupData] = useState(null);
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -27,7 +27,6 @@ const Towers = () => {
       0.1,
       1000
     );
-    // camera.position.set(0, 0, 0);
     camera.fov = 150; // Decrease this value to zoom in, increase to zoom out
     camera.updateProjectionMatrix();
 
@@ -43,8 +42,8 @@ const Towers = () => {
     controls.maxPolarAngle = Math.PI / 2;
 
     // World setup
-    const SphereGeometry = new THREE.SphereGeometry(0.4, 32, 32);
-    SphereGeometry.translate(0, 0.5, 0);
+    const sphereGeometry = new THREE.SphereGeometry(0.4, 32, 32);
+    sphereGeometry.translate(0, 0.5, 0);
     const boxMaterial = new THREE.MeshPhongMaterial({
       color: "#cd3d2c",
       flatShading: true,
@@ -65,11 +64,18 @@ const Towers = () => {
 
     const meshes = [];
     const minDistance = 40; // Minimum distance between boxes
+    const count = 100;
+    const instancedMesh = new THREE.InstancedMesh(
+      sphereGeometry,
+      boxMaterial,
+      count
+    );
+    const positions = new Float32Array(count * 3);
+    let positionIndex = 0;
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < count; i++) {
       let position;
       let overlapping;
-
       do {
         overlapping = false;
         // Generate random position
@@ -78,19 +84,29 @@ const Towers = () => {
           0,
           Math.random() * 600 - 300
         );
-
-        // Check for overlaps with existing meshes
-        for (const obj of meshes) {
-          const distance = position.distanceTo(obj.mesh.position);
+        // Check for overlaps with existing instances
+        for (let j = 0; j < i; j++) {
+          const previousPosition = new THREE.Vector3(
+            positions[j * 3],
+            positions[j * 3 + 1],
+            positions[j * 3 + 2]
+          );
+          const distance = position.distanceTo(previousPosition);
           if (distance < minDistance) {
             overlapping = true;
             break;
           }
         }
       } while (overlapping);
-
+      positions[positionIndex++] = position.x;
+      positions[positionIndex++] = position.y;
+      positions[positionIndex++] = position.z;
+      instancedMesh.setMatrixAt(
+        i,
+        new THREE.Matrix4().makeTranslation(position.x, position.y, position.z)
+      );
       // Create the box mesh
-      const boxMesh = new THREE.Mesh(SphereGeometry, boxMaterial);
+      const boxMesh = new THREE.Mesh(sphereGeometry, boxMaterial);
       boxMesh.position.copy(position);
       boxMesh.scale.x = 20;
       boxMesh.scale.y = Math.random() * 0.5; // Random height
@@ -132,16 +148,9 @@ const Towers = () => {
     window.addEventListener("click", onMouseClick);
 
     // Lights setup
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 3);
-    dirLight1.position.set(1, 1, 1);
-    scene.add(dirLight1);
-
-    const dirLight2 = new THREE.DirectionalLight(0x002288, 3);
-    dirLight2.position.set(-1, -1, -1);
-    scene.add(dirLight2);
-
-    const ambientLight = new THREE.AmbientLight(0x555555);
-    scene.add(ambientLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 3);
+    dirLight.position.set(1, 1, 1);
+    scene.add(dirLight);
 
     // Resize handler
     const onWindowResize = () => {
@@ -174,7 +183,12 @@ const Towers = () => {
 
   return (
     <>
-      <div ref={mountRef} />
+      <div
+        ref={mountRef}
+        style={{
+          cursor: "pointer",
+        }}
+      />
       {isPopupVisible && popupData && (
         <div
           style={{
@@ -194,4 +208,4 @@ const Towers = () => {
   );
 };
 
-export default Towers;
+export default Interactive;
