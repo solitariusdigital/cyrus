@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "MuseTechLab",
-  "short_name": "MuseTechLab",
+  "name": "Cyrus",
+  "short_name": "Cyrus",
   "icons": [
     {
       "src": "/icon-192x192.png",

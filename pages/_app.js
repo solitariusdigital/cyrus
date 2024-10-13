@@ -10,13 +10,13 @@ export default function App({ Component, pageProps }) {
     <StateProvider>
       <Layout>
         <DefaultSeo
-          title="MuseTechLab"
-          description="Digital Agency"
+          title="Pantea Cyrus"
+          description="Portfolio"
           openGraph={{
             type: "website",
             locale: "fa_IR",
-            url: "https://MuseTechLab.com/",
-            siteName: "MuseTechLab",
+            url: "https://Cyrus.com/",
+            siteName: "Pantea Cyrus",
           }}
         />
         <Component {...pageProps} />
