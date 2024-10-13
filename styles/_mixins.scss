@@ -1,0 +1,123 @@
+@use "config" as config;
+
+$screen-mobile: 700px;
+$screen-tablet: 1200px;
+$screen-large: 2000px;
+
+@mixin mobile {
+  @media (max-width: #{$screen-mobile}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (min-width: #{$screen-mobile} ) and (max-width: #{$screen-tablet}) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media (min-width: #{$screen-mobile} ) and (max-width: #{$screen-large}) {
+    @content;
+  }
+}
+
+@mixin row-space-between-center() {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin button($color, $subColor, $size) {
+  width: $size;
+  height: 50px;
+  border-radius: 50px;
+  padding: 4px;
+  font-weight: bold;
+  background: $color;
+  color: $subColor;
+  font-size: 16px;
+  border: none;
+  box-shadow: config.$button-shadow;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin border-radius() {
+  border-radius: 12px;
+}
+
+@mixin heartbeat {
+  -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
+  animation: heartbeat 1.5s ease-in-out infinite both;
+
+  @-webkit-keyframes heartbeat {
+    from {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    10% {
+      -webkit-transform: scale(0.91);
+      transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    17% {
+      -webkit-transform: scale(0.98);
+      transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    33% {
+      -webkit-transform: scale(0.87);
+      transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    45% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  }
+  @keyframes heartbeat {
+    from {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-transform-origin: center center;
+      transform-origin: center center;
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    10% {
+      -webkit-transform: scale(0.91);
+      transform: scale(0.91);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    17% {
+      -webkit-transform: scale(0.98);
+      transform: scale(0.98);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    33% {
+      -webkit-transform: scale(0.87);
+      transform: scale(0.87);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    45% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+  }
+}

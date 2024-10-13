@@ -1,5 +1,5 @@
 {
-  "name": "schematic",
+  "name": "musetechlab",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,34 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.14"
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.14.2",
+    "@react-three/drei": "^9.114.0",
+    "@react-three/fiber": "^8.17.9",
+    "eslint-config-next": "13.4.12",
+    "konva": "^9.2.0",
+    "mini-css-extract-plugin": "^2.7.6",
+    "next": "^14.2.11",
+    "next-pwa": "^5.6.0",
+    "next-seo": "^6.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-konva": "^18.2.10",
+    "sass": "^1.64.1",
+    "sharp": "^0.33.5",
+    "three": "^0.169.0",
+    "webpack": "^5.88.2"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.14"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "^12.3.4",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }

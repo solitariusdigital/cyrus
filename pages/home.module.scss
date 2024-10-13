@@ -1,0 +1,247 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.header {
+  color: config.$white;
+  margin: 50px;
+  text-align: center;
+
+  .english {
+    font-family: config.$font-english !important;
+  }
+
+  .labText {
+    font-family: config.$font-english !important;
+    font-size: config.$small-font;
+  }
+}
+
+.bannerContainer,
+.bannerServices {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+  gap: 12px;
+  margin: auto;
+  direction: rtl;
+  width: config.$content-width;
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    width: 100%;
+    padding: 0px 12px;
+  }
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    width: 100%;
+    padding: 0px 12px;
+  }
+
+  .banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 200px;
+    padding: 12px;
+    color: config.$white;
+    border: 1px solid config.$white;
+    background: config.$background;
+    @include mixins.border-radius();
+
+    h3 {
+      margin: 6px 0px;
+    }
+  }
+}
+
+.bannerServices {
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  margin: auto;
+  margin-bottom: 100px;
+
+  @include mixins.tablet {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    width: 100%;
+    padding: 0px 12px;
+  }
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    width: 100%;
+    padding: 0px 12px;
+  }
+}
+
+.canvasContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
+  width: config.$content-width;
+
+  .canvas {
+    width: 100%;
+    height: 300px;
+  }
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .intro,
+    .canvas {
+      width: 100%;
+    }
+  }
+}
+
+.imageHero {
+  position: relative;
+  height: 600px;
+  width: 600px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+}
+
+.description {
+  color: config.$white;
+  width: 600px;
+  text-align: center;
+  line-height: 40px;
+  margin: 100px 0px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
+
+.spinner {
+  width: 7em;
+  height: 7em;
+  cursor: none;
+  border-radius: 50%;
+  box-shadow: -10px -10px 10px #af7ac5, 0px -10px 10px 0px #e74c3c,
+    10px -10px 10px #f7f9fb, 10px 0 10px #f06060, 10px 10px 10px 0px#8CBEB2,
+    0 10px 10px 0px #f39c12, -10px 10px 10px 0px #5dade2;
+  animation: rot55 1s linear infinite;
+}
+
+@keyframes rot55 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.infomrationContainer {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+
+  .infomration {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0px;
+    color: config.$white;
+    border: 1px solid config.$white;
+    @include mixins.border-radius();
+
+    .rowTitle,
+    .row {
+      display: flex;
+      direction: rtl;
+    }
+
+    .row {
+      margin-bottom: 8px;
+
+      h3 {
+        margin-right: 20px;
+      }
+    }
+
+    p {
+      text-align: right;
+    }
+
+    .rowEnglish {
+      display: flex;
+      margin-bottom: 8px;
+      align-items: center;
+      text-align: left;
+
+      h3 {
+        margin-left: 20px;
+      }
+    }
+
+    .rowTitle {
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      @include mixins.desktop {
+        &:hover {
+          color: config.$action;
+        }
+      }
+    }
+
+    .item {
+      margin: 20px 20px;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  color: config.$white;
+  width: config.$content-width;
+
+  @include mixins.mobile {
+    flex-direction: column;
+    height: 150px;
+    width: calc(100% - 24px);
+    margin-bottom: 20px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+
+    @include mixins.desktop {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    p {
+      margin: 0px 12px;
+    }
+  }
+}
