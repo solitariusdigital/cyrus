@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { MapControls } from "three/addons/controls/MapControls.js";
+import classes from "./Interactive.module.scss";
 import map from "@/assets/map.jpg";
 
 const Interactive = () => {
@@ -51,17 +52,16 @@ const Interactive = () => {
 
     // Create a unified base geometry
     const baseGeometry = new THREE.BoxGeometry(1440 + 500, 1, 720 + 200);
-
     const texture = new THREE.TextureLoader().load(map.src);
     texture.colorSpace = THREE.SRGBColorSpace;
     const baseMesh = new THREE.Mesh(
       baseGeometry,
       new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide })
     );
-
     baseMesh.position.y = -1; // Position the base slightly below the origin
     scene.add(baseMesh); // Add the base to the scene
 
+    // Create geometries and add to the mesh
     const meshes = [];
     const minDistance = 40; // Minimum distance between boxes
     const count = 100;
@@ -111,8 +111,8 @@ const Interactive = () => {
       boxMesh.scale.x = 20;
       boxMesh.scale.y = Math.random() * 0.5; // Random height
       boxMesh.scale.z = 20;
-      boxMesh.updateMatrix();
       boxMesh.matrixAutoUpdate = false;
+      boxMesh.updateMatrix();
       scene.add(boxMesh);
 
       // Store mesh with additional data
@@ -190,18 +190,9 @@ const Interactive = () => {
         }}
       />
       {isPopupVisible && popupData && (
-        <div
-          style={{
-            position: "absolute",
-            top: "0px",
-            left: "0px",
-            background: "white",
-            padding: "8px",
-            zIndex: 2,
-          }}
-        >
+        <div className={classes.popup}>
           <h3>{popupData.text}</h3>
-          <button onClick={closePopup}>Close</button>
+          <button onClick={() => closePopup()}>Close</button>
         </div>
       )}
     </>

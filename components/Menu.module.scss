@@ -2,33 +2,10 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  height: 100px;
   width: config.$content-width;
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {
     width: calc(100% - 24px);
-  }
-}
-
-.largeMenu {
-  width: 100%;
-  @include mixins.row-space-between-center();
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  @include mixins.desktop {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  p {
-    font-size: config.$tiny-font;
-    color: config.$white;
   }
 }
