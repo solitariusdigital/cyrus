@@ -1,0 +1,22 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container {
+  width: 50%;
+  margin: 5vh auto;
+  border: 1px solid config.$white;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
+
+.image {
+  position: relative;
+  height: 50vh;
+  margin-bottom: 5vh;
+
+  @include mixins.mobile {
+    height: 250px;
+  }
+}

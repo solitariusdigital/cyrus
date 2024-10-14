@@ -4,46 +4,55 @@
 .container {
   position: relative;
   width: config.$content-width;
-  max-width: config.$max-widthHeigh;
-  @include mixins.row-space-between-center();
 
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
+}
+
+.navigationBar {
+  @include mixins.row-space-between-center();
 
   .languageControl {
     position: absolute;
-    right: -110px;
-    color: config.$white;
+    right: 50px;
+    top: 13px;
 
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
-        color: config.$red;
       }
     }
   }
 }
 
-.navigation,
-.navigationReverse {
-  width: 100%;
+.navigation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  width: 250px;
+  padding: 50px 0px;
   color: config.$white;
-  @include mixins.row-space-between-center();
+  @include mixins.transparentBackground(0.9, config.$black);
 
   .nav {
-    cursor: pointer;
+    margin: 8px 0px;
     font-weight: bold;
 
     @include mixins.allDesktop {
       &:hover {
-        color: config.$red;
+        cursor: pointer;
+        color: config.$white;
       }
     }
   }
 
   .navActive {
-    color: config.$red;
+    color: config.$white;
+    margin: 8px 0px;
     font-weight: bold;
     cursor: pointer;
   }
@@ -56,14 +65,5 @@
 
   .image {
     cursor: pointer;
-  }
-}
-
-.smallNavigation {
-  width: 100%;
-  @include mixins.row-space-between-center();
-
-  .languageControl {
-    left: 50px;
   }
 }

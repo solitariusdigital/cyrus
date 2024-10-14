@@ -64,10 +64,29 @@ p {
 
 .menu {
   position: fixed;
-  top: 0px;
+  top: 40px;
   z-index: 10;
   height: 70px;
   width: 100%;
   @include mixins.row-space-between-center();
   justify-content: center;
+
+  @include mixins.mobile {
+    top: 10px;
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 20px;
+  z-index: 10;
+  width: 100%;
+
+  @include mixins.mobile {
+    bottom: 10px;
+  }
+}
+
+.icon {
+  cursor: pointer;
 }

@@ -34,76 +34,52 @@ export default function Menu() {
 
   return (
     <div className={classes.container}>
-      {screenSize === "desktop" && (
-        <Fragment>
-          <nav
-            className={
-              language ? classes.navigation : classes.navigationReverse
-            }
-          >
-            {navigationTopBar.map((nav, index) => (
-              <Fragment key={index}>
-                <a
-                  className={!nav.active ? classes.nav : classes.navActive}
-                  onClick={() => activateNav(nav.link, index)}
-                >
-                  {nav.title[languageType]}
-                </a>
-                {index === 2 && (
-                  <div className={classes.logo}>
-                    <Image
-                      className={classes.image}
-                      src={logo}
-                      layout="fill"
-                      objectFit="cover"
-                      alt="logo"
-                      onClick={() => window.location.assign("/")}
-                    />
-                  </div>
-                )}
-              </Fragment>
-            ))}
-          </nav>
-          <div
-            className={classes.languageControl}
-            onClick={() => toggleLanguage()}
-          >
-            {language ? <p>EN</p> : <p>FA</p>}
-          </div>
-        </Fragment>
-      )}
-      {screenSize !== "desktop" && (
-        <div className={classes.smallNavigation}>
-          {menuMobile ? (
-            <CloseIcon
-              className="icon"
-              onClick={() => setMenuMobile(!menuMobile)}
-              sx={{ fontSize: 30, color: "#000000" }}
-            />
-          ) : (
-            <MenuIcon
-              className="icon"
-              onClick={() => setMenuMobile(!menuMobile)}
-              sx={{ fontSize: 30, color: "#000000" }}
-            />
-          )}
-          <div
-            className={classes.languageControl}
-            onClick={() => toggleLanguage()}
-          >
-            {language ? <p>EN</p> : <p>FA</p>}
-          </div>
-          <div className={classes.logo}>
-            <Image
-              className={classes.image}
-              src={logo}
-              layout="fill"
-              objectFit="cover"
-              alt="logo"
-              onClick={() => window.location.assign("/")}
-            />
-          </div>
+      <div className={classes.navigationBar}>
+        <div className={classes.logo}>
+          <Image
+            className={classes.image}
+            src={logo}
+            layout="fill"
+            objectFit="cover"
+            alt="logo"
+            onClick={() => window.location.assign("/")}
+          />
         </div>
+        {menuMobile ? (
+          <CloseIcon
+            className="icon"
+            onClick={() => setMenuMobile(!menuMobile)}
+            sx={{ fontSize: 34 }}
+          />
+        ) : (
+          <MenuIcon
+            className="icon"
+            onClick={() => setMenuMobile(!menuMobile)}
+            sx={{ fontSize: 34 }}
+          />
+        )}
+        <div
+          className={classes.languageControl}
+          onClick={() => toggleLanguage()}
+        >
+          {language ? <p>EN</p> : <p>FA</p>}
+        </div>
+      </div>
+      {menuMobile && (
+        <nav
+          className={`${classes.navigation} animate__animated animate__slideInRight`}
+        >
+          {navigationTopBar.map((nav, index) => (
+            <Fragment key={index}>
+              <a
+                className={!nav.active ? classes.nav : classes.navActive}
+                onClick={() => activateNav(nav.link, index)}
+              >
+                {nav.title[languageType]}
+              </a>
+            </Fragment>
+          ))}
+        </nav>
       )}
     </div>
   );

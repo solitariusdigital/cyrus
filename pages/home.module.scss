@@ -13,9 +13,21 @@
   width: 100%;
   height: 100vh;
   cursor: url("../assets/brush.png"), auto;
+  margin-bottom: 50px;
 
   @include mixins.mobile {
     height: 500px;
+  }
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  margin-bottom: 50px;
+
+  @include mixins.mobile {
+    height: 200px;
   }
 }
 

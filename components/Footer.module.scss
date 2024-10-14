@@ -3,8 +3,7 @@
 
 .footer {
   width: config.$content-width;
-  max-width: config.$max-widthHeigh;
-  margin: 20px auto;
+  margin: auto;
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {

@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
       <section className="main">
         <main>{children}</main>
       </section>
-      <section>
+      <section className="footer">
         <Footer />
       </section>
     </Fragment>
