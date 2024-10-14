@@ -3,20 +3,49 @@
 
 .container {
   width: 50%;
-  margin: 5vh auto;
-  border: 1px solid config.$white;
+  margin: 2vh auto;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr;
+  gap: 2vh;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+    display: flex;
+    flex-direction: column;
+  }
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+  @include mixins.tabletPortrait {
+    width: config.$content-widthTablet;
   }
 }
 
-.image {
-  position: relative;
-  height: 50vh;
-  margin-bottom: 5vh;
+.columnOne,
+.columnTwo {
+  .imageBox {
+    position: relative;
+    height: 50vh;
+    margin-bottom: 2vh;
 
-  @include mixins.mobile {
-    height: 250px;
+    @include mixins.mobile {
+      height: 250px;
+    }
+
+    .image {
+      @include mixins.allDesktop {
+        &:hover {
+          @include mixins.background-anime();
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.columnTwo {
+  .imageBox {
+    height: 30vh;
   }
 }

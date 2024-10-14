@@ -79,6 +79,16 @@ export default function Menu() {
               </a>
             </Fragment>
           ))}
+          <div className={classes.logo}>
+            <Image
+              className={classes.image}
+              src={logo}
+              layout="fill"
+              objectFit="cover"
+              alt="logo"
+              onClick={() => window.location.assign("/")}
+            />
+          </div>
         </nav>
       )}
     </div>

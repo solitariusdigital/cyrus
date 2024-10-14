@@ -26,6 +26,7 @@ export default function Home() {
       </div>
       <div className={classes.banner}>
         <Image
+          className={classes.image}
           src={
             "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
           }
@@ -42,6 +43,7 @@ export default function Home() {
       </div>
       <div className={classes.banner}>
         <Image
+          className={classes.image}
           src={
             "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
           }
@@ -58,6 +60,7 @@ export default function Home() {
       </div>
       <div className={classes.banner}>
         <Image
+          className={classes.image}
           src={
             "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
           }

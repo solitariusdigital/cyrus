@@ -24,6 +24,16 @@
       }
     }
   }
+
+  .logo {
+    position: relative;
+    height: 50px;
+    width: 150px;
+
+    .image {
+      cursor: pointer;
+    }
+  }
 }
 
 .navigation {
@@ -40,30 +50,30 @@
 
   .nav {
     margin: 8px 0px;
-    font-weight: bold;
 
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
-        color: config.$white;
+        color: config.$brand;
       }
     }
   }
 
   .navActive {
-    color: config.$white;
+    color: config.$brand;
     margin: 8px 0px;
     font-weight: bold;
     cursor: pointer;
   }
-}
 
-.logo {
-  position: relative;
-  height: 50px;
-  width: 150px;
+  .logo {
+    position: relative;
+    height: 50px;
+    width: 150px;
+    margin-top: 16px;
 
-  .image {
-    cursor: pointer;
+    .image {
+      cursor: pointer;
+    }
   }
 }

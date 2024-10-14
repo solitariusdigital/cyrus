@@ -29,6 +29,15 @@
   @include mixins.mobile {
     height: 200px;
   }
+
+  .image {
+    @include mixins.allDesktop {
+      &:hover {
+        @include mixins.background-anime();
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .notFound {
