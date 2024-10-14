@@ -1,7 +1,19 @@
 /** @type {import('next').NextConfig} */
 const withPWA = require("next-pwa");
 
-const nextConfig = { reactStrictMode: false, swcMinify: true };
+const nextConfig = {
+  reactStrictMode: false,
+  swcMinify: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "eshareh.storage.iran.liara.space",
+        pathname: "**",
+      },
+    ],
+  },
+};
 
 module.exports = withPWA({
   pwa: {

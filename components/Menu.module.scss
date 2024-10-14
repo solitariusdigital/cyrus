@@ -2,10 +2,68 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
+  position: relative;
   width: config.$content-width;
+  max-width: config.$max-widthHeigh;
   @include mixins.row-space-between-center();
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+  }
+
+  .languageControl {
+    position: absolute;
+    right: -110px;
+    color: config.$white;
+
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$red;
+      }
+    }
+  }
+}
+
+.navigation,
+.navigationReverse {
+  width: 100%;
+  color: config.$white;
+  @include mixins.row-space-between-center();
+
+  .nav {
+    cursor: pointer;
+    font-weight: bold;
+
+    @include mixins.allDesktop {
+      &:hover {
+        color: config.$red;
+      }
+    }
+  }
+
+  .navActive {
+    color: config.$red;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.logo {
+  position: relative;
+  height: 50px;
+  width: 150px;
+
+  .image {
+    cursor: pointer;
+  }
+}
+
+.smallNavigation {
+  width: 100%;
+  @include mixins.row-space-between-center();
+
+  .languageControl {
+    left: 50px;
   }
 }

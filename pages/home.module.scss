@@ -8,12 +8,28 @@
   align-items: center;
 }
 
-.menu {
-  position: absolute;
-  top: 0px;
-  height: 70px;
+.cover {
+  position: relative;
   width: 100%;
-  @include mixins.transparentBackground(0.7, config.$background);
-  @include mixins.row-space-between-center();
-  justify-content: center;
+  height: 100vh;
+  cursor: url("../assets/brush.png"), auto;
+
+  @include mixins.mobile {
+    height: 500px;
+  }
+}
+
+.notFound {
+  margin: auto;
+  width: config.$content-width;
+  margin-top: 150px;
+  text-align: center;
+
+  @include mixins.tablet {
+    width: config.$content-widthTablet;
+  }
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
 }

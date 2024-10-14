@@ -1,0 +1,13 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.footer {
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin: 20px auto;
+  @include mixins.row-space-between-center();
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
