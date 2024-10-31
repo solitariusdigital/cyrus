@@ -36,8 +36,8 @@ export default function RootLayout({ children }) {
   }, []);
 
   useEffect(() => {
-    setLanguageType("en");
-    setLanguage(false);
+    setLanguageType("fa");
+    setLanguage(true);
   }, [setLanguage, setLanguageType]);
 
   return (

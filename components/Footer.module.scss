@@ -5,8 +5,49 @@
   width: config.$content-width;
   margin: auto;
   @include mixins.row-space-between-center();
+  flex-direction: row-reverse;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
   }
+}
+
+.navigation,
+.navigationReverse {
+  @include mixins.row-space-between-center();
+
+  width: 250px;
+
+  .nav {
+    margin: 8px 0px;
+
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$brand;
+      }
+    }
+  }
+
+  .navActive {
+    color: config.$brand;
+    margin: 8px 0px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .logo {
+    position: relative;
+    height: 50px;
+    width: 150px;
+    margin-top: 16px;
+
+    .image {
+      cursor: pointer;
+    }
+  }
+}
+
+.navigation {
+  flex-direction: row-reverse;
 }

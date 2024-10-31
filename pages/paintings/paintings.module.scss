@@ -2,23 +2,18 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  width: 50%;
+  width: 100%;
   margin: 2vh auto;
   height: 100vh;
   display: grid;
-  grid-template-columns: 2fr 1.5fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2vh;
+  width: config.$content-width;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
     display: flex;
     flex-direction: column;
-  }
-  @include mixins.tablet {
-    width: config.$content-widthTablet;
-  }
-  @include mixins.tabletPortrait {
-    width: config.$content-widthTablet;
   }
 }
 
@@ -46,6 +41,6 @@
 
 .columnTwo {
   .imageBox {
-    height: 30vh;
+    height: 40vh;
   }
 }

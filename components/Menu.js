@@ -35,34 +35,26 @@ export default function Menu() {
   return (
     <div className={classes.container}>
       <div className={classes.navigationBar}>
-        <div className={classes.logo}>
-          <Image
-            className={classes.image}
-            src={logo}
-            layout="fill"
-            objectFit="cover"
-            alt="logo"
-            onClick={() => window.location.assign("/")}
-          />
-        </div>
-        {menuMobile ? (
-          <CloseIcon
-            className="icon"
-            onClick={() => setMenuMobile(!menuMobile)}
-            sx={{ fontSize: 34 }}
-          />
-        ) : (
-          <MenuIcon
-            className="icon"
-            onClick={() => setMenuMobile(!menuMobile)}
-            sx={{ fontSize: 34 }}
-          />
-        )}
-        <div
-          className={classes.languageControl}
-          onClick={() => toggleLanguage()}
-        >
-          {language ? <p>EN</p> : <p>FA</p>}
+        <h1 onClick={() => window.location.assign("/")}>
+          P a n t e a C y r u s
+        </h1>
+        <div className={classes.control}>
+          <div onClick={() => toggleLanguage()}>
+            {language ? <p>EN</p> : <p>FA</p>}
+          </div>
+          {menuMobile ? (
+            <CloseIcon
+              className="icon"
+              onClick={() => setMenuMobile(!menuMobile)}
+              sx={{ fontSize: 34 }}
+            />
+          ) : (
+            <MenuIcon
+              className="icon"
+              onClick={() => setMenuMobile(!menuMobile)}
+              sx={{ fontSize: 34 }}
+            />
+          )}
         </div>
       </div>
       {menuMobile && (

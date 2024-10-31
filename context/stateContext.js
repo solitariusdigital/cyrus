@@ -2,7 +2,7 @@ import { useState, createContext } from "react";
 export const StateContext = createContext();
 
 export const StateProvider = (props) => {
-  const [language, setLanguage] = useState(false);
+  const [language, setLanguage] = useState(true);
   const [languageType, setLanguageType] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [menuMobile, setMenuMobile] = useState(false);
@@ -14,7 +14,7 @@ export const StateProvider = (props) => {
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
       title: {
-        fa: "نقاشی",
+        fa: "نقاشی‌",
         en: "Paintings",
       },
       link: "/paintings",
@@ -22,18 +22,18 @@ export const StateProvider = (props) => {
     },
     {
       title: {
-        fa: "بازیگری",
-        en: "Acting",
+        fa: "فیلم",
+        en: "Movies",
       },
-      link: "/acting",
+      link: "/movies",
       active: false,
     },
     {
       title: {
-        fa: "ماجراجویی",
-        en: "Adventures",
+        fa: "سفر",
+        en: "Travels",
       },
-      link: "/adventures",
+      link: "/travels",
       active: false,
     },
     {
