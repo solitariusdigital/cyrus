@@ -71,7 +71,7 @@ $screen-fourK: 6000px;
   color: config.$black;
   outline: none;
   border: 1px solid config.$grey;
-  font-weight: 300;
+  border-radius: 4px;
 
   &:focus {
     outline: none;
@@ -86,7 +86,6 @@ $screen-fourK: 6000px;
   padding: 12px;
   outline: none;
   border-radius: 12px;
-  font-weight: 300;
   background: config.$background;
   color: config.$black;
   border: 1px solid config.$white;

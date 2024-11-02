@@ -47,9 +47,9 @@ export const deleteUserApi = async (id) => {
   return await response.json();
 };
 
-// company api
-export const updateCompanyApi = async (data) => {
-  const response = await fetch("/api/company", {
+// works api
+export const updateWorksApi = async (data) => {
+  const response = await fetch("/api/works", {
     method: "PUT",
     body: JSON.stringify(data),
     headers: {
@@ -58,8 +58,8 @@ export const updateCompanyApi = async (data) => {
   });
   return await response.json();
 };
-export const createCompanyApi = async (data) => {
-  const response = await fetch("/api/company", {
+export const createWorksApi = async (data) => {
+  const response = await fetch("/api/works", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -68,8 +68,8 @@ export const createCompanyApi = async (data) => {
   });
   return await response.json();
 };
-export const getSingleCompanyApi = async (id) => {
-  const response = await fetch(`/api/company?id=${id}`, {
+export const getSingleWorksApi = async (id) => {
+  const response = await fetch(`/api/works?id=${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -77,8 +77,8 @@ export const getSingleCompanyApi = async (id) => {
   });
   return await response.json();
 };
-export const getCompanyApi = async () => {
-  const response = await fetch("/api/company", {
+export const getWorksApi = async () => {
+  const response = await fetch("/api/works", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -86,8 +86,8 @@ export const getCompanyApi = async () => {
   });
   return await response.json();
 };
-export const deleteCompanyApi = async (id) => {
-  const response = await fetch(`/api/company?id=${id}`, {
+export const deleteWorksApi = async (id) => {
+  const response = await fetch(`/api/works?id=${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

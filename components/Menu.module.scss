@@ -14,8 +14,6 @@
   @include mixins.row-space-between-center();
 
   h1 {
-    font-weight: 300;
-
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;

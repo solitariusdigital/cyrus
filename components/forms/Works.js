@@ -12,16 +12,23 @@ import {
   uploadMedia,
   extractParagraphs,
 } from "@/services/utility";
-import { createCompanyApi, updateCompanyApi } from "@/services/api";
+import { createWorksApi, updateWorksApi } from "@/services/api";
 
-export default function Company() {
+export default function Works() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [name, setName] = useState("");
-  const [manager, setManager] = useState("");
-  const [contact, setContact] = useState("");
-  const [address, setAddress] = useState("");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
-  const [newMedia, setNewMedia] = useState("");
+  const [size, setSize] = useState("");
+  const [year, setYear] = useState("");
+  const [newMedia, setNewMedia] = useState([]);
+
+  const [imagesPreview, setImagesPreview] = useState([]);
+  const [videosPreview, setVideosPreview] = useState([]);
+  const [uploadImages, setUploadImages] = useState([]);
+  const [uploadVideos, setUploadVideos] = useState([]);
+
   const [editMedia, setEditMedia] = useState("");
   const [isMediaChanging, setIsMediaChanging] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
@@ -30,50 +37,104 @@ export default function Company() {
   const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
 
+  const categories = ["نقاشی‌", "فیلم", "سفر"];
   const sourceLink = "https://kimpur.storage.c2.liara.space";
   const router = useRouter();
 
-  const createCompany = async () => {
-    if (
-      !name ||
-      !manager ||
-      !contact ||
-      !address ||
-      !description ||
-      !newMedia
-    ) {
-      showAlert("همه موارد الزامیست");
+  const handleImageChange = (event) => {
+    const array = Array.from(event.target.files);
+    setUploadImages(array);
+    setImagesPreview(
+      array.map((item) => ({
+        file: item,
+        link: URL.createObjectURL(item),
+      }))
+    );
+  };
+  const handleVideoChange = (event) => {
+    const array = Array.from(event.target.files);
+    setUploadVideos(array);
+    setVideosPreview(
+      array.map((item) => ({
+        file: item,
+        link: URL.createObjectURL(item),
+      }))
+    );
+  };
+  const removeImageInputFile = () => {
+    const input = document.getElementById("inputImage");
+    input.value = null;
+  };
+  const removeVideoInputFile = () => {
+    const input = document.getElementById("inputVideo");
+    input.value = null;
+  };
+
+  const createWorks = async () => {
+    if (!category) {
+      showAlert("دسته‌بندی الزامیست");
+      return;
+    }
+    if (imagesPreview.length === 0 && videosPreview.length === 0) {
+      showAlert("انتخاب عکس یا ویدئو");
       return;
     }
 
     setLoader(true);
     setDisableButton(true);
 
-    let mediaLink;
-    let mediaFormat = ".jpg";
-    let mediaFolder = "company";
-    const subFolder = `com${sixGenerator()}`;
-    let mediaId = `img${fourGenerator()}`;
-    mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
-    await uploadMedia(newMedia, mediaId, mediaFolder, subFolder, mediaFormat);
+    let mediaLinks = [];
+    const mediaFolder = "works";
+    const worksId = `wor${sixGenerator()}`;
 
-    const companyObject = {
-      name: name.trim(),
-      manager: manager.trim(),
-      contact: contact.trim(),
-      address: address.trim(),
+    if (imagesPreview.length > 0) {
+      const imageFormat = ".jpg";
+      for (const media of uploadImages) {
+        const mediaId = `img${fourGenerator()}`;
+        const mediaLink = `${sourceLink}/${mediaFolder}/${worksId}/${mediaId}${imageFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, worksId, imageFormat);
+        mediaLinks.push({
+          link: mediaLink,
+          type: "image",
+          active: true,
+        });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
+      }
+    }
+
+    if (videosPreview.length > 0) {
+      const videoFormat = ".mp4";
+      for (const media of uploadVideos) {
+        const mediaId = `vid${fourGenerator()}`;
+        const mediaLink = `${sourceLink}/${mediaFolder}/${worksId}/${mediaId}${videoFormat}`;
+        await uploadMedia(media, mediaId, mediaFolder, worksId, videoFormat);
+        mediaLinks.push({
+          link: mediaLink,
+          type: "video",
+          active: true,
+        });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
+      }
+    }
+
+    const worksObject = {
+      title: title.trim(),
+      category: category.trim(),
+      location: location.trim(),
       description: extractParagraphs(description).join("\n\n"),
+      size: size.trim(),
+      year: year.trim(),
       media: mediaLink,
-      active: true,
+      active: false,
     };
 
-    await createCompanyApi(companyObject);
+    await createWorksApi(worksObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
 
-  const updateCompany = async () => {
-    if (!name || !manager || !contact || !address || !description) {
+  const updateWorks = async () => {
+    if (!title || !location || !size || !year || !description) {
       showAlert("همه موارد الزامیست");
       return;
     }
@@ -95,15 +156,15 @@ export default function Company() {
 
     const companyObject = {
       ...editCompanyData,
-      name: name.trim(),
-      manager: manager.trim(),
-      contact: contact.trim(),
-      address: address.trim(),
+      title: title.trim(),
+      location: location.trim(),
+      size: size.trim(),
+      year: year.trim(),
       description: extractParagraphs(description).join("\n\n"),
       media: mediaLink,
     };
 
-    await updateCompanyApi(companyObject);
+    await updateWorksApi(companyObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
@@ -111,10 +172,10 @@ export default function Company() {
   const selectCompany = (index) => {
     setEditCompany(true);
     setEditCompanyData(companyData[index]);
-    setName(companyData[index].name);
-    setManager(companyData[index].manager);
-    setContact(companyData[index].contact);
-    setAddress(companyData[index].address);
+    setTitle(companyData[index].title);
+    setLocation(companyData[index].location);
+    setSize(companyData[index].size);
+    setYear(companyData[index].year);
     setDescription(companyData[index].description);
     setEditMedia(companyData[index].media);
   };
@@ -138,96 +199,104 @@ export default function Company() {
         <div className={classes.bar}>
           <p className={classes.label}>
             <span>*</span>
-            شرکت
+            دسته‌بندی
           </p>
+        </div>
+        <select
+          defaultValue={"default"}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="default" disabled>
+            انتخاب
+          </option>
+          {categories.map((category, index) => {
+            return (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className={classes.input}>
+        <div className={classes.bar}>
+          <p className={classes.label}>عنوان</p>
           <CloseIcon
             className="icon"
-            onClick={() => setName("")}
+            onClick={() => setTitle("")}
             sx={{ fontSize: 16 }}
           />
         </div>
         <input
           type="text"
-          id="name"
-          name="name"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
+          id="title"
+          name="title"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
           dir="rtl"
           autoComplete="off"
         ></input>
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>
-            <span>*</span>
-            مدیر
-          </p>
+          <p className={classes.label}>مکان</p>
           <CloseIcon
             className="icon"
-            onClick={() => setManager("")}
+            onClick={() => setLocation("")}
             sx={{ fontSize: 16 }}
           />
         </div>
         <input
           type="text"
-          id="manager"
-          name="manager"
-          onChange={(e) => setManager(e.target.value)}
-          value={manager}
+          id="location"
+          name="location"
+          onChange={(e) => setLocation(e.target.value)}
+          value={location}
           dir="rtl"
           autoComplete="off"
         ></input>
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>
-            <span>*</span>
-            تماس
-          </p>
+          <p className={classes.label}>اندازه</p>
           <CloseIcon
             className="icon"
-            onClick={() => setContact("")}
+            onClick={() => setSize("")}
             sx={{ fontSize: 16 }}
           />
         </div>
         <input
           type="phone"
-          id="contact"
-          name="contact"
-          onChange={(e) => setContact(e.target.value)}
-          value={contact}
+          id="size"
+          name="size"
+          onChange={(e) => setSize(e.target.value)}
+          value={size}
           dir="rtl"
           autoComplete="off"
         ></input>
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>
-            <span>*</span>
-            آدرس
-          </p>
+          <p className={classes.label}>سال</p>
           <CloseIcon
             className="icon"
-            onClick={() => setAddress("")}
+            onClick={() => setYear("")}
             sx={{ fontSize: 16 }}
           />
         </div>
         <input
           type="text"
-          id="address"
-          name="address"
-          onChange={(e) => setAddress(e.target.value)}
-          value={address}
+          id="year"
+          name="year"
+          onChange={(e) => setYear(e.target.value)}
+          value={year}
           dir="rtl"
           autoComplete="off"
         ></input>
       </div>
       <div className={classes.input}>
         <div className={classes.bar}>
-          <p className={classes.label}>
-            <span>*</span>
-            توضیحات
-          </p>
+          <p className={classes.label}>توضیحات</p>
           <CloseIcon
             className="icon"
             onClick={() => setDescription("")}
@@ -245,39 +314,72 @@ export default function Company() {
         ></textarea>
       </div>
       <div className={classes.formAction}>
-        <div className={classes.input}>
-          <label className="file">
-            <input
-              onChange={(e) => {
-                setNewMedia(e.target.files[0]);
-                setIsMediaChanging(true);
+        <div className={classes.mediaContainer}>
+          <div className={classes.media}>
+            <label className="file">
+              <input
+                onChange={handleImageChange}
+                id="inputImage"
+                type="file"
+                accept="image/*"
+                multiple
+              />
+              <p>عکس</p>
+            </label>
+            <CloseIcon
+              className={classes.clearMedia}
+              onClick={() => {
+                setImagesPreview([]);
+                removeImageInputFile();
               }}
-              type="file"
-              accept="image/*"
+              sx={{ fontSize: 16 }}
             />
-            <p>لوگو</p>
-          </label>
-          {newMedia && (
             <div className={classes.preview}>
-              <CloseIcon
-                className="icon"
-                onClick={() => {
-                  setNewMedia("");
-                  setIsMediaChanging(false);
-                }}
-                sx={{ fontSize: 16 }}
-              />
-              <Image
-                className={classes.media}
-                width={170}
-                height={200}
-                objectFit="contain"
-                src={URL.createObjectURL(newMedia)}
-                alt="image"
-                priority
-              />
+              {imagesPreview.map((image, index) => (
+                <Image
+                  key={index}
+                  width={300}
+                  height={200}
+                  objectFit="contain"
+                  src={image.link}
+                  alt="image"
+                  priority
+                />
+              ))}
             </div>
-          )}
+          </div>
+          <div className={classes.media}>
+            <label className="file">
+              <input
+                onChange={handleVideoChange}
+                id="inputVideo"
+                type="file"
+                accept="video/*"
+                multiple
+              />
+              <p>ویدئو</p>
+            </label>
+            <CloseIcon
+              className={classes.clearMedia}
+              onClick={() => {
+                setVideosPreview([]);
+                removeVideoInputFile();
+              }}
+              sx={{ fontSize: 16 }}
+            />
+            <div className={classes.preview}>
+              {videosPreview.map((video, index) => (
+                <video
+                  key={index}
+                  className={classes.video}
+                  src={video.link + "#t=0.1"}
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+              ))}
+            </div>
+          </div>
         </div>
         <p className={classes.alert}>{alert}</p>
         {loader && (
@@ -287,7 +389,7 @@ export default function Company() {
         )}
         <button
           disabled={disableButton}
-          onClick={() => (editCompany ? updateCompany() : createCompany())}
+          onClick={() => (editCompany ? updateWorks() : createWorks())}
         >
           {editCompany ? "ویرایش داده" : "ذخیره داده"}
         </button>

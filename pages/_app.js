@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }) {
           openGraph={{
             type: "website",
             locale: "fa_IR",
-            url: "https://Cyrus.com/",
+            url: "https://panteapaint.com/",
             siteName: "Pantea Cyrus",
           }}
         />

@@ -1,0 +1,54 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.slider {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+  @include mixins.tablet {
+    width: 100%;
+  }
+}
+
+.swiper {
+  text-align: center;
+  @include mixins.mobile {
+    margin-top: 100px;
+  }
+}
+
+.image {
+  height: calc(100vh - 130px);
+
+  @include mixins.mobile {
+    height: 300px;
+  }
+}
+
+.video {
+  width: 80%;
+  height: 100%;
+  object-fit: cover;
+
+  @include mixins.mobile {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+  }
+  @include mixins.tablet {
+    object-fit: contain;
+  }
+}
+
+.progress {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}

@@ -13,33 +13,3 @@
     width: calc(100% - 24px);
   }
 }
-
-.navigation {
-  width: 350px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-  border-radius: 4px;
-  height: 40px;
-  border: 1px solid config.$grey;
-  background: config.$white;
-  text-transform: capitalize;
-  @include mixins.row-space-between-center();
-  justify-content: space-around;
-
-  @include mixins.mobile {
-    width: 100%;
-  }
-
-  .nav {
-    @include mixins.allDesktop {
-      &:hover {
-        cursor: pointer;
-        color: config.$brand;
-      }
-    }
-  }
-
-  .navActive {
-    color: config.$brand;
-  }
-}
