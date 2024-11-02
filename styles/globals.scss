@@ -25,7 +25,7 @@ button {
 h1 {
   font-size: 2.5rem;
   @include mixins.mobile {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -81,4 +81,25 @@ p {
 
 .icon {
   cursor: pointer;
+}
+
+// input file
+label.file input[type="file"] {
+  position: absolute;
+  top: -1000px;
+}
+.file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: config.$grey;
+  background: config.$white;
+  height: 50px;
+  border-radius: 4px;
+  border: 1px solid config.$grey;
+  cursor: pointer;
+}
+.file:hover {
+  color: config.$brand;
+  border: 1px solid config.$brand;
 }

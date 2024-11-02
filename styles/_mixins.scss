@@ -59,6 +59,42 @@ $screen-fourK: 6000px;
 
   &:hover {
     cursor: pointer;
+    background: $subColor;
+    color: $color;
+    border: 1px solid $color;
+  }
+}
+
+@mixin input() {
+  padding: 12px;
+  height: 50px;
+  color: config.$black;
+  outline: none;
+  border: 1px solid config.$grey;
+  font-weight: 300;
+
+  &:focus {
+    outline: none;
+    border: 1px solid config.$brand;
+  }
+}
+
+@mixin textarea() {
+  width: 100%;
+  height: 200px;
+  resize: none;
+  padding: 12px;
+  outline: none;
+  border-radius: 12px;
+  font-weight: 300;
+  background: config.$background;
+  color: config.$black;
+  border: 1px solid config.$white;
+
+  &:focus {
+    outline: none;
+    background: transparent;
+    border: 1px solid config.$black;
   }
 }
 

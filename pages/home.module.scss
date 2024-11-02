@@ -14,10 +14,6 @@
   height: 100vh;
   cursor: url("../assets/brush.png"), auto;
   margin-bottom: 50px;
-
-  @include mixins.mobile {
-    height: 500px;
-  }
 }
 
 .banner {
