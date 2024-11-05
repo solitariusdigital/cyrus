@@ -35,8 +35,13 @@ export default function Menu() {
   return (
     <div className={classes.container}>
       <div className={classes.navigationBar}>
-        <h1 onClick={() => window.location.assign("/")}>
-          P a n t e a C y r u s
+        <h1
+          style={{
+            fontFamily: language ? "EnglishLight" : "EnglishLight",
+          }}
+          onClick={() => window.location.assign("/")}
+        >
+          Pantea Cyrus
         </h1>
         <div className={classes.control}>
           <div onClick={() => toggleLanguage()}>

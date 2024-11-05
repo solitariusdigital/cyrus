@@ -4,6 +4,7 @@
 .container {
   position: relative;
   width: config.$content-width;
+  color: config.$white;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -11,13 +12,20 @@
 }
 
 .navigationBar {
+  height: 60px;
   @include mixins.row-space-between-center();
 
   h1 {
+    letter-spacing: 16px;
     @include mixins.allDesktop {
       &:hover {
+        color: config.$brand;
         cursor: pointer;
       }
+    }
+
+    @include mixins.mobile {
+      letter-spacing: 8px;
     }
   }
 
@@ -41,12 +49,16 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 70px;
+  top: 90px;
   right: 0px;
   width: 250px;
-  padding: 50px 0px;
+  padding: 20px 0px;
   color: config.$white;
-  @include mixins.transparentBackground(0.9, config.$black);
+  @include mixins.transparentBackground(0.5, config.$background);
+
+  @include mixins.mobile {
+    right: -12px;
+  }
 
   .nav {
     margin: 8px 0px;
@@ -62,7 +74,6 @@
   .navActive {
     color: config.$brand;
     margin: 8px 0px;
-    font-weight: bold;
     cursor: pointer;
   }
 

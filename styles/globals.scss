@@ -1,11 +1,31 @@
 @use "config" as config;
 @use "mixins" as mixins;
 
+@font-face {
+  font-family: "English";
+  src: url("../assets/fonts/En/OpenSans-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "EnglishLight";
+  src: url("../assets/fonts/En/OpenSans-Light.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "EnglishMed";
+  src: url("../assets/fonts/En/OpenSans-Medium.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "EnglishBold";
+  src: url("../assets/fonts/En/OpenSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: config.$font;
   font-weight: 300;
 }
 
@@ -45,10 +65,7 @@ h3 {
 }
 
 p {
-  font-size: 1.1rem;
-  @include mixins.mobile {
-    font-size: 1rem;
-  }
+  font-size: 1rem;
 }
 
 .main {
@@ -57,27 +74,23 @@ p {
 
 .menu {
   position: fixed;
-  top: 40px;
+  top: 0px;
   z-index: 10;
-  height: 70px;
+  height: 120px;
   width: 100%;
+  @include mixins.transparentBackground(0.5, config.$background);
   @include mixins.row-space-between-center();
   justify-content: center;
-
-  @include mixins.mobile {
-    top: 10px;
-  }
 }
 
 .footer {
   position: fixed;
-  bottom: 40px;
+  bottom: 0px;
   z-index: 10;
+  height: 50px;
   width: 100%;
-
-  @include mixins.mobile {
-    bottom: 10px;
-  }
+  @include mixins.transparentBackground(0.5, config.$background);
+  @include mixins.row-space-between-center();
 }
 
 .icon {

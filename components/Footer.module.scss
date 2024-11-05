@@ -4,6 +4,7 @@
 .footer {
   width: config.$content-width;
   margin: auto;
+  color: config.$white;
   @include mixins.row-space-between-center();
   flex-direction: row-reverse;
 
@@ -15,7 +16,6 @@
 .navigation,
 .navigationReverse {
   @include mixins.row-space-between-center();
-
   width: 250px;
 
   .nav {

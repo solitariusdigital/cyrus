@@ -41,18 +41,22 @@ export default function RootLayout({ children }) {
   }, [setLanguage, setLanguageType]);
 
   return (
-    <Fragment>
+    <div
+      style={{
+        fontFamily: language ? "Farsi" : "English",
+      }}
+    >
       {displayMenu && (
-        <section className="menu">
+        <section className="menu animate__animated animate__slideInDown">
           <Menu />
         </section>
       )}
       <section className="main">
         <main>{children}</main>
       </section>
-      <section className="footer">
+      <section className="footer animate__animated animate__slideInUp">
         <Footer />
       </section>
-    </Fragment>
+    </div>
   );
 }
