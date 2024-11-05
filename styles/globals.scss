@@ -40,7 +40,7 @@ a {
 }
 
 button {
-  @include mixins.button(config.$white, config.$black, 180px);
+  @include mixins.button(config.$background, config.$brand);
 }
 
 h1 {
@@ -97,6 +97,29 @@ p {
   cursor: pointer;
 }
 
+.appload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+
+  h1 {
+    position: relative;
+    bottom: 200px;
+    color: config.$brand;
+    letter-spacing: 28px;
+
+    @include mixins.mobile {
+      letter-spacing: 16px;
+    }
+  }
+}
+
 // input file
 label.file input[type="file"] {
   position: absolute;
@@ -116,4 +139,11 @@ label.file input[type="file"] {
 .file:hover {
   color: config.$brand;
   border: 1px solid config.$brand;
+}
+
+.swiper-button-prev {
+  color: config.$brand !important;
+}
+.swiper-button-next {
+  color: config.$brand !important;
 }

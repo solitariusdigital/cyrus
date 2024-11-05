@@ -36,14 +36,14 @@ export const StateProvider = (props) => {
       link: "/travels",
       active: false,
     },
-    {
-      title: {
-        fa: "بلاگز",
-        en: "Blogs",
-      },
-      link: "/blogs",
-      active: false,
-    },
+    // {
+    //   title: {
+    //     fa: "بلاگز",
+    //     en: "Blogs",
+    //   },
+    //   link: "/blogs",
+    //   active: false,
+    // },
     {
       title: {
         fa: "درباره",

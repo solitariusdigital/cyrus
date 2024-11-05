@@ -2,19 +2,38 @@
 @use "styles/_mixins.scss" as mixins;
 
 .form {
-  width: 500px;
+  width: 60%;
   margin: 150px auto;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+  @include mixins.tablet {
+    width: 100%;
+  }
+  @include mixins.tabletPortrait {
+    width: 100%;
+  }
+
+  .formBox {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    gap: 12px;
+  }
 
   .input {
     margin-bottom: 20px;
   }
 
-  .bar {
+  .bar,
+  .barReverse {
     height: 30px;
     @include mixins.row-space-between-center();
-    flex-direction: row-reverse;
   }
 
+  .barReverse {
+    flex-direction: row-reverse;
+  }
   .label {
     color: config.$grey;
 
@@ -37,22 +56,13 @@
     max-width: 100%;
     min-width: 100%;
   }
-
-  @include mixins.mobile {
-    width: 100%;
-  }
 }
 
 .formAction {
   display: flex;
   flex-direction: column;
   text-align: center;
-  width: 100%;
-
-  button {
-    @include mixins.button(config.$brand, config.$white, config.$white);
-    margin: auto;
-  }
+  align-items: center;
 
   .mediaContainer {
     display: flex;

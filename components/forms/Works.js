@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
@@ -16,12 +16,14 @@ import { createWorksApi, updateWorksApi } from "@/services/api";
 
 export default function Works() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [location, setLocation] = useState("");
-  const [description, setDescription] = useState("");
-  const [size, setSize] = useState("");
-  const [year, setYear] = useState("");
+  const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const [title, setTitle] = useState({ en: "", fa: "" });
+  const [category, setCategory] = useState({ en: "", fa: "" });
+  const [location, setLocation] = useState({ en: "", fa: "" });
+  const [description, setDescription] = useState({ en: "", fa: "" });
+  const [size, setSize] = useState({ en: "", fa: "" });
+  const [year, setYear] = useState({ en: "", fa: "" });
   const [newMedia, setNewMedia] = useState([]);
 
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -194,209 +196,447 @@ export default function Works() {
   };
 
   return (
-    <div className={classes.form}>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>
-            <span>*</span>
-            دسته‌بندی
-          </p>
+    <Fragment>
+      <div className={classes.form}>
+        <div className={classes.input}>
+          <div className={classes.barReverse}>
+            <p className={classes.label}>
+              <span>*</span>
+              دسته‌بندی
+            </p>
+          </div>
+          <select
+            defaultValue={"default"}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="default" disabled>
+              انتخاب
+            </option>
+            {categories.map((category, index) => {
+              return (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              );
+            })}
+          </select>
         </div>
-        <select
-          defaultValue={"default"}
-          onChange={(e) => setCategory(e.target.value)}
+        <div
+          className={classes.formBox}
+          style={{
+            fontFamily: "English",
+          }}
         >
-          <option value="default" disabled>
-            انتخاب
-          </option>
-          {categories.map((category, index) => {
-            return (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>عنوان</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => setTitle("")}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
-          dir="rtl"
-          autoComplete="off"
-        ></input>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>مکان</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => setLocation("")}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          onChange={(e) => setLocation(e.target.value)}
-          value={location}
-          dir="rtl"
-          autoComplete="off"
-        ></input>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>اندازه</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => setSize("")}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          type="phone"
-          id="size"
-          name="size"
-          onChange={(e) => setSize(e.target.value)}
-          value={size}
-          dir="rtl"
-          autoComplete="off"
-        ></input>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>سال</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => setYear("")}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <input
-          type="text"
-          id="year"
-          name="year"
-          onChange={(e) => setYear(e.target.value)}
-          value={year}
-          dir="rtl"
-          autoComplete="off"
-        ></input>
-      </div>
-      <div className={classes.input}>
-        <div className={classes.bar}>
-          <p className={classes.label}>توضیحات</p>
-          <CloseIcon
-            className="icon"
-            onClick={() => setDescription("")}
-            sx={{ fontSize: 16 }}
-          />
-        </div>
-        <textarea
-          type="text"
-          id="description"
-          name="description"
-          onChange={(e) => setDescription(e.target.value)}
-          value={description}
-          dir="rtl"
-          autoComplete="off"
-        ></textarea>
-      </div>
-      <div className={classes.formAction}>
-        <div className={classes.mediaContainer}>
-          <div className={classes.media}>
-            <label className="file">
-              <input
-                onChange={handleImageChange}
-                id="inputImage"
-                type="file"
-                accept="image/*"
-                multiple
-              />
-              <p>عکس</p>
-            </label>
-            <CloseIcon
-              className={classes.clearMedia}
-              onClick={() => {
-                setImagesPreview([]);
-                removeImageInputFile();
-              }}
-              sx={{ fontSize: 16 }}
-            />
-            <div className={classes.preview}>
-              {imagesPreview.map((image, index) => (
-                <Image
-                  key={index}
-                  width={300}
-                  height={200}
-                  objectFit="contain"
-                  src={image.link}
-                  alt="image"
-                  priority
-                />
-              ))}
-            </div>
-          </div>
-          <div className={classes.media}>
-            <label className="file">
-              <input
-                onChange={handleVideoChange}
-                id="inputVideo"
-                type="file"
-                accept="video/*"
-                multiple
-              />
-              <p>ویدئو</p>
-            </label>
-            <CloseIcon
-              className={classes.clearMedia}
-              onClick={() => {
-                setVideosPreview([]);
-                removeVideoInputFile();
-              }}
-              sx={{ fontSize: 16 }}
-            />
-            <div className={classes.preview}>
-              {videosPreview.map((video, index) => (
-                <video
-                  key={index}
-                  className={classes.video}
-                  src={video.link + "#t=0.1"}
-                  controls
-                  playsInline
-                  preload="metadata"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-        <p className={classes.alert}>{alert}</p>
-        {loader && (
           <div>
-            <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>Title</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setTitle((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                type="text"
+                id="title"
+                name="title"
+                onChange={(e) =>
+                  setTitle((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={title.en}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>Location</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setLocation((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                type="text"
+                id="location"
+                name="location"
+                onChange={(e) =>
+                  setLocation((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={location.en}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>Size</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSize((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                type="phone"
+                id="size"
+                name="size"
+                onChange={(e) =>
+                  setSize((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={size.en}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>Year</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setYear((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                type="text"
+                id="year"
+                name="year"
+                onChange={(e) =>
+                  setYear((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={year.en}
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>Description</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setDescription((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "English",
+                }}
+                type="text"
+                id="description"
+                name="description"
+                onChange={(e) =>
+                  setDescription((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={description.en}
+                autoComplete="off"
+              ></textarea>
+            </div>
           </div>
-        )}
-        <button
-          disabled={disableButton}
-          onClick={() => (editCompany ? updateWorks() : createWorks())}
+          <div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>عنوان</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setTitle((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                type="text"
+                id="title"
+                name="title"
+                onChange={(e) =>
+                  setTitle((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={title.fa}
+                dir="rtl"
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>مکان</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setLocation((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                type="text"
+                id="location"
+                name="location"
+                onChange={(e) =>
+                  setLocation((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={location.fa}
+                dir="rtl"
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>اندازه</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setSize((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                type="phone"
+                id="size"
+                name="size"
+                onChange={(e) =>
+                  setSize((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={size.fa}
+                dir="rtl"
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>سال</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setYear((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                type="text"
+                id="year"
+                name="year"
+                onChange={(e) =>
+                  setYear((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={year.fa}
+                dir="rtl"
+                autoComplete="off"
+              ></input>
+            </div>
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>توضیحات</p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setDescription((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <textarea
+                style={{
+                  fontFamily: "Farsi",
+                }}
+                type="text"
+                id="description"
+                name="description"
+                onChange={(e) =>
+                  setDescription((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={description.fa}
+                dir="rtl"
+                autoComplete="off"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <div
+          className={classes.formAction}
+          style={{
+            fontFamily: "Farsi",
+          }}
         >
-          {editCompany ? "ویرایش داده" : "ذخیره داده"}
-        </button>
-        <div className={classes.logout} onClick={() => logOut()}>
-          <p>خروج از پورتال</p>
+          <div className={classes.mediaContainer}>
+            <div className={classes.media}>
+              <label className="file">
+                <input
+                  onChange={handleImageChange}
+                  id="inputImage"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                />
+                <p>عکس</p>
+              </label>
+              <CloseIcon
+                className={classes.clearMedia}
+                onClick={() => {
+                  setImagesPreview([]);
+                  removeImageInputFile();
+                }}
+                sx={{ fontSize: 16 }}
+              />
+              <div className={classes.preview}>
+                {imagesPreview.map((image, index) => (
+                  <Image
+                    key={index}
+                    width={300}
+                    height={200}
+                    objectFit="contain"
+                    src={image.link}
+                    alt="image"
+                    priority
+                  />
+                ))}
+              </div>
+            </div>
+            <div className={classes.media}>
+              <label className="file">
+                <input
+                  onChange={handleVideoChange}
+                  id="inputVideo"
+                  type="file"
+                  accept="video/*"
+                  multiple
+                />
+                <p>ویدئو</p>
+              </label>
+              <CloseIcon
+                className={classes.clearMedia}
+                onClick={() => {
+                  setVideosPreview([]);
+                  removeVideoInputFile();
+                }}
+                sx={{ fontSize: 16 }}
+              />
+              <div className={classes.preview}>
+                {videosPreview.map((video, index) => (
+                  <video
+                    key={index}
+                    className={classes.video}
+                    src={video.link + "#t=0.1"}
+                    controls
+                    playsInline
+                    preload="metadata"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          <p className={classes.alert}>{alert}</p>
+          {loader && (
+            <div>
+              <Image width={50} height={50} src={loaderImage} alt="isLoading" />
+            </div>
+          )}
+          <button
+            disabled={disableButton}
+            onClick={() => (editCompany ? updateWorks() : createWorks())}
+          >
+            {editCompany ? "ویرایش داده" : "ذخیره داده"}
+          </button>
+          <div className={classes.logout} onClick={() => logOut()}>
+            <p>خروج از پورتال</p>
+          </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }

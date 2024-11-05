@@ -35,17 +35,23 @@
   }
 }
 
-.notFound {
-  margin: auto;
+.swiperContainer {
+  height: 50vh;
+  margin-bottom: 120px;
   width: config.$content-width;
+
+  h2 {
+    color: config.$white;
+  }
+
+  .swiper {
+    height: 100%;
+    margin-top: 20px;
+  }
+}
+
+.notFound {
   margin-top: 150px;
   text-align: center;
-
-  @include mixins.tablet {
-    width: config.$content-width;
-  }
-
-  @include mixins.mobile {
-    width: calc(100% - 24px);
-  }
+  color: config.$white;
 }

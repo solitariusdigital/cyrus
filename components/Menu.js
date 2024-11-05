@@ -3,7 +3,7 @@ import { StateContext } from "@/context/stateContext";
 import classes from "./Menu.module.scss";
 import Router from "next/router";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -63,30 +63,28 @@ export default function Menu() {
         </div>
       </div>
       {menuMobile && (
-        <nav
+        <div
           className={`${classes.navigation} animate__animated animate__slideInRight`}
         >
-          {navigationTopBar.map((nav, index) => (
-            <Fragment key={index}>
-              <a
-                className={!nav.active ? classes.nav : classes.navActive}
-                onClick={() => activateNav(nav.link, index)}
-              >
-                {nav.title[languageType]}
-              </a>
-            </Fragment>
-          ))}
-          <div className={classes.logo}>
-            <Image
-              className={classes.image}
-              src={logo}
-              layout="fill"
-              objectFit="cover"
-              alt="logo"
-              onClick={() => window.location.assign("/")}
-            />
+          <nav className={classes.navigationBox}>
+            {navigationTopBar.map((nav, index) => (
+              <Fragment key={index}>
+                <a
+                  className={!nav.active ? classes.nav : classes.navActive}
+                  onClick={() => activateNav(nav.link, index)}
+                >
+                  {nav.title[languageType]}
+                </a>
+              </Fragment>
+            ))}
+          </nav>
+          <div
+            className={classes.logo}
+            onClick={() => window.location.assign("/")}
+          >
+            <Image src={logo} layout="fill" objectFit="contain" alt="logo" />
           </div>
-        </nav>
+        </div>
       )}
     </div>
   );

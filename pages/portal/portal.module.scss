@@ -48,10 +48,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    button {
-      @include mixins.button(config.$brand, config.$white, config.$white);
-    }
   }
 
   .alert {
