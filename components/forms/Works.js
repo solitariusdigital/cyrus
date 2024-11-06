@@ -187,7 +187,12 @@ export default function Works() {
   return (
     <Fragment>
       <div className={classes.form}>
-        <div className={classes.input}>
+        <div
+          className={classes.input}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
           <div className={classes.barReverse}>
             <p className={classes.label}>
               <span>*</span>
@@ -195,6 +200,9 @@ export default function Works() {
             </p>
           </div>
           <select
+            style={{
+              fontFamily: "Farsi",
+            }}
             defaultValue={"default"}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -210,13 +218,12 @@ export default function Works() {
             })}
           </select>
         </div>
-        <div
-          className={classes.formBox}
-          style={{
-            fontFamily: "English",
-          }}
-        >
-          <div>
+        <div className={classes.formBox}>
+          <div
+            style={{
+              fontFamily: "English",
+            }}
+          >
             <div className={classes.input}>
               <div className={classes.bar}>
                 <p className={classes.label}>Title</p>
@@ -373,7 +380,11 @@ export default function Works() {
               ></textarea>
             </div>
           </div>
-          <div>
+          <div
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
             <div className={classes.input}>
               <div className={classes.barReverse}>
                 <p className={classes.label}>عنوان</p>
@@ -616,6 +627,9 @@ export default function Works() {
             </div>
           )}
           <button
+            style={{
+              fontFamily: "Farsi",
+            }}
             disabled={disableButton}
             onClick={() => (editWorks ? updateWorks() : createWorks())}
           >

@@ -7,11 +7,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import VisibilitySensor from "react-visibility-sensor";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
+
+  const [isVisiblePaintings, setIsVisiblePaintings] = useState(false);
+  const [isVisibleMovies, setIsVisibleMovies] = useState(false);
+  const [isVisibleTravels, setIsVisibleTravels] = useState(false);
 
   let images = [
     "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg",
@@ -67,9 +72,21 @@ export default function Home() {
         className={classes.swiperContainer}
         onClick={() => Router.push("/paintings")}
       >
-        <h2 style={{ textAlign: language ? "right" : "left" }}>
-          {language ? "نقاشی‌" : "Paintings"}
-        </h2>
+        <VisibilitySensor
+          scrollDelay={250}
+          onChange={(isVisible) => setIsVisiblePaintings(isVisible)}
+        >
+          <h2
+            className={
+              isVisiblePaintings
+                ? "animate__animated animate__slideInDown"
+                : "animate__animated animate__slideOutUp"
+            }
+            style={{ textAlign: language ? "right" : "left" }}
+          >
+            {language ? "نقاشی‌" : "Paintings"}
+          </h2>
+        </VisibilitySensor>
         <Swiper
           className={classes.swiper}
           slidesPerView={generateSwipeCount()}
@@ -102,9 +119,21 @@ export default function Home() {
         className={classes.swiperContainer}
         onClick={() => Router.push("/movies")}
       >
-        <h2 style={{ textAlign: language ? "right" : "left" }}>
-          {language ? "فیلم" : "Movies"}
-        </h2>
+        <VisibilitySensor
+          scrollDelay={250}
+          onChange={(isVisible) => setIsVisibleMovies(isVisible)}
+        >
+          <h2
+            className={
+              isVisibleMovies
+                ? "animate__animated animate__slideInDown"
+                : "animate__animated animate__slideOutUp"
+            }
+            style={{ textAlign: language ? "right" : "left" }}
+          >
+            {language ? "فیلم" : "Movies"}
+          </h2>
+        </VisibilitySensor>
         <Swiper
           className={classes.swiper}
           slidesPerView={generateSwipeCount()}
@@ -137,9 +166,21 @@ export default function Home() {
         className={classes.swiperContainer}
         onClick={() => Router.push("/travels")}
       >
-        <h2 style={{ textAlign: language ? "right" : "left" }}>
-          {language ? "سفر" : "Travels"}
-        </h2>
+        <VisibilitySensor
+          scrollDelay={250}
+          onChange={(isVisible) => setIsVisibleTravels(isVisible)}
+        >
+          <h2
+            className={
+              isVisibleTravels
+                ? "animate__animated animate__slideInDown"
+                : "animate__animated animate__slideOutUp"
+            }
+            style={{ textAlign: language ? "right" : "left" }}
+          >
+            {language ? "سفر" : "Travels"}
+          </h2>
+        </VisibilitySensor>
         <Swiper
           className={classes.swiper}
           slidesPerView={generateSwipeCount()}

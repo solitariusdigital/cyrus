@@ -123,7 +123,12 @@ export default function Portal() {
   };
 
   return (
-    <div className={classes.container}>
+    <div
+      className={classes.container}
+      style={{
+        fontFamily: "Farsi",
+      }}
+    >
       <h2>پورتال</h2>
       <div className={classes.form}>
         <div className={classes.input}>
@@ -136,6 +141,9 @@ export default function Portal() {
             />
           </div>
           <input
+            style={{
+              fontFamily: "English",
+            }}
             type="email"
             id="email"
             name="email"
@@ -154,6 +162,9 @@ export default function Portal() {
             />
           </div>
           <input
+            style={{
+              fontFamily: "English",
+            }}
             type="password"
             id="password"
             name="password"
@@ -164,7 +175,12 @@ export default function Portal() {
         </div>
         <div className={classes.formAction}>
           <p className={classes.alert}>{alert}</p>
-          <button onClick={() => handleLogin()}>
+          <button
+            style={{
+              fontFamily: "Farsi",
+            }}
+            onClick={() => handleLogin()}
+          >
             {formType ? <>ورود</> : <>ثبت نام</>}
           </button>
         </div>
