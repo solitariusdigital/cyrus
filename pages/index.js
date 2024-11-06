@@ -8,6 +8,7 @@ import { Mousewheel, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import VisibilitySensor from "react-visibility-sensor";
+import logoWhite from "@/assets/logoWhite.png";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
@@ -19,10 +20,10 @@ export default function Home() {
   const [isVisibleTravels, setIsVisibleTravels] = useState(false);
 
   let images = [
-    "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg",
-    "https://eshareh.storage.iran.liara.space/cover/cov602084/img5322.jpg",
-    "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg",
-    "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg",
+    "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
+    "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+    "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
   ];
 
   const generateSwipeCount = () => {
@@ -53,12 +54,24 @@ export default function Home() {
   return (
     <div className={classes.container}>
       <div className={classes.cover}>
+        {/* <div className={classes.logoWhite}>
+          <Image
+            className={classes.logoWhite}
+            width={30}
+            height={300}
+            src={logoWhite}
+            alt="logo"
+            as="image"
+            priority
+          />
+        </div> */}
         <Image
+          className={classes.image}
           src={
-            "https://eshareh.storage.iran.liara.space/cover/cov602084/img5322.jpg"
+            "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG"
           }
           blurDataURL={
-            "https://eshareh.storage.iran.liara.space/cover/cov602084/img5322.jpg"
+            "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG"
           }
           placeholder="blur"
           alt="cover"
@@ -68,10 +81,7 @@ export default function Home() {
           priority
         />
       </div>
-      <div
-        className={classes.swiperContainer}
-        onClick={() => Router.push("/paintings")}
-      >
+      <div className={classes.swiperContainer}>
         <VisibilitySensor
           scrollDelay={250}
           onChange={(isVisible) => setIsVisiblePaintings(isVisible)}
@@ -83,6 +93,7 @@ export default function Home() {
                 : "animate__animated animate__slideOutUp"
             }
             style={{ textAlign: language ? "right" : "left" }}
+            onClick={() => Router.push("/paintings")}
           >
             {language ? "نقاشی‌" : "Paintings"}
           </h2>
@@ -94,14 +105,15 @@ export default function Home() {
           centeredSlides={true}
           mousewheel={true}
           loop={true}
-          allowTouchMove={screenSize === "desktop" ? false : true}
+          allowTouchMove={true}
           navigation={true}
-          modules={[Navigation, Mousewheel]}
+          modules={[Navigation]}
           onSlideChange={updateIndex}
         >
           {images.map((user, index) => (
             <SwiperSlide key={index}>
               <Image
+                onClick={() => Router.push("/paintings")}
                 src={user}
                 blurDataURL={user}
                 placeholder="blur"
@@ -115,10 +127,7 @@ export default function Home() {
           ))}
         </Swiper>
       </div>
-      <div
-        className={classes.swiperContainer}
-        onClick={() => Router.push("/movies")}
-      >
+      <div className={classes.swiperContainer}>
         <VisibilitySensor
           scrollDelay={250}
           onChange={(isVisible) => setIsVisibleMovies(isVisible)}
@@ -130,6 +139,7 @@ export default function Home() {
                 : "animate__animated animate__slideOutUp"
             }
             style={{ textAlign: language ? "right" : "left" }}
+            onClick={() => Router.push("/movies")}
           >
             {language ? "فیلم" : "Movies"}
           </h2>
@@ -141,14 +151,15 @@ export default function Home() {
           centeredSlides={true}
           mousewheel={true}
           loop={true}
-          allowTouchMove={screenSize === "desktop" ? false : true}
+          allowTouchMove={true}
           navigation={true}
-          modules={[Navigation, Mousewheel]}
+          modules={[Navigation]}
           onSlideChange={updateIndex}
         >
           {images.map((user, index) => (
             <SwiperSlide key={index}>
               <Image
+                onClick={() => Router.push("/movies")}
                 src={user}
                 blurDataURL={user}
                 placeholder="blur"
@@ -162,10 +173,7 @@ export default function Home() {
           ))}
         </Swiper>
       </div>
-      <div
-        className={classes.swiperContainer}
-        onClick={() => Router.push("/travels")}
-      >
+      <div className={classes.swiperContainer}>
         <VisibilitySensor
           scrollDelay={250}
           onChange={(isVisible) => setIsVisibleTravels(isVisible)}
@@ -177,6 +185,7 @@ export default function Home() {
                 : "animate__animated animate__slideOutUp"
             }
             style={{ textAlign: language ? "right" : "left" }}
+            onClick={() => Router.push("/travels")}
           >
             {language ? "سفر" : "Travels"}
           </h2>
@@ -188,14 +197,15 @@ export default function Home() {
           centeredSlides={true}
           mousewheel={true}
           loop={true}
-          allowTouchMove={screenSize === "desktop" ? false : true}
+          allowTouchMove={true}
           navigation={true}
-          modules={[Navigation, Mousewheel]}
+          modules={[Navigation]}
           onSlideChange={updateIndex}
         >
           {images.map((user, index) => (
             <SwiperSlide key={index}>
               <Image
+                onClick={() => Router.push("/travels")}
                 src={user}
                 blurDataURL={user}
                 placeholder="blur"

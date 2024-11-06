@@ -8,7 +8,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "eshareh.storage.iran.liara.space",
+        hostname: "cyrus.storage.c2.liara.space",
         pathname: "**",
       },
     ],

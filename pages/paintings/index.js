@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
-import classes from "./paintings.module.scss";
+import classes from "../works.module.scss";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
@@ -9,10 +9,10 @@ export default function Paintings() {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
   const works = [
-    "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg",
-    "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg",
-    "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg",
-    "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg",
+    "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
+    "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+    "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
   ];
 
   const gallerySlider = () => {
@@ -25,197 +25,55 @@ export default function Paintings() {
     <div className={classes.container}>
       <div className={classes.gridBox}>
         <div className={classes.columnTwo} onClick={() => gallerySlider()}>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
+          {works.map((work, index) => (
+            <div key={index} className={classes.imageBox}>
+              <Image
+                className={classes.image}
+                src={work}
+                blurDataURL={work}
+                placeholder="blur"
+                alt="cover"
+                layout="fill"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+            </div>
+          ))}
         </div>
         <div className={classes.columnOne}>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
+          {works.map((work, index) => (
+            <div key={index} className={classes.imageBox}>
+              <Image
+                className={classes.image}
+                src={work}
+                blurDataURL={work}
+                placeholder="blur"
+                alt="cover"
+                layout="fill"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+            </div>
+          ))}
         </div>
         <div className={classes.columnTwo}>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov156042/img6851.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov720908/img6055.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
-          <div className={classes.imageBox}>
-            <Image
-              className={classes.image}
-              src={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              blurDataURL={
-                "https://eshareh.storage.iran.liara.space/cover/cov913559/img2034.jpg"
-              }
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
-          </div>
+          {works.map((work, index) => (
+            <div key={index} className={classes.imageBox}>
+              <Image
+                className={classes.image}
+                src={work}
+                blurDataURL={work}
+                placeholder="blur"
+                alt="cover"
+                layout="fill"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+            </div>
+          ))}
         </div>
       </div>
       {displayGallerySlider && (

@@ -13,6 +13,17 @@
   width: 100%;
   height: 100vh;
   margin-bottom: 50px;
+
+  @include mixins.mobile {
+    height: 450px;
+  }
+
+  // .logoWhite {
+  //   position: absolute;
+  //   left: 10%;
+  //   top: 30%;
+  //   z-index: 1;
+  // }
 }
 
 .banner {
@@ -39,6 +50,10 @@
   height: 50vh;
   margin-bottom: 120px;
   width: config.$content-width;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
 
   h2 {
     color: config.$white;

@@ -33,7 +33,10 @@
     @include mixins.row-space-between-center();
 
     p {
-      margin: 0px 20px;
+      display: flex;
+      align-items: center;
+      margin: 0px 10px;
+      height: 34px;
     }
 
     @include mixins.allDesktop {
@@ -52,8 +55,8 @@
   position: absolute;
   top: 90px;
   right: 0px;
-  width: 180px;
-  padding: 20px 0px;
+  width: 200px;
+  padding: 40px 0px;
   color: config.$white;
   @include mixins.transparentBackground(0.5, config.$background);
 
@@ -68,7 +71,7 @@
   }
 
   .nav {
-    margin: 8px 0px;
+    margin: 12px 0px;
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
@@ -86,7 +89,7 @@
   .logo {
     position: absolute;
     right: 10px;
-    height: 180px;
+    height: 300px;
     width: 50px;
     cursor: pointer;
   }
