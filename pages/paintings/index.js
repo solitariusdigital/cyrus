@@ -22,8 +22,8 @@ export default function Paintings() {
   };
 
   return (
-    <Fragment>
-      <div className={classes.container}>
+    <div className={classes.container}>
+      <div className={classes.gridBox}>
         <div className={classes.columnTwo} onClick={() => gallerySlider()}>
           <div className={classes.imageBox}>
             <Image
@@ -232,6 +232,6 @@ export default function Paintings() {
           <GallerySlider media={works} />
         </div>
       )}
-    </Fragment>
+    </div>
   );
 }

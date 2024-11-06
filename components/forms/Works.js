@@ -34,8 +34,8 @@ export default function Works() {
   const [editMedia, setEditMedia] = useState("");
   const [isMediaChanging, setIsMediaChanging] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
-  const [editCompany, setEditCompany] = useState(false);
-  const [editCompanyData, setEditCompanyData] = useState(null);
+  const [editWorks, setEditWorks] = useState(false);
+  const [editWorksData, setEditWorksData] = useState(null);
   const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
 
@@ -157,7 +157,7 @@ export default function Works() {
     }
 
     const companyObject = {
-      ...editCompanyData,
+      ...editWorksData,
       title: title.trim(),
       location: location.trim(),
       size: size.trim(),
@@ -169,17 +169,6 @@ export default function Works() {
     await updateWorksApi(companyObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
-  };
-
-  const selectCompany = (index) => {
-    setEditCompany(true);
-    setEditCompanyData(companyData[index]);
-    setTitle(companyData[index].title);
-    setLocation(companyData[index].location);
-    setSize(companyData[index].size);
-    setYear(companyData[index].year);
-    setDescription(companyData[index].description);
-    setEditMedia(companyData[index].media);
   };
 
   const showAlert = (message) => {
@@ -628,9 +617,9 @@ export default function Works() {
           )}
           <button
             disabled={disableButton}
-            onClick={() => (editCompany ? updateWorks() : createWorks())}
+            onClick={() => (editWorks ? updateWorks() : createWorks())}
           >
-            {editCompany ? "ویرایش داده" : "ذخیره داده"}
+            {editWorks ? "ویرایش داده" : "ذخیره داده"}
           </button>
           <div className={classes.logout} onClick={() => logOut()}>
             <p>خروج از پورتال</p>

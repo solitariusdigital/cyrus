@@ -2,9 +2,12 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
+  margin-top: 150px;
+}
+
+.gridBox {
   width: 100%;
   margin: 2vh auto;
-  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2vh;
@@ -14,6 +17,11 @@
     width: calc(100% - 24px);
     display: flex;
     flex-direction: column;
+    gap: 0vh 2vh;
+  }
+
+  @include mixins.tabletPortrait {
+    gap: 1vh;
   }
 }
 
@@ -26,6 +34,13 @@
 
     @include mixins.mobile {
       height: 250px;
+    }
+    @include mixins.tablet {
+      height: 350px;
+    }
+    @include mixins.tabletPortrait {
+      height: 250px;
+      margin-bottom: 1vh;
     }
 
     .image {
@@ -42,6 +57,13 @@
 .columnTwo {
   .imageBox {
     height: 40vh;
+
+    @include mixins.tablet {
+      height: 250px;
+    }
+    @include mixins.tabletPortrait {
+      height: 200px;
+    }
   }
 }
 

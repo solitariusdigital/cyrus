@@ -21,6 +21,26 @@
   src: url("../assets/fonts/En/OpenSans-Bold.ttf") format("truetype");
   font-weight: bold;
 }
+@font-face {
+  font-family: "Farsi";
+  src: url("../assets/fonts/Fa/IranSans-Regular.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "FarsiLight";
+  src: url("../assets/fonts/Fa/IranSans-Light.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "FarsiMed";
+  src: url("../assets/fonts/Fa/IranSans-Medium.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "FarsiBold";
+  src: url("../assets/fonts/Fa/IranSans-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
 
 * {
   box-sizing: border-box;
@@ -69,7 +89,7 @@ p {
 }
 
 .main {
-  height: 100vh;
+  margin-bottom: 150px;
 }
 
 .menu {

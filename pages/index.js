@@ -1,7 +1,8 @@
-import { useState, useEffect, useContext, Fragment } from "react";
+import { useState, useEffect, useContext, Fragment, useRef } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./home.module.scss";
 import Image from "next/legacy/image";
+import Router from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -62,7 +63,10 @@ export default function Home() {
           priority
         />
       </div>
-      <div className={classes.swiperContainer}>
+      <div
+        className={classes.swiperContainer}
+        onClick={() => Router.push("/paintings")}
+      >
         <h2 style={{ textAlign: language ? "right" : "left" }}>
           {language ? "نقاشی‌" : "Paintings"}
         </h2>
@@ -94,7 +98,10 @@ export default function Home() {
           ))}
         </Swiper>
       </div>
-      <div className={classes.swiperContainer}>
+      <div
+        className={classes.swiperContainer}
+        onClick={() => Router.push("/movies")}
+      >
         <h2 style={{ textAlign: language ? "right" : "left" }}>
           {language ? "فیلم" : "Movies"}
         </h2>
@@ -126,7 +133,10 @@ export default function Home() {
           ))}
         </Swiper>
       </div>
-      <div className={classes.swiperContainer}>
+      <div
+        className={classes.swiperContainer}
+        onClick={() => Router.push("/travels")}
+      >
         <h2 style={{ textAlign: language ? "right" : "left" }}>
           {language ? "سفر" : "Travels"}
         </h2>
