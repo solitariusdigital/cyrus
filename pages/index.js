@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import VisibilitySensor from "react-visibility-sensor";
 import logoWhite from "@/assets/logoWhite.png";
 import CoverSlider from "@/components/CoverSlider";
+import logo from "@/assets/logo.png";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
@@ -69,142 +70,178 @@ export default function Home() {
         </div> */}
       </section>
       <div className={classes.swiperContainer}>
-        <VisibilitySensor
-          scrollDelay={250}
-          onChange={(isVisible) => setIsVisiblePaintings(isVisible)}
-        >
-          <h2
-            className={
-              isVisiblePaintings
-                ? "animate__animated animate__slideInDown"
-                : "animate__animated animate__slideOutUp"
-            }
-            style={{ textAlign: language ? "right" : "left" }}
-            onClick={() => Router.push("/paintings")}
+        <div className={classes.swiperBox}>
+          <VisibilitySensor
+            scrollDelay={250}
+            onChange={(isVisible) => setIsVisiblePaintings(isVisible)}
           >
-            {language ? "نقاشی‌" : "Paintings"}
-          </h2>
-        </VisibilitySensor>
-        <Swiper
-          className={classes.swiper}
-          slidesPerView={generateSwipeCount()}
-          spaceBetween={20}
-          centeredSlides={true}
-          mousewheel={true}
-          loop={true}
-          allowTouchMove={true}
-          navigation={true}
-          modules={[Navigation]}
-          onSlideChange={updateIndex}
-        >
-          {images.map((user, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                onClick={() => Router.push("/paintings")}
-                src={user}
-                blurDataURL={user}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            <h2
+              className={
+                isVisiblePaintings
+                  ? "animate__animated animate__slideInDown"
+                  : "animate__animated animate__slideOutUp"
+              }
+              style={{ textAlign: language ? "right" : "left" }}
+              onClick={() => Router.push("/paintings")}
+            >
+              {language ? "نقاشی‌" : "Paintings"}
+            </h2>
+          </VisibilitySensor>
+          <Swiper
+            className={classes.swiper}
+            slidesPerView={generateSwipeCount()}
+            spaceBetween={20}
+            centeredSlides={true}
+            mousewheel={true}
+            loop={true}
+            allowTouchMove={true}
+            navigation={true}
+            modules={[Navigation]}
+            onSlideChange={updateIndex}
+          >
+            {images.map((user, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  onClick={() => Router.push("/paintings")}
+                  src={user}
+                  blurDataURL={user}
+                  placeholder="blur"
+                  alt="image"
+                  layout="fill"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className={classes.logo}>
+          <Image
+            width={40}
+            height={400}
+            src={logoWhite}
+            alt="logo"
+            as="image"
+            priority
+          />
+        </div>
       </div>
       <div className={classes.swiperContainer}>
-        <VisibilitySensor
-          scrollDelay={250}
-          onChange={(isVisible) => setIsVisibleMovies(isVisible)}
-        >
-          <h2
-            className={
-              isVisibleMovies
-                ? "animate__animated animate__slideInDown"
-                : "animate__animated animate__slideOutUp"
-            }
-            style={{ textAlign: language ? "right" : "left" }}
-            onClick={() => Router.push("/movies")}
+        <div className={classes.swiperBox}>
+          <VisibilitySensor
+            scrollDelay={250}
+            onChange={(isVisible) => setIsVisibleMovies(isVisible)}
           >
-            {language ? "فیلم" : "Movies"}
-          </h2>
-        </VisibilitySensor>
-        <Swiper
-          className={classes.swiper}
-          slidesPerView={generateSwipeCount()}
-          spaceBetween={20}
-          centeredSlides={true}
-          mousewheel={true}
-          loop={true}
-          allowTouchMove={true}
-          navigation={true}
-          modules={[Navigation]}
-          onSlideChange={updateIndex}
-        >
-          {images.map((user, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                onClick={() => Router.push("/movies")}
-                src={user}
-                blurDataURL={user}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            <h2
+              className={
+                isVisibleMovies
+                  ? "animate__animated animate__slideInDown"
+                  : "animate__animated animate__slideOutUp"
+              }
+              style={{ textAlign: language ? "right" : "left" }}
+              onClick={() => Router.push("/movies")}
+            >
+              {language ? "فیلم" : "Movies"}
+            </h2>
+          </VisibilitySensor>
+          <Swiper
+            className={classes.swiper}
+            slidesPerView={generateSwipeCount()}
+            spaceBetween={20}
+            centeredSlides={true}
+            mousewheel={true}
+            loop={true}
+            allowTouchMove={true}
+            navigation={true}
+            modules={[Navigation]}
+            onSlideChange={updateIndex}
+          >
+            {images.map((user, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  onClick={() => Router.push("/paintings")}
+                  src={user}
+                  blurDataURL={user}
+                  placeholder="blur"
+                  alt="image"
+                  layout="fill"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className={classes.logo}>
+          <Image
+            width={40}
+            height={400}
+            src={logoWhite}
+            alt="logo"
+            as="image"
+            priority
+          />
+        </div>
       </div>
       <div className={classes.swiperContainer}>
-        <VisibilitySensor
-          scrollDelay={250}
-          onChange={(isVisible) => setIsVisibleTravels(isVisible)}
-        >
-          <h2
-            className={
-              isVisibleTravels
-                ? "animate__animated animate__slideInDown"
-                : "animate__animated animate__slideOutUp"
-            }
-            style={{ textAlign: language ? "right" : "left" }}
-            onClick={() => Router.push("/travels")}
+        <div className={classes.swiperBox}>
+          <VisibilitySensor
+            scrollDelay={250}
+            onChange={(isVisible) => setIsVisibleTravels(isVisible)}
           >
-            {language ? "سفر" : "Travels"}
-          </h2>
-        </VisibilitySensor>
-        <Swiper
-          className={classes.swiper}
-          slidesPerView={generateSwipeCount()}
-          spaceBetween={20}
-          centeredSlides={true}
-          mousewheel={true}
-          loop={true}
-          allowTouchMove={true}
-          navigation={true}
-          modules={[Navigation]}
-          onSlideChange={updateIndex}
-        >
-          {images.map((user, index) => (
-            <SwiperSlide key={index}>
-              <Image
-                onClick={() => Router.push("/travels")}
-                src={user}
-                blurDataURL={user}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            <h2
+              className={
+                isVisibleTravels
+                  ? "animate__animated animate__slideInDown"
+                  : "animate__animated animate__slideOutUp"
+              }
+              style={{ textAlign: language ? "right" : "left" }}
+              onClick={() => Router.push("/travels")}
+            >
+              {language ? "سفر" : "Travels"}
+            </h2>
+          </VisibilitySensor>
+          <Swiper
+            className={classes.swiper}
+            slidesPerView={generateSwipeCount()}
+            spaceBetween={20}
+            centeredSlides={true}
+            mousewheel={true}
+            loop={true}
+            allowTouchMove={true}
+            navigation={true}
+            modules={[Navigation]}
+            onSlideChange={updateIndex}
+          >
+            {images.map((user, index) => (
+              <SwiperSlide key={index}>
+                <Image
+                  onClick={() => Router.push("/paintings")}
+                  src={user}
+                  blurDataURL={user}
+                  placeholder="blur"
+                  alt="image"
+                  layout="fill"
+                  objectFit="cover"
+                  as="image"
+                  priority
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className={classes.logo}>
+          <Image
+            width={40}
+            height={400}
+            src={logoWhite}
+            alt="logo"
+            as="image"
+            priority
+          />
+        </div>
       </div>
     </div>
   );

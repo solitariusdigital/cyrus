@@ -49,6 +49,8 @@
   height: 50vh;
   margin-bottom: 120px;
   width: config.$content-width;
+  @include mixins.row-space-between-center();
+  position: relative;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
@@ -58,8 +60,19 @@
     color: config.$white;
   }
 
+  .swiperBox {
+    width: 95%;
+    height: 100%;
+  }
+
+  .logo {
+    position: relative;
+    top: 20%;
+  }
+
   .swiper {
     height: 100%;
+    width: 100%;
     margin-top: 20px;
   }
 }
