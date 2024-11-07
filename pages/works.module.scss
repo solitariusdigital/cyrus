@@ -9,7 +9,7 @@
   width: 100%;
   margin: 2vh auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 2vh;
   width: config.$content-width;
 
@@ -29,17 +29,17 @@
 .columnTwo {
   .imageBox {
     position: relative;
-    height: 50vh;
+    height: 60vh;
     margin-bottom: 2vh;
 
     @include mixins.mobile {
-      height: 250px;
+      height: 280px;
     }
     @include mixins.tablet {
       height: 350px;
     }
     @include mixins.tabletPortrait {
-      height: 250px;
+      height: 280px;
       margin-bottom: 1vh;
     }
 
@@ -56,13 +56,16 @@
 
 .columnTwo {
   .imageBox {
-    height: 40vh;
+    height: 50vh;
 
+    @include mixins.mobile {
+      height: 280px;
+    }
     @include mixins.tablet {
-      height: 250px;
+      height: 280px;
     }
     @include mixins.tabletPortrait {
-      height: 200px;
+      height: 220px;
     }
   }
 }

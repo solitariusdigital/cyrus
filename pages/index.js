@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import VisibilitySensor from "react-visibility-sensor";
 import logoWhite from "@/assets/logoWhite.png";
+import CoverSlider from "@/components/CoverSlider";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
@@ -53,7 +54,8 @@ export default function Home() {
 
   return (
     <div className={classes.container}>
-      <div className={classes.cover}>
+      <section className={classes.cover}>
+        <CoverSlider covers={images} />
         {/* <div className={classes.logoWhite}>
           <Image
             className={classes.logoWhite}
@@ -65,22 +67,7 @@ export default function Home() {
             priority
           />
         </div> */}
-        <Image
-          className={classes.image}
-          src={
-            "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG"
-          }
-          blurDataURL={
-            "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG"
-          }
-          placeholder="blur"
-          alt="cover"
-          layout="fill"
-          objectFit="cover"
-          as="image"
-          priority
-        />
-      </div>
+      </section>
       <div className={classes.swiperContainer}>
         <VisibilitySensor
           scrollDelay={250}

@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function Paintings() {
+export default function Movies() {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
   const works = [
@@ -25,6 +25,23 @@ export default function Paintings() {
     <div className={classes.container}>
       <div className={classes.gridBox}>
         <div className={classes.columnOne} onClick={() => gallerySlider()}>
+          {works.map((work, index) => (
+            <div key={index} className={classes.imageBox}>
+              <Image
+                className={classes.image}
+                src={work}
+                blurDataURL={work}
+                placeholder="blur"
+                alt="cover"
+                layout="fill"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+            </div>
+          ))}
+        </div>
+        <div className={classes.columnTwo} onClick={() => gallerySlider()}>
           {works
             .map((work, index) => (
               <div key={index} className={classes.imageBox}>
@@ -42,23 +59,6 @@ export default function Paintings() {
               </div>
             ))
             .reverse()}
-        </div>
-        <div className={classes.columnTwo} onClick={() => gallerySlider()}>
-          {works.map((work, index) => (
-            <div key={index} className={classes.imageBox}>
-              <Image
-                className={classes.image}
-                src={work}
-                blurDataURL={work}
-                placeholder="blur"
-                alt="cover"
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-            </div>
-          ))}
         </div>
       </div>
       {displayGallerySlider && (

@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function Paintings() {
+export default function Travels() {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
   const works = [

@@ -9,13 +9,12 @@
 }
 
 .cover {
-  position: relative;
   width: 100%;
   height: 100vh;
   margin-bottom: 50px;
 
   @include mixins.mobile {
-    height: 450px;
+    height: 500px;
   }
 
   // .logoWhite {
