@@ -16,13 +16,6 @@
   @include mixins.mobile {
     height: 500px;
   }
-
-  // .logoWhite {
-  //   position: absolute;
-  //   left: 10%;
-  //   top: 30%;
-  //   z-index: 1;
-  // }
 }
 
 .banner {
@@ -57,7 +50,7 @@
   }
 
   h2 {
-    color: config.$white;
+    color: config.$brand;
   }
 
   .swiperBox {

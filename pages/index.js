@@ -4,11 +4,10 @@ import classes from "./home.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import VisibilitySensor from "react-visibility-sensor";
-import logoWhite from "@/assets/logoWhite.png";
 import CoverSlider from "@/components/CoverSlider";
 import logo from "@/assets/logo.png";
 
@@ -57,17 +56,6 @@ export default function Home() {
     <div className={classes.container}>
       <section className={classes.cover}>
         <CoverSlider covers={images} />
-        {/* <div className={classes.logoWhite}>
-          <Image
-            className={classes.logoWhite}
-            width={30}
-            height={300}
-            src={logoWhite}
-            alt="logo"
-            as="image"
-            priority
-          />
-        </div> */}
       </section>
       <div className={classes.swiperContainer}>
         <div className={classes.swiperBox}>
@@ -120,7 +108,7 @@ export default function Home() {
           <Image
             width={40}
             height={400}
-            src={logoWhite}
+            src={logo}
             alt="logo"
             as="image"
             priority
@@ -178,7 +166,7 @@ export default function Home() {
           <Image
             width={40}
             height={400}
-            src={logoWhite}
+            src={logo}
             alt="logo"
             as="image"
             priority
@@ -236,7 +224,7 @@ export default function Home() {
           <Image
             width={40}
             height={400}
-            src={logoWhite}
+            src={logo}
             alt="logo"
             as="image"
             priority

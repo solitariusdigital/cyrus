@@ -2,10 +2,12 @@ import { Fragment, useContext, useState, useEffect } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
+import logo from "@/assets/logo.png";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
 
   return (
     <div className={classes.container}>
@@ -40,6 +42,18 @@ export default function About() {
             priority
           />
         </div>
+        {screenSize === "mobile" && (
+          <div className={classes.logo}>
+            <Image
+              width={40}
+              height={400}
+              src={logo}
+              alt="logo"
+              as="image"
+              priority
+            />
+          </div>
+        )}
       </div>
     </div>
   );
