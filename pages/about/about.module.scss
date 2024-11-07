@@ -36,7 +36,7 @@
       direction: rtl;
       height: 400px;
       overflow-y: auto;
-      @include mixins.transparentBackground(0.5, config.$grey);
+      @include mixins.transparentBackground(0.3, config.$grey);
 
       @include mixins.allDesktop {
         position: relative;
