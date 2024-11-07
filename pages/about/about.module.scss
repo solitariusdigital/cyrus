@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
   gap: 12px;
-  width: config.$content-width;
   margin: auto;
   min-height: 100vh;
 
@@ -14,12 +13,15 @@
     flex-direction: column;
     width: calc(100% - 24px);
     margin-top: 150px;
+    margin-bottom: 150px;
   }
   @include mixins.tabletPortrait {
     display: flex;
     flex-direction: column;
     min-height: fit-content !important;
+    width: config.$content-width;
     margin-top: 150px;
+    margin-bottom: 150px;
   }
 
   .infoBox {
@@ -30,20 +32,27 @@
     .informationReverse {
       display: flex;
       flex-direction: column;
-      padding: 50px;
+      padding: 30px;
       direction: rtl;
+      height: 400px;
+      overflow-y: auto;
       @include mixins.transparentBackground(0.5, config.$grey);
-      height: fit-content;
 
+      @include mixins.allDesktop {
+        position: relative;
+        left: 10%;
+        z-index: 5;
+        max-width: 800px;
+      }
+      @include mixins.tablet {
+        position: relative;
+        left: 10%;
+        z-index: 5;
+      }
       @include mixins.mobile {
         padding: 12px;
       }
-      @include mixins.tablet {
-        padding: 12px;
-      }
-      @include mixins.tabletPortrait {
-        padding: 12px;
-      }
+
       h2 {
         color: config.$brand;
         margin-bottom: 20px;
@@ -59,12 +68,29 @@
     }
   }
 
+  .infoBox::-webkit-scrollbar {
+    width: 5px;
+  }
+  .infoBox::-webkit-scrollbar-track {
+    background: config.$brand;
+  }
+  .infoBox::-webkit-scrollbar-thumb {
+    background: config.$brand;
+  }
+  .infoBox::-webkit-scrollbar-thumb:hover {
+    background: config.$brand;
+  }
+  .infoBox {
+    scrollbar-width: thin;
+    scrollbar-color: config.$brand config.$brand;
+  }
+
   .imageBox {
     @include mixins.mobile {
       height: 300px;
     }
     @include mixins.tabletPortrait {
-      height: 500px;
+      height: 600px;
     }
 
     .image {

@@ -33,13 +33,13 @@
     margin-bottom: 2vh;
 
     @include mixins.mobile {
-      height: 280px;
+      height: 300px;
     }
     @include mixins.tablet {
-      height: 350px;
+      height: 450px;
     }
     @include mixins.tabletPortrait {
-      height: 280px;
+      height: 300px;
       margin-bottom: 1vh;
     }
 
@@ -59,13 +59,13 @@
     height: 50vh;
 
     @include mixins.mobile {
-      height: 280px;
+      height: 300px;
     }
     @include mixins.tablet {
-      height: 280px;
+      height: 350px;
     }
     @include mixins.tabletPortrait {
-      height: 220px;
+      height: 250px;
     }
   }
 }

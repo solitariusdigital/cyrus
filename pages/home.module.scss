@@ -67,7 +67,14 @@
 
   .logo {
     position: relative;
-    top: 20%;
+    top: 15%;
+
+    @include mixins.tablet {
+      top: 10%;
+    }
+    @include mixins.tabletPortrait {
+      top: 10%;
+    }
   }
 
   .swiper {

@@ -34,7 +34,7 @@ export default function GallerySlider({ media }) {
                   src={image}
                   blurDataURL={image}
                   placeholder="blur"
-                  alt={image.link}
+                  alt="image"
                   layout="fill"
                   objectFit="contain"
                   as="image"

@@ -24,7 +24,7 @@ export default function Movies() {
   return (
     <div className={classes.container}>
       <div className={classes.gridBox}>
-        <div className={classes.columnOne} onClick={() => gallerySlider()}>
+        <div className={classes.columnTwo} onClick={() => gallerySlider()}>
           {works.map((work, index) => (
             <div key={index} className={classes.imageBox}>
               <Image
@@ -41,7 +41,7 @@ export default function Movies() {
             </div>
           ))}
         </div>
-        <div className={classes.columnTwo} onClick={() => gallerySlider()}>
+        <div className={classes.columnOne} onClick={() => gallerySlider()}>
           {works
             .map((work, index) => (
               <div key={index} className={classes.imageBox}>
