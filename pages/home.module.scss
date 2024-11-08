@@ -39,11 +39,11 @@
 }
 
 .swiperContainer {
+  position: relative;
   height: 50vh;
   margin-bottom: 120px;
   width: config.$content-width;
   @include mixins.row-space-between-center();
-  position: relative;
 
   @include mixins.mobile {
     width: calc(100% - 24px);

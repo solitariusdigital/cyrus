@@ -40,6 +40,7 @@ export default function CoverSlider({ covers }) {
                   as="image"
                   priority
                 />
+                <div className={classes.fadeOverlay}></div>
                 {/* ) : (
                   <video
                     className={classes.video}
