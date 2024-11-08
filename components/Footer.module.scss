@@ -18,6 +18,10 @@
   @include mixins.row-space-between-center();
   width: 250px;
 
+  @include mixins.mobile {
+    width: 200px;
+  }
+
   .nav {
     margin: 8px 0px;
 
