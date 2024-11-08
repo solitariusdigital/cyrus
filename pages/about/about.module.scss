@@ -68,23 +68,6 @@
     }
   }
 
-  .infoBox::-webkit-scrollbar {
-    width: 5px;
-  }
-  .infoBox::-webkit-scrollbar-track {
-    background: config.$brand;
-  }
-  .infoBox::-webkit-scrollbar-thumb {
-    background: config.$brand;
-  }
-  .infoBox::-webkit-scrollbar-thumb:hover {
-    background: config.$brand;
-  }
-  .infoBox {
-    scrollbar-width: thin;
-    scrollbar-color: config.$brand config.$brand;
-  }
-
   .imageBox {
     @include mixins.mobile {
       height: 300px;

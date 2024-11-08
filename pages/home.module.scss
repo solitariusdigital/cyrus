@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 150px;
 }
 
 .cover {
@@ -47,6 +48,8 @@
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+    height: 300px;
+    margin-bottom: 100px;
   }
 
   h2 {
@@ -62,8 +65,11 @@
     position: relative;
     top: 15%;
 
+    @include mixins.mobile {
+      top: 20%;
+    }
     @include mixins.tablet {
-      top: 10%;
+      top: 12%;
     }
     @include mixins.tabletPortrait {
       top: 10%;
