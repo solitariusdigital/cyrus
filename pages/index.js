@@ -148,7 +148,7 @@ export default function Home() {
             {images.map((user, index) => (
               <SwiperSlide key={index}>
                 <Image
-                  onClick={() => Router.push("/paintings")}
+                  onClick={() => Router.push("/movies")}
                   src={user}
                   blurDataURL={user}
                   placeholder="blur"
@@ -206,7 +206,7 @@ export default function Home() {
             {images.map((user, index) => (
               <SwiperSlide key={index}>
                 <Image
-                  onClick={() => Router.push("/paintings")}
+                  onClick={() => Router.push("/travels")}
                   src={user}
                   blurDataURL={user}
                   placeholder="blur"

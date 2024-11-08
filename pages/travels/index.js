@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 export default function Travels() {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
 
   const works = [
     "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
@@ -14,6 +15,18 @@ export default function Travels() {
     "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
     "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
   ];
+
+  useEffect(() => {
+    navigationTopBar.map((nav) => {
+      if (nav.link === "/travels") {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const gallerySlider = () => {
     setDisplayGallerySlider(true);
