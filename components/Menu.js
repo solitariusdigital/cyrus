@@ -44,7 +44,12 @@ export default function Menu() {
           Pantea Cyrus
         </h1>
         <div className={classes.control}>
-          <div onClick={() => toggleLanguage()}>
+          <div
+            onClick={() => toggleLanguage()}
+            style={{
+              fontFamily: language ? "English" : "English",
+            }}
+          >
             {language ? <p>EN</p> : <p>FA</p>}
           </div>
           {menuMobile ? (
