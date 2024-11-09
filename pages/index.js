@@ -105,12 +105,12 @@ export default function Home() {
               slideShadows: true,
             }}
           >
-            {images.map((user, index) => (
+            {images.map((image, index) => (
               <SwiperSlide key={index}>
                 <Image
                   onClick={() => Router.push("/paintings")}
-                  src={user}
-                  blurDataURL={user}
+                  src={image}
+                  blurDataURL={image}
                   placeholder="blur"
                   alt="image"
                   layout="fill"
@@ -170,12 +170,12 @@ export default function Home() {
               slideShadows: true,
             }}
           >
-            {images.map((user, index) => (
+            {images.map((image, index) => (
               <SwiperSlide key={index}>
                 <Image
                   onClick={() => Router.push("/movies")}
-                  src={user}
-                  blurDataURL={user}
+                  src={image}
+                  blurDataURL={image}
                   placeholder="blur"
                   alt="image"
                   layout="fill"
@@ -237,12 +237,12 @@ export default function Home() {
               },
             }}
           >
-            {images.map((user, index) => (
+            {images.map((image, index) => (
               <SwiperSlide key={index}>
                 <Image
                   onClick={() => Router.push("/travels")}
-                  src={user}
-                  blurDataURL={user}
+                  src={image}
+                  blurDataURL={image}
                   placeholder="blur"
                   alt="image"
                   layout="fill"

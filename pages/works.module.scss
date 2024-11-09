@@ -1,71 +1,24 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.container {
-  margin: 150px auto;
-}
-
-.gridBox {
-  width: 100%;
-  margin: 2vh auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2vh;
+.swiperContainer {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
   width: config.$content-width;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
-    display: flex;
-    flex-direction: column;
-    gap: 0vh 2vh;
   }
 
-  @include mixins.tabletPortrait {
-    gap: 1vh;
-  }
-}
-
-.columnOne,
-.columnTwo {
-  .imageBox {
-    position: relative;
-    height: 60vh;
-    margin-bottom: 2vh;
+  .swiper {
+    height: 30%;
+    width: 100%;
+    cursor: grab;
 
     @include mixins.mobile {
-      height: 300px;
-    }
-    @include mixins.tablet {
-      height: 450px;
-    }
-    @include mixins.tabletPortrait {
-      height: 300px;
-      margin-bottom: 1vh;
-    }
-
-    .image {
-      @include mixins.allDesktop {
-        &:hover {
-          @include mixins.background-anime();
-          cursor: pointer;
-        }
-      }
-    }
-  }
-}
-
-.columnTwo {
-  .imageBox {
-    height: 50vh;
-
-    @include mixins.mobile {
-      height: 300px;
-    }
-    @include mixins.tablet {
-      height: 350px;
-    }
-    @include mixins.tabletPortrait {
-      height: 250px;
+      height: 200px;
     }
   }
 }
