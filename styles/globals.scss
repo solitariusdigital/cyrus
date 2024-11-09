@@ -161,15 +161,9 @@ label.file input[type="file"] {
 
 .swiper-button-prev {
   color: config.$brand !important;
-  scale: 0.7;
-  @include mixins.mobile {
-    scale: 0.5;
-  }
+  scale: 0.5;
 }
 .swiper-button-next {
   color: config.$brand !important;
-  scale: 0.7;
-  @include mixins.mobile {
-    scale: 0.5;
-  }
+  scale: 0.5;
 }

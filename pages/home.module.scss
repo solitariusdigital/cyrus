@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 150px;
+  // margin-bottom: 150px;
 }
 
 .cover {
@@ -41,15 +41,14 @@
 
 .swiperContainer {
   position: relative;
-  height: 50vh;
-  margin-bottom: 120px;
+  height: 200px;
+  margin-bottom: 100px;
   width: config.$content-width;
   @include mixins.row-space-between-center();
+  justify-content: center;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
-    height: 300px;
-    margin-bottom: 100px;
   }
 
   h2 {
@@ -57,23 +56,20 @@
   }
 
   .swiperBox {
-    width: 95%;
+    position: relative;
+    width: 400px;
     height: 100%;
+
+    @include mixins.mobile {
+      width: 90%;
+    }
   }
 
   .logo {
     position: relative;
-    top: 15%;
-
-    @include mixins.mobile {
-      top: 20%;
-    }
-    @include mixins.tablet {
-      top: 13%;
-    }
-    @include mixins.tabletPortrait {
-      top: 10%;
-    }
+    top: 50px;
+    width: 50px;
+    min-height: 200px;
   }
 
   .swiper {

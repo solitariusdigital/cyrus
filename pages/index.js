@@ -4,7 +4,7 @@ import classes from "./home.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, EffectCreative, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import VisibilitySensor from "react-visibility-sensor";
@@ -31,16 +31,16 @@ export default function Home() {
     let count = 0;
     switch (screenSize) {
       case "desktop":
-        count = 3;
+        count = 2;
         break;
       case "tablet-landscape":
         count = 2;
         break;
       case "tablet-portrait":
-        count = 1;
+        count = 2;
         break;
       case "mobile":
-        count = 1;
+        count = 2;
         break;
     }
     return count;
@@ -57,7 +57,7 @@ export default function Home() {
       <section className={classes.cover}>
         <CoverSlider covers={images} />
       </section>
-      <div className={classes.swiperContainer}>
+      <section className={classes.swiperContainer}>
         <div className={classes.swiperBox}>
           <VisibilitySensor
             scrollDelay={250}
@@ -77,15 +77,23 @@ export default function Home() {
           </VisibilitySensor>
           <Swiper
             className={classes.swiper}
-            slidesPerView={generateSwipeCount()}
-            spaceBetween={20}
-            centeredSlides={true}
+            slidesPerView={2}
+            spaceBetween={0}
             mousewheel={true}
             loop={true}
             allowTouchMove={true}
             navigation={true}
-            modules={[Navigation]}
             onSlideChange={updateIndex}
+            modules={[Navigation, EffectCoverflow]}
+            effect={"coverflow"}
+            grabCursor={true}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
           >
             {images.map((user, index) => (
               <SwiperSlide key={index}>
@@ -106,16 +114,16 @@ export default function Home() {
         </div>
         <div className={classes.logo}>
           <Image
-            width={40}
-            height={400}
             src={logo}
             alt="logo"
+            layout="fill"
+            objectFit="contain"
             as="image"
             priority
           />
         </div>
-      </div>
-      <div className={classes.swiperContainer}>
+      </section>
+      <section className={classes.swiperContainer}>
         <div className={classes.swiperBox}>
           <VisibilitySensor
             scrollDelay={250}
@@ -135,15 +143,23 @@ export default function Home() {
           </VisibilitySensor>
           <Swiper
             className={classes.swiper}
-            slidesPerView={generateSwipeCount()}
-            spaceBetween={20}
-            centeredSlides={true}
+            slidesPerView={3}
+            spaceBetween={0}
             mousewheel={true}
             loop={true}
             allowTouchMove={true}
             navigation={true}
-            modules={[Navigation]}
             onSlideChange={updateIndex}
+            modules={[Navigation, EffectCoverflow]}
+            effect={"coverflow"}
+            grabCursor={true}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
           >
             {images.map((user, index) => (
               <SwiperSlide key={index}>
@@ -164,16 +180,16 @@ export default function Home() {
         </div>
         <div className={classes.logo}>
           <Image
-            width={40}
-            height={400}
             src={logo}
             alt="logo"
+            layout="fill"
+            objectFit="contain"
             as="image"
             priority
           />
         </div>
-      </div>
-      <div className={classes.swiperContainer}>
+      </section>
+      <section className={classes.swiperContainer}>
         <div className={classes.swiperBox}>
           <VisibilitySensor
             scrollDelay={250}
@@ -194,14 +210,24 @@ export default function Home() {
           <Swiper
             className={classes.swiper}
             slidesPerView={generateSwipeCount()}
-            spaceBetween={20}
-            centeredSlides={true}
+            spaceBetween={0}
             mousewheel={true}
             loop={true}
             allowTouchMove={true}
             navigation={true}
-            modules={[Navigation]}
             onSlideChange={updateIndex}
+            modules={[Navigation, EffectCreative]}
+            effect={"creative"}
+            grabCursor={true}
+            creativeEffect={{
+              prev: {
+                shadow: true,
+                translate: [0, 0, -400],
+              },
+              next: {
+                translate: ["100%", 0, 0],
+              },
+            }}
           >
             {images.map((user, index) => (
               <SwiperSlide key={index}>
@@ -222,15 +248,15 @@ export default function Home() {
         </div>
         <div className={classes.logo}>
           <Image
-            width={40}
-            height={400}
             src={logo}
             alt="logo"
+            layout="fill"
+            objectFit="contain"
             as="image"
             priority
           />
         </div>
-      </div>
+      </section>
     </div>
   );
 }
