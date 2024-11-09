@@ -14,17 +14,6 @@ export default function Admin() {
   //   }
   // }, [permissionControl]);
 
-  useEffect(() => {
-    if (document) {
-      const newBackgroundColor = "#fafbf6";
-      const originalBackgroundColor = document.body.style.backgroundColor;
-      document.body.style.backgroundColor = newBackgroundColor;
-      return () => {
-        document.body.style.backgroundColor = originalBackgroundColor;
-      };
-    }
-  }, []);
-
   return (
     <div className={classes.container}>
       <h3>{currentUser?.name}</h3>

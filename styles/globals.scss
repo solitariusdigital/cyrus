@@ -52,7 +52,7 @@
 
 body {
   user-select: none;
-  background: config.$background;
+  background: config.$white;
 }
 
 a {
@@ -61,7 +61,7 @@ a {
 }
 
 button {
-  @include mixins.button(config.$background, config.$brand);
+  @include mixins.button(config.$green, config.$brand);
 }
 
 h1 {
@@ -95,7 +95,7 @@ p {
   z-index: 10;
   height: 120px;
   width: 100%;
-  @include mixins.transparentBackground(0.5, config.$background);
+  @include mixins.transparentBackground(0.5, config.$green);
   @include mixins.row-space-between-center();
   justify-content: center;
 }
@@ -106,7 +106,7 @@ p {
   z-index: 10;
   height: 50px;
   width: 100%;
-  @include mixins.transparentBackground(0.5, config.$background);
+  @include mixins.transparentBackground(0.5, config.$green);
   @include mixins.row-space-between-center();
 }
 
@@ -124,7 +124,8 @@ p {
   top: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-
+  background: config.$green;
+  height: 100vh;
   h1 {
     position: relative;
     right: 8px;

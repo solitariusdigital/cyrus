@@ -23,17 +23,6 @@ export default function Portal() {
     }
   }, [permissionControl]);
 
-  useEffect(() => {
-    if (document) {
-      const newBackgroundColor = "#fafbf6";
-      const originalBackgroundColor = document.body.style.backgroundColor;
-      document.body.style.backgroundColor = newBackgroundColor;
-      return () => {
-        document.body.style.backgroundColor = originalBackgroundColor;
-      };
-    }
-  }, []);
-
   const showAlert = (message) => {
     setAlert(message);
     setTimeout(() => {

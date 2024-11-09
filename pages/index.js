@@ -27,6 +27,17 @@ export default function Home() {
     "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
   ];
 
+  useEffect(() => {
+    if (document) {
+      const newBackgroundColor = "#1e3638";
+      const originalBackgroundColor = document.body.style.backgroundColor;
+      document.body.style.backgroundColor = newBackgroundColor;
+      return () => {
+        document.body.style.backgroundColor = originalBackgroundColor;
+      };
+    }
+  }, []);
+
   const generateSwipeCount = () => {
     let count = 0;
     switch (screenSize) {
@@ -86,7 +97,6 @@ export default function Home() {
             onSlideChange={updateIndex}
             modules={[Navigation, EffectCoverflow]}
             effect={"coverflow"}
-            grabCursor={true}
             coverflowEffect={{
               rotate: 50,
               stretch: 0,
@@ -152,7 +162,6 @@ export default function Home() {
             onSlideChange={updateIndex}
             modules={[Navigation, EffectCoverflow]}
             effect={"coverflow"}
-            grabCursor={true}
             coverflowEffect={{
               rotate: 50,
               stretch: 0,
@@ -218,7 +227,6 @@ export default function Home() {
             onSlideChange={updateIndex}
             modules={[Navigation, EffectCreative]}
             effect={"creative"}
-            grabCursor={true}
             creativeEffect={{
               prev: {
                 shadow: true,

@@ -9,6 +9,17 @@ export default function About() {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
 
+  useEffect(() => {
+    if (document) {
+      const newBackgroundColor = "#1e3638";
+      const originalBackgroundColor = document.body.style.backgroundColor;
+      document.body.style.backgroundColor = newBackgroundColor;
+      return () => {
+        document.body.style.backgroundColor = originalBackgroundColor;
+      };
+    }
+  }, []);
+
   return (
     <div className={classes.container}>
       <div className={classes.infoBox}>
