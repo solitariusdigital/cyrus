@@ -95,7 +95,7 @@ p {
   z-index: 10;
   height: 120px;
   width: 100%;
-  @include mixins.transparentBackground(0.5, config.$green);
+  @include mixins.transparentBackground(0.7, config.$green);
   @include mixins.row-space-between-center();
   justify-content: center;
 }
@@ -106,7 +106,7 @@ p {
   z-index: 10;
   height: 50px;
   width: 100%;
-  @include mixins.transparentBackground(0.5, config.$green);
+  @include mixins.transparentBackground(0.7, config.$green);
   @include mixins.row-space-between-center();
 }
 
@@ -158,6 +158,15 @@ label.file input[type="file"] {
 .file:hover {
   color: config.$brand;
   border: 1px solid config.$brand;
+}
+
+.works_swiper__tLvOM {
+  .swiper-slide {
+    opacity: 0.5;
+  }
+  .swiper-slide-active {
+    opacity: 1;
+  }
 }
 
 .swiper-button-prev {

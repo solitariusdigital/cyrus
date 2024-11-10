@@ -75,7 +75,8 @@ export default function Paintings() {
         <Swiper
           className={classes.swiper}
           slidesPerView={generateSwipeCount()}
-          spaceBetween={5}
+          spaceBetween={0}
+          centeredSlides={true}
           mousewheel={true}
           loop={true}
           allowTouchMove={true}

@@ -7,6 +7,10 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 150px;
+
+  @include mixins.mobile {
+    margin-top: 120px;
+  }
 }
 
 .cover {
@@ -16,26 +20,6 @@
 
   @include mixins.mobile {
     height: 500px;
-  }
-}
-
-.banner {
-  position: relative;
-  width: 100%;
-  height: 50vh;
-  margin-bottom: 50px;
-
-  @include mixins.mobile {
-    height: 200px;
-  }
-
-  .image {
-    @include mixins.allDesktop {
-      &:hover {
-        @include mixins.background-anime();
-        cursor: pointer;
-      }
-    }
   }
 }
 
