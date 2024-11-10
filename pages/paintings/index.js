@@ -5,7 +5,7 @@ import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectCreative, EffectCoverflow } from "swiper/modules";
+import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -82,7 +82,7 @@ export default function Paintings() {
           allowTouchMove={true}
           navigation={true}
           onSlideChange={updateIndex}
-          modules={[Navigation]}
+          modules={[Navigation, Mousewheel]}
         >
           {works.map((work, index) => (
             <SwiperSlide key={index}>
