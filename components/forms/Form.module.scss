@@ -2,13 +2,10 @@
 @use "styles/_mixins.scss" as mixins;
 
 .form {
-  width: 60%;
+  width: 70%;
   margin: auto;
 
   @include mixins.mobile {
-    width: 100%;
-  }
-  @include mixins.tablet {
     width: 100%;
   }
   @include mixins.tabletPortrait {

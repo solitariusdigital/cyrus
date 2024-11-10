@@ -11,6 +11,7 @@ import {
   sixGenerator,
   uploadMedia,
   extractParagraphs,
+  areAllStatesValid,
 } from "@/services/utility";
 import { createWorksApi, updateWorksApi } from "@/services/api";
 
@@ -19,7 +20,8 @@ export default function Works() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const [title, setTitle] = useState({ en: "", fa: "" });
-  const [category, setCategory] = useState({ en: "", fa: "" });
+  const [category, setCategory] = useState({ en: "Paintings", fa: "نقاشی‌" });
+  const [subCategory, setSubCategory] = useState({ en: "", fa: "" });
   const [location, setLocation] = useState({ en: "", fa: "" });
   const [description, setDescription] = useState({ en: "", fa: "" });
   const [size, setSize] = useState({ en: "", fa: "" });
@@ -39,9 +41,40 @@ export default function Works() {
   const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
 
-  const categories = ["نقاشی‌", "فیلم", "سفر"];
-  const sourceLink = "https://kimpur.storage.c2.liara.space";
+  const sourceLink = "https://cyrus.storage.c2.liara.space";
   const router = useRouter();
+
+  const categories = {
+    نقاشی‌: {
+      fa: "نقاشی‌",
+      en: "Paintings",
+    },
+    سینما: {
+      fa: "سینما",
+      en: "Cinema",
+    },
+    سفر: {
+      fa: "سفر",
+      en: "Travels",
+    },
+  };
+  const subCategories = {
+    نقاشی‌: ["نمایشگاه", "آرشیو"],
+    سینما: ["سینما", "تئاتر", "سریال", "فیلم کوتاه", "جشنواره", "جوایز"],
+    سفر: ["ایران گردی", "جهان گردی"],
+  };
+  const englishSubCategoreis = {
+    نمایشگاه: "Exhibition",
+    آرشیو: "Archive",
+    سینما: "Cinema",
+    تئاتر: "Theatre",
+    سریال: "Series",
+    "فیلم کوتاه": "Short film",
+    جشنواره: "Festival",
+    جوایز: "Awards",
+    "ایران گردی": "Iran tour",
+    "جهان گردی": "World Tour",
+  };
 
   const handleImageChange = (event) => {
     const array = Array.from(event.target.files);
@@ -73,17 +106,21 @@ export default function Works() {
   };
 
   const createWorks = async () => {
-    if (!category) {
-      showAlert("دسته‌بندی الزامیست");
+    const isValid = areAllStatesValid([category, subCategory]);
+    if (!isValid) {
+      showAlert("دسته‌ و زیر مجموعه الزامیست");
+      return;
+    }
+    if (!category && !subCategory) {
       return;
     }
     if (imagesPreview.length === 0 && videosPreview.length === 0) {
-      showAlert("انتخاب عکس یا ویدئو");
+      showAlert("انتخاب عکس یا ویدئو الزامیست");
       return;
     }
 
-    setLoader(true);
     setDisableButton(true);
+    setLoader(true);
 
     let mediaLinks = [];
     const mediaFolder = "works";
@@ -100,7 +137,6 @@ export default function Works() {
           type: "image",
           active: true,
         });
-        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
@@ -115,18 +151,29 @@ export default function Works() {
           type: "video",
           active: true,
         });
-        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
     const worksObject = {
-      title: title.trim(),
-      category: category.trim(),
-      location: location.trim(),
-      description: extractParagraphs(description).join("\n\n"),
-      size: size.trim(),
-      year: year.trim(),
-      media: mediaLink,
+      fa: {
+        title: title.fa,
+        category: category.fa,
+        subCategory: subCategory.fa,
+        location: location.fa,
+        description: extractParagraphs(description.fa).join("\n\n"),
+        size: size.fa,
+        year: year.fa,
+      },
+      en: {
+        title: title.en,
+        category: category.en,
+        subCategory: subCategory.en,
+        location: location.en,
+        description: extractParagraphs(description.en).join("\n\n"),
+        size: size.en,
+        year: year.en,
+      },
+      media: mediaLinks,
       active: false,
     };
 
@@ -187,36 +234,77 @@ export default function Works() {
   return (
     <Fragment>
       <div className={classes.form}>
-        <div
-          className={classes.input}
-          style={{
-            fontFamily: "Farsi",
-          }}
-        >
-          <div className={classes.barReverse}>
-            <p className={classes.label}>
-              <span>*</span>
-              دسته‌بندی
-            </p>
-          </div>
-          <select
+        <div className={classes.formBox}>
+          <div
+            className={classes.input}
             style={{
               fontFamily: "Farsi",
             }}
-            defaultValue={"default"}
-            onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="default" disabled>
-              انتخاب
-            </option>
-            {categories.map((category, index) => {
-              return (
-                <option key={index} value={category}>
-                  {category}
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                زیر مجموعه
+              </p>
+            </div>
+            <select
+              style={{
+                fontFamily: "Farsi",
+              }}
+              defaultValue={"default"}
+              onChange={(e) =>
+                setSubCategory({
+                  fa: [e.target.value],
+                  en: englishSubCategoreis[e.target.value],
+                })
+              }
+            >
+              <option value="default" disabled>
+                انتخاب
+              </option>
+              {subCategories[category["fa"]].map((subCat, index) => (
+                <option key={index} value={subCat}>
+                  {subCat}
                 </option>
-              );
-            })}
-          </select>
+              ))}
+            </select>
+          </div>
+          <div
+            className={classes.input}
+            style={{
+              fontFamily: "Farsi",
+            }}
+          >
+            <div className={classes.barReverse}>
+              <p className={classes.label}>
+                <span>*</span>
+                دسته
+              </p>
+            </div>
+            <select
+              style={{
+                fontFamily: "Farsi",
+              }}
+              defaultValue={"default"}
+              onChange={(e) =>
+                setCategory({
+                  fa: categories[e.target.value].fa,
+                  en: categories[e.target.value].en,
+                })
+              }
+            >
+              <option value="default" disabled>
+                انتخاب
+              </option>
+              {Object.keys(categories).map((category, index) => {
+                return (
+                  <option key={index} value={category}>
+                    {category}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
         <div className={classes.formBox}>
           <div

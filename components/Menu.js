@@ -87,7 +87,7 @@ export default function Menu() {
             className={classes.logo}
             onClick={() => window.location.assign("/")}
           >
-            <Image src={logo} layout="fill" objectFit="contain" alt="logo" />
+            <Image src={logo} layout="fill" objectFit="cover" alt="logo" />
           </div>
         </div>
       )}

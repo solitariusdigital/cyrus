@@ -22,10 +22,10 @@ export const StateProvider = (props) => {
     },
     {
       title: {
-        fa: "فیلم",
-        en: "Movies",
+        fa: "سینما",
+        en: "Cinema",
       },
-      link: "/movies",
+      link: "/cinema",
       active: false,
     },
     {
@@ -36,14 +36,14 @@ export const StateProvider = (props) => {
       link: "/travels",
       active: false,
     },
-    // {
-    //   title: {
-    //     fa: "بلاگز",
-    //     en: "Blogs",
-    //   },
-    //   link: "/blogs",
-    //   active: false,
-    // },
+    {
+      title: {
+        fa: "بلاگز",
+        en: "Blogs",
+      },
+      link: "/blogs",
+      active: false,
+    },
     {
       title: {
         fa: "درباره",
