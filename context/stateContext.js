@@ -38,7 +38,7 @@ export const StateProvider = (props) => {
     },
     {
       title: {
-        fa: "بلاگز",
+        fa: "وبلاگ",
         en: "Blogs",
       },
       link: "/blogs",

@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
     setTimeout(() => {
       setAppLoader(true);
     }, 2000);
-  }, [setCurrentUser]);
+  }, [setCurrentUser, setPermissionControl]);
 
   return (
     <Fragment>

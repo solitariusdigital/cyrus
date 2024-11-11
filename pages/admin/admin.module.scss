@@ -9,11 +9,37 @@
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
 
-  h3 {
-    margin-bottom: 20px;
-  }
-
   @include mixins.mobile {
     width: calc(100% - 24px);
+  }
+}
+
+.navigation {
+  width: 350px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  height: 40px;
+  border: 1px solid config.$grey;
+  background: config.$white;
+  text-transform: capitalize;
+  @include mixins.row-space-between-center();
+  @include mixins.border-radius();
+  justify-content: space-around;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+
+  .nav {
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$brand;
+      }
+    }
+  }
+
+  .navActive {
+    color: config.$brand;
   }
 }

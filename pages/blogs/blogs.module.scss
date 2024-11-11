@@ -1,0 +1,53 @@
+@use "styles/_config.scss" as config;
+@use "styles/_mixins.scss" as mixins;
+
+.container,
+.containerReverse {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  gap: 12px;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  margin: 150px auto;
+  direction: rtl;
+
+  @include mixins.tabletPortrait {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  }
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .item,
+  .itemReverse {
+    background: config.$pureWhite;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    @include mixins.border-radius();
+
+    .row {
+      @include mixins.row-space-between-center();
+      margin-bottom: 12px;
+    }
+  }
+
+  .itemReverse {
+    direction: ltr;
+  }
+
+  .item {
+    p {
+      font-size: small;
+    }
+    h3 {
+      font-size: large;
+    }
+  }
+}
+
+.containerReverse {
+  direction: ltr;
+}

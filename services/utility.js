@@ -13,8 +13,12 @@ export function sixGenerator() {
   return Math.floor(100000 + Math.random() * 900000);
 }
 
-export function convertDate(date) {
-  return new Date(date).toLocaleDateString("fa-IR");
+export function convertDate(date, type) {
+  if (type === "fa") {
+    return new Date(date).toLocaleDateString("fa-IR");
+  } else {
+    return new Date(date).toLocaleDateString("en-US");
+  }
 }
 
 export function abbreviateNumber(num) {
