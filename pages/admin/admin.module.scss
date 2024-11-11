@@ -9,6 +9,10 @@
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
 
+  h3 {
+    margin-bottom: 20px;
+  }
+
   @include mixins.mobile {
     width: calc(100% - 24px);
   }

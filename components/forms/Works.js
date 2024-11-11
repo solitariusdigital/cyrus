@@ -254,7 +254,7 @@ export default function Works() {
               defaultValue={"default"}
               onChange={(e) =>
                 setSubCategory({
-                  fa: [e.target.value],
+                  fa: [e.target.value][0],
                   en: englishSubCategoreis[e.target.value],
                 })
               }

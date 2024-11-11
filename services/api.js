@@ -95,3 +95,52 @@ export const deleteWorksApi = async (id) => {
   });
   return await response.json();
 };
+
+// blogs api
+export const updateBlogsApi = async (data) => {
+  const response = await fetch("/api/blogs", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const createBlogsApi = async (data) => {
+  const response = await fetch("/api/blogs", {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getSingleBlogsApi = async (id) => {
+  const response = await fetch(`/api/blogs?id=${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const getBlogsApi = async () => {
+  const response = await fetch("/api/blogs", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};
+export const deleteBlogsApi = async (id) => {
+  const response = await fetch(`/api/blogs?id=${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+};

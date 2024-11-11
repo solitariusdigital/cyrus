@@ -4,12 +4,16 @@ import Menu from "@/components/Menu";
 import Footer from "@/components/Footer";
 import Image from "next/legacy/image";
 import logo from "@/assets/logo.png";
+import secureLocalStorage from "react-secure-storage";
+import { getSingleUserApi } from "@/services/api";
 
 export default function RootLayout({ children }) {
+  const { currentUser, setCurrentUser } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { displayMenu, setDisplayMenu } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [appLoader, setAppLoader] = useState(false);
 
   const handleResize = () => {
@@ -43,11 +47,32 @@ export default function RootLayout({ children }) {
     setLanguage(true);
   }, [setLanguage, setLanguageType]);
 
+  // checks user login and set user data
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const currentUser = JSON.parse(
+          secureLocalStorage.getItem("currentUser")
+        );
+        if (currentUser) {
+          const userData = await getSingleUserApi(currentUser["_id"]);
+          setCurrentUser(userData);
+          secureLocalStorage.setItem("currentUser", JSON.stringify(userData));
+          if (userData.permission === "admin") {
+            setPermissionControl("admin");
+          } else {
+            setPermissionControl("user");
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
     setTimeout(() => {
       setAppLoader(true);
-    }, 1500);
-  }, []);
+    }, 2000);
+  }, [setCurrentUser]);
 
   return (
     <Fragment>
