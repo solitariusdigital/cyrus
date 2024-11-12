@@ -9,11 +9,15 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Router from "next/router";
 import {
   getSingleBlogsApi,
   updateBlogsApi,
   deleteBlogsApi,
 } from "@/services/api";
+import { sliceString, replaceSpacesAndHyphens } from "@/services/utility";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
 export default function Blogs({ blogsData }) {
   const { language, setLanguage } = useContext(StateContext);
@@ -99,10 +103,29 @@ export default function Blogs({ blogsData }) {
             </p>
           </div>
           <p className={classes.description}>
-            {blog[languageType].description.split("\n\n").map((desc, index) => (
-              <p key={index}>{desc}</p>
-            ))}
+            {sliceString(blog[languageType].description, 150)}
           </p>
+          <div
+            className={language ? classes.more : classes.moreReverse}
+            onClick={() =>
+              Router.push(
+                `/blogs/${replaceSpacesAndHyphens(blog[languageType].title)}`
+              )
+            }
+          >
+            <p>{language ? "ادامه مطلب" : "Read more"}</p>
+            {language ? (
+              <ArrowBackIosIcon
+                className={classes.icon}
+                sx={{ fontSize: 16, color: "#c79c6e" }}
+              />
+            ) : (
+              <ArrowForwardIosIcon
+                className={classes.icon}
+                sx={{ fontSize: 16, color: "#c79c6e" }}
+              />
+            )}
+          </div>
         </div>
       ))}
     </div>

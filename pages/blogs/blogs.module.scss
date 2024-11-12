@@ -30,7 +30,24 @@
 
     .row {
       @include mixins.row-space-between-center();
-      margin-bottom: 12px;
+    }
+
+    .more,
+    .moreReverse {
+      @include mixins.row-space-between-center();
+      justify-content: flex-end;
+
+      p {
+        color: config.$brand;
+        border-bottom: 1px solid config.$pureWhite;
+
+        @include mixins.allDesktop {
+          &:hover {
+            cursor: pointer;
+            border-bottom: 1px solid config.$brand;
+          }
+        }
+      }
     }
   }
 
@@ -46,8 +63,39 @@
       font-size: large;
     }
   }
+
+  .description {
+    margin: 12px 0px;
+  }
 }
 
 .containerReverse {
   direction: ltr;
+}
+
+.blogBox,
+.blogBoxReverse {
+  width: 50%;
+  margin: 150px auto;
+  direction: ltr;
+
+  .row {
+    @include mixins.row-space-between-center();
+  }
+
+  .date {
+    margin: 8px 0px;
+    font-size: small;
+  }
+  .description {
+    margin: 16px 0px;
+  }
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+}
+
+.blogBox {
+  direction: rtl;
 }

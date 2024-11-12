@@ -111,7 +111,12 @@ p {
 }
 
 .icon {
-  cursor: pointer;
+  @include mixins.allDesktop {
+    &:hover {
+      cursor: pointer;
+      color: config.$brand;
+    }
+  }
 }
 
 .appload {
