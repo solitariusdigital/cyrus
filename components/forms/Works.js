@@ -235,12 +235,7 @@ export default function Works() {
     <Fragment>
       <div className={classes.form}>
         <div className={classes.formBox}>
-          <div
-            className={classes.input}
-            style={{
-              fontFamily: "Farsi",
-            }}
-          >
+          <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
@@ -260,7 +255,7 @@ export default function Works() {
               }
             >
               <option value="default" disabled>
-                انتخاب
+                انتخاب زیر مجموعه
               </option>
               {subCategories[category["fa"]].map((subCat, index) => (
                 <option key={index} value={subCat}>
@@ -269,12 +264,7 @@ export default function Works() {
               ))}
             </select>
           </div>
-          <div
-            className={classes.input}
-            style={{
-              fontFamily: "Farsi",
-            }}
-          >
+          <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
@@ -294,7 +284,7 @@ export default function Works() {
               }
             >
               <option value="default" disabled>
-                انتخاب
+                انتخاب دسته
               </option>
               {Object.keys(categories).map((category, index) => {
                 return (

@@ -4,16 +4,18 @@ import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { extractParagraphs, areAllStatesValid } from "@/services/utility";
-import { createBlogsApi } from "@/services/api";
+import { createBlogsApi, updateBlogsApi } from "@/services/api";
 
-export default function Blogs() {
+export default function Blogs({ blogsData }) {
   const [title, setTitle] = useState({ en: "", fa: "" });
   const [description, setDescription] = useState({ en: "", fa: "" });
   const [disableButton, setDisableButton] = useState(false);
   const [alert, setAlert] = useState("");
+  const [editBlog, setEditBlog] = useState(false);
+  const [editBlogData, setEditBlogData] = useState(null);
   const router = useRouter();
 
-  const createBlogs = async () => {
+  const createBlog = async () => {
     const isValid = areAllStatesValid([title, description]);
     if (!isValid) {
       showAlert("همه موارد الزامیست");
@@ -22,7 +24,7 @@ export default function Blogs() {
 
     setDisableButton(true);
 
-    const worksObject = {
+    const blogObject = {
       fa: {
         title: title.fa,
         description: extractParagraphs(description.fa).join("\n\n"),
@@ -33,8 +35,34 @@ export default function Blogs() {
       },
       active: false,
     };
+    await createBlogsApi(blogObject);
+    showAlert("ذخیره شد");
+    router.reload(router.asPath);
+  };
 
-    await createBlogsApi(worksObject);
+  const updateBlog = async () => {
+    const isValid = areAllStatesValid([title, description]);
+    if (!isValid) {
+      showAlert("همه موارد الزامیست");
+      return;
+    }
+
+    setDisableButton(true);
+
+    const blogObject = {
+      ...editBlogData,
+      fa: {
+        title: title.fa,
+        description: extractParagraphs(description.fa).join("\n\n"),
+      },
+      en: {
+        title: title.en,
+        description: extractParagraphs(description.en).join("\n\n"),
+      },
+      active: true,
+    };
+
+    await updateBlogsApi(blogObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
@@ -46,8 +74,55 @@ export default function Blogs() {
     }, 3000);
   };
 
+  const selectBlog = (index) => {
+    setEditBlog(true);
+    setEditBlogData(blogsData[index]);
+    setTitle({
+      fa: blogsData[index].fa.title,
+      en: blogsData[index].en.title,
+    });
+    setDescription({
+      fa: blogsData[index].fa.description,
+      en: blogsData[index].en.description,
+    });
+  };
+
   return (
     <div className={classes.form}>
+      <div className={classes.formBox}>
+        <div className={classes.input}>
+          <div className={classes.barReverse}>
+            <p className={classes.label}>برای ویرایش انتخاب کنید</p>
+            <CloseIcon
+              className="icon"
+              onClick={() => {
+                router.reload(router.asPath);
+              }}
+              sx={{ fontSize: 16 }}
+            />
+          </div>
+          <select
+            style={{
+              fontFamily: "Farsi",
+            }}
+            defaultValue={"default"}
+            onChange={(e) => {
+              selectBlog(e.target.value);
+            }}
+          >
+            <option value="default" disabled>
+              انتخاب وبلاگ
+            </option>
+            {blogsData.map((blogs, index) => {
+              return (
+                <option key={index} value={index}>
+                  {blogs["fa"].title}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      </div>
       <div className={classes.formBox}>
         <div
           style={{
@@ -200,9 +275,9 @@ export default function Blogs() {
             fontFamily: "Farsi",
           }}
           disabled={disableButton}
-          onClick={() => createBlogs()}
+          onClick={() => (editBlog ? updateBlog() : createBlog())}
         >
-          ذخیره داده
+          {editBlog ? "ویرایش داده" : "ذخیره داده"}
         </button>
       </div>
     </div>

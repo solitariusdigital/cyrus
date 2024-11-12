@@ -4,8 +4,10 @@ import classes from "./admin.module.scss";
 import Works from "@/components/forms/Works";
 import Blogs from "@/components/forms/Blogs";
 import Router from "next/router";
+import dbConnect from "@/services/dbConnect";
+import blogsModel from "@/models/Blogs";
 
-export default function Admin() {
+export default function Admin({ blogsData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [displayAdmin, setDisplayAdmin] = useState(false);
@@ -37,9 +39,30 @@ export default function Admin() {
             ))}
           </div>
           {pageType === "آثار" && <Works />}
-          {pageType === "وبلاگ" && <Blogs />}
+          {pageType === "وبلاگ" && <Blogs blogsData={blogsData} />}
         </div>
       )}
     </Fragment>
   );
+}
+
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    let blogs = await blogsModel.find();
+    let blogsData = blogs.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+
+    return {
+      props: {
+        blogsData: JSON.parse(JSON.stringify(blogsData)),
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
 }

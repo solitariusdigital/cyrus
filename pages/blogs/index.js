@@ -15,7 +15,7 @@ import {
   deleteBlogsApi,
 } from "@/services/api";
 
-export default function Blogs({ blogs }) {
+export default function Blogs({ blogsData }) {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
@@ -24,26 +24,26 @@ export default function Blogs({ blogs }) {
 
   useEffect(() => {
     if (permissionControl === "admin") {
-      setDisplayBlogs(blogs);
+      setDisplayBlogs(blogsData);
     } else {
-      setDisplayBlogs(blogs.filter((blog) => blog.active));
+      setDisplayBlogs(blogsData.filter((blog) => blog.active));
     }
-  }, [blogs, permissionControl]);
+  }, [blogsData, permissionControl]);
 
   const updateBlogs = async (id, type) => {
     let confirmationMessage = "مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      let blogsData = await getSingleBlogsApi(id);
+      let blogData = await getSingleBlogsApi(id);
       switch (type) {
         case "show":
-          blogsData.active = true;
+          blogData.active = true;
           break;
         case "hide":
-          blogsData.active = false;
+          blogData.active = false;
           break;
       }
-      await updateBlogsApi(blogsData);
+      await updateBlogsApi(blogData);
       router.replace(router.asPath);
     }
   };
@@ -99,7 +99,9 @@ export default function Blogs({ blogs }) {
             </p>
           </div>
           <p className={classes.description}>
-            {blog[languageType].description}
+            {blog[languageType].description.split("\n\n").map((desc, index) => (
+              <p key={index}>{desc}</p>
+            ))}
           </p>
         </div>
       ))}
@@ -111,13 +113,13 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     let blogs = await blogsModel.find();
-    let sortedBlogs = blogs.sort(
+    let blogsData = blogs.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
 
     return {
       props: {
-        blogs: JSON.parse(JSON.stringify(sortedBlogs)),
+        blogsData: JSON.parse(JSON.stringify(blogsData)),
       },
     };
   } catch (error) {
