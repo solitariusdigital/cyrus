@@ -15,7 +15,7 @@ import {
 } from "@/services/utility";
 import { createWorksApi, updateWorksApi } from "@/services/api";
 
-export default function Works() {
+export default function Works({ worksData }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
@@ -111,9 +111,6 @@ export default function Works() {
       showAlert("دسته‌ و زیر مجموعه الزامیست");
       return;
     }
-    if (!category && !subCategory) {
-      return;
-    }
     if (imagesPreview.length === 0 && videosPreview.length === 0) {
       showAlert("انتخاب عکس یا ویدئو الزامیست");
       return;
@@ -183,8 +180,9 @@ export default function Works() {
   };
 
   const updateWorks = async () => {
-    if (!title || !location || !size || !year || !description) {
-      showAlert("همه موارد الزامیست");
+    const isValid = areAllStatesValid([category, subCategory]);
+    if (!isValid) {
+      showAlert("دسته‌ و زیر مجموعه الزامیست");
       return;
     }
 
@@ -194,8 +192,8 @@ export default function Works() {
     let mediaLink;
     if (isMediaChanging) {
       let mediaFormat = ".jpg";
-      let mediaFolder = "company";
-      const subFolder = `com${sixGenerator()}`;
+      let mediaFolder = "works";
+      const subFolder = `wor${sixGenerator()}`;
       let mediaId = `img${fourGenerator()}`;
       mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
       await uploadMedia(newMedia, mediaId, mediaFolder, subFolder, mediaFormat);
@@ -225,6 +223,15 @@ export default function Works() {
     }, 3000);
   };
 
+  const selectWorks = (index) => {
+    setEditWorks(true);
+    setEditWorksData(worksData[index]);
+    setTitle({
+      fa: worksData[index].fa.title,
+      en: worksData[index].en.title,
+    });
+  };
+
   const logOut = () => {
     window.location.assign("/");
     secureLocalStorage.removeItem("currentUser");
@@ -234,6 +241,40 @@ export default function Works() {
   return (
     <Fragment>
       <div className={classes.form}>
+        <div className={classes.formBox}>
+          <div className={classes.input}>
+            <div className={classes.barReverse}>
+              <p className={classes.label}>برای ویرایش انتخاب کنید</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => {
+                  router.reload(router.asPath);
+                }}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <select
+              style={{
+                fontFamily: "Farsi",
+              }}
+              defaultValue={"default"}
+              onChange={(e) => {
+                selectWorks(e.target.value);
+              }}
+            >
+              <option value="default" disabled>
+                انتخاب اثر
+              </option>
+              {worksData.map((works, index) => {
+                return (
+                  <option key={index} value={index}>
+                    {works["fa"].title}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </div>
         <div className={classes.formBox}>
           <div className={classes.input}>
             <div className={classes.barReverse}>

@@ -34,11 +34,12 @@
       align-items: center;
       margin: 0px 10px;
       height: 34px;
-    }
 
-    @include mixins.allDesktop {
-      &:hover {
-        cursor: pointer;
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
       }
     }
   }

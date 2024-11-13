@@ -72,29 +72,11 @@ $screen-fourK: 6000px;
   outline: none;
   border: 1px solid config.$grey;
   border-radius: 4px;
-  background: config.$white;
+  background: config.$pureWhite;
 
   &:focus {
     outline: none;
     border: 1px solid config.$green;
-  }
-}
-
-@mixin textarea() {
-  width: 100%;
-  height: 200px;
-  resize: none;
-  padding: 12px;
-  outline: none;
-  border-radius: 12px;
-  background: config.$white;
-  color: config.$black;
-  border: 1px solid config.$white;
-
-  &:focus {
-    outline: none;
-    background: transparent;
-    border: 1px solid config.$black;
   }
 }
 

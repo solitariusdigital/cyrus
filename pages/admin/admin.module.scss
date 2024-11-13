@@ -20,7 +20,7 @@
   margin-bottom: 50px;
   height: 40px;
   border: 1px solid config.$grey;
-  background: config.$white;
+  background: config.$pureWhite;
   text-transform: capitalize;
   @include mixins.row-space-between-center();
   @include mixins.border-radius();

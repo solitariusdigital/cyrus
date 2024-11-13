@@ -61,7 +61,6 @@ export default function Blogs({ blogsData }) {
       },
       active: true,
     };
-
     await updateBlogsApi(blogObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);

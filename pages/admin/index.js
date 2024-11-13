@@ -6,8 +6,9 @@ import Blogs from "@/components/forms/Blogs";
 import Router from "next/router";
 import dbConnect from "@/services/dbConnect";
 import blogsModel from "@/models/Blogs";
+import worksModel from "@/models/Works";
 
-export default function Admin({ blogsData }) {
+export default function Admin({ worksData, blogsData }) {
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const [displayAdmin, setDisplayAdmin] = useState(false);
@@ -38,7 +39,7 @@ export default function Admin({ blogsData }) {
               </p>
             ))}
           </div>
-          {pageType === "آثار" && <Works />}
+          {pageType === "آثار" && <Works worksData={worksData} />}
           {pageType === "وبلاگ" && <Blogs blogsData={blogsData} />}
         </div>
       )}
@@ -50,13 +51,18 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     let blogs = await blogsModel.find();
+    let works = await worksModel.find();
     let blogsData = blogs.sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    );
+    let worksData = works.sort(
       (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     );
 
     return {
       props: {
         blogsData: JSON.parse(JSON.stringify(blogsData)),
+        worksData: JSON.parse(JSON.stringify(worksData)),
       },
     };
   } catch (error) {

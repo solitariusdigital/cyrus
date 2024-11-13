@@ -110,7 +110,6 @@ export default function RootLayout({ children }) {
             style={{
               fontFamily: language ? "EnglishLight" : "EnglishLight",
             }}
-            onClick={() => window.location.assign("/")}
           >
             Pantea Cyrus
           </h1>
