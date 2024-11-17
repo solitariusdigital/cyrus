@@ -30,6 +30,7 @@ export default function CoverSlider({ covers }) {
             >
               {/* {project.coverMedia.type === "image" ? ( */}
               <Image
+                className={classes.image}
                 src={project}
                 blurDataURL={project}
                 placeholder="blur"

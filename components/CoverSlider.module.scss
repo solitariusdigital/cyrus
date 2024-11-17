@@ -9,6 +9,15 @@
     width: 100%;
     height: 100vh;
 
+    .image {
+      @include mixins.mobile {
+        object-position: 90% 0%;
+      }
+      @include mixins.tabletPortrait {
+        object-position: 85% 0%;
+      }
+    }
+
     @include mixins.mobile {
       height: 500px;
     }
@@ -22,8 +31,8 @@
       width: 30px;
       height: 250px;
 
-      @include mixins.tabletPortrait {
-        left: 15%;
+      @include mixins.mobile {
+        height: 100px;
       }
     }
   }
