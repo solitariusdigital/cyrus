@@ -17,6 +17,16 @@ export default function GallerySlider({ media }) {
 
   return (
     <div className={classes.slider}>
+      <div className={classes.infoBox}>
+        <h2>art {current}</h2>
+        <p>info 1</p>
+        <p>info 2</p>
+        <p>info 3</p>
+        <p>info 4</p>
+        <p>info 5</p>
+        <p>info 6</p>
+        <p>info 7</p>
+      </div>
       <div className={classes.swiper}>
         <Swiper
           slidesPerView="auto"
@@ -29,7 +39,7 @@ export default function GallerySlider({ media }) {
         >
           {media.map((image, index) => (
             <SwiperSlide key={index}>
-              <div className={classes.image}>
+              <div className={classes.imageBox}>
                 <Image
                   src={image}
                   blurDataURL={image}

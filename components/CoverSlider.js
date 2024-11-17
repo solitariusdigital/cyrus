@@ -6,6 +6,7 @@ import { Navigation, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/swiper-bundle.css";
+import logoWhite from "@/assets/logoWhite.png";
 
 export default function CoverSlider({ covers }) {
   return (
@@ -18,30 +19,38 @@ export default function CoverSlider({ covers }) {
           delay: 5000,
           disableOnInteraction: false,
         }}
-        modules={[EffectFade, Navigation, Autoplay]}
+        modules={[EffectFade, Navigation]}
         effect="fade"
       >
-        {covers
-          // .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-          .map((project, index) => (
-            <SwiperSlide key={index}>
-              <div
-                className={classes.media}
-                onClick={() => Router.push(project.link)}
-              >
-                {/* {project.coverMedia.type === "image" ? ( */}
+        {covers.map((project, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className={classes.media}
+              onClick={() => Router.push(project.link)}
+            >
+              {/* {project.coverMedia.type === "image" ? ( */}
+              <Image
+                src={project}
+                blurDataURL={project}
+                placeholder="blur"
+                alt="image"
+                layout="fill"
+                objectFit="cover"
+                as="image"
+                priority
+              />
+              <div className={classes.fadeOverlay}></div>
+              <div className={classes.logo}>
                 <Image
-                  src={project}
-                  blurDataURL={project}
-                  placeholder="blur"
-                  alt="image"
                   layout="fill"
                   objectFit="cover"
+                  src={logoWhite}
+                  alt="logo"
                   as="image"
                   priority
                 />
-                <div className={classes.fadeOverlay}></div>
-                {/* ) : (
+              </div>
+              {/* ) : (
                   <video
                     className={classes.video}
                     src={project.coverMedia.link + "#t=0.1"}
@@ -52,9 +61,9 @@ export default function CoverSlider({ covers }) {
                     preload="metadata"
                   />
                 )} */}
-              </div>
-            </SwiperSlide>
-          ))}
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

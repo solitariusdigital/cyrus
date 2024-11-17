@@ -1,24 +1,77 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
 
-.swiperContainer {
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  margin: auto;
-  width: config.$content-width;
+.container {
+  margin: 160px 0px;
 
-  @include mixins.mobile {
-    width: calc(100% - 24px);
-  }
-
-  .swiper {
-    height: 30%;
-    width: 100%;
-    cursor: grab;
+  .gridBox {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    gap: 4px;
+    margin: auto;
+    height: 100%;
+    width: config.$content-width;
 
     @include mixins.mobile {
-      height: 150px;
+      grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+      width: calc(100% - 24px);
+    }
+
+    .imageBox {
+      position: relative;
+
+      &::before {
+        content: "";
+        display: block;
+        padding-top: 75%;
+      }
+
+      .image {
+        @include mixins.allDesktop {
+          &:hover {
+            cursor: pointer;
+            @include mixins.background-anime();
+          }
+        }
+      }
+    }
+  }
+
+  .navigation {
+    position: fixed;
+    top: 115px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: config.$white;
+    width: 60%;
+    @include mixins.row-space-between-center();
+    justify-content: space-around;
+
+    @include mixins.mobile {
+      width: calc(100% - 24px);
+    }
+
+    .nav,
+    .navActive {
+      color: config.$white;
+
+      @include mixins.allDesktop {
+        &:hover {
+          color: config.$brand;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .navActive {
+      color: config.$brand;
+    }
+
+    p {
+      @include mixins.mobile {
+        font-size: small;
+      }
     }
   }
 }
@@ -31,7 +84,7 @@
   top: 0px;
   left: 0px;
   z-index: 30;
-  padding: 20px;
+  padding: 12px;
   width: 100%;
   height: 100vh;
   background: config.$white;
@@ -41,9 +94,7 @@
   }
 
   .icon {
-    display: flex;
     width: 100%;
     direction: rtl;
-    cursor: pointer;
   }
 }

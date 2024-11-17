@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 150px;
+  margin-bottom: 160px;
 
   @include mixins.mobile {
     margin-top: 120px;
@@ -25,47 +25,44 @@
 
 .swiperContainer {
   position: relative;
-  height: 200px;
-  margin-bottom: 100px;
-  width: config.$content-width;
+  height: 400px;
   @include mixins.row-space-between-center();
   justify-content: center;
 
   @include mixins.mobile {
     width: calc(100% - 24px);
+    height: 200px;
   }
 
   h2 {
+    display: flex;
+    justify-content: center;
     color: config.$brand;
   }
 
   .swiperBox {
     position: relative;
-    width: 400px;
+    width: 800px;
     height: 100%;
 
     @include mixins.mobile {
-      width: 90%;
+      width: 100%;
     }
   }
 
-  .logo {
-    position: relative;
-    top: 50px;
-    width: 50px;
-    min-height: 200px;
+  .titleBox {
+    @include mixins.row-space-between-center();
   }
 
   .swiper {
     height: 100%;
-    width: 100%;
     margin-top: 20px;
     cursor: grab;
   }
 }
 
 .notFound {
-  margin-top: 150px;
+  margin-top: 160px;
   text-align: center;
   color: config.$green;
 }

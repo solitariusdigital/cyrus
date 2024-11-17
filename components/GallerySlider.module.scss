@@ -3,13 +3,17 @@
 
 .slider {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 100%;
-  height: 100vh;
   margin: auto;
 
   @include mixins.mobile {
-    width: 100%;
+    flex-direction: column-reverse;
+  }
+  @include mixins.tabletPortrait {
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    height: 100%;
   }
   @include mixins.tablet {
     width: 100%;
@@ -17,17 +21,41 @@
 }
 
 .swiper {
-  text-align: center;
+  width: 70%;
+
   @include mixins.mobile {
-    margin-top: 100px;
+    width: 100%;
+  }
+  @include mixins.tabletPortrait {
+    width: 100%;
   }
 }
 
-.image {
+.infoBox {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @include mixins.mobile {
+    width: 100%;
+    margin-top: 16px;
+  }
+  @include mixins.tabletPortrait {
+    width: 100%;
+    height: 40vh;
+  }
+}
+
+.imageBox {
   height: calc(100vh - 130px);
 
   @include mixins.mobile {
-    height: 300px;
+    height: 50vh;
+  }
+  @include mixins.tabletPortrait {
+    height: 60vh;
   }
 }
 

@@ -2,7 +2,6 @@
 @use "styles/_mixins.scss" as mixins;
 
 .slider {
-  position: relative;
   margin: auto;
 
   .media {
@@ -12,6 +11,20 @@
 
     @include mixins.mobile {
       height: 500px;
+    }
+
+    .logo {
+      position: absolute;
+      right: 15%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 30px;
+      height: 250px;
+
+      @include mixins.tabletPortrait {
+        left: 15%;
+      }
     }
   }
 
