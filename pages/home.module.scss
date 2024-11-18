@@ -7,10 +7,6 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 160px;
-
-  @include mixins.mobile {
-    margin-top: 150px;
-  }
 }
 
 .cover {
@@ -34,7 +30,7 @@
     height: 200px;
   }
 
-  h2 {
+  h3 {
     display: flex;
     justify-content: center;
     color: config.$brand;

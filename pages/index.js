@@ -76,7 +76,7 @@ export default function Home() {
             onChange={(isVisible) => setIsVisible(isVisible)}
           >
             <div className={classes.titleBox}>
-              <h2
+              <h3
                 className={
                   isVisible
                     ? "animate__animated animate__slideInDown"
@@ -86,8 +86,8 @@ export default function Home() {
                 onClick={() => Router.push("/travels")}
               >
                 {sliderHome[current].title}
-              </h2>
-              <h2
+              </h3>
+              <h3
                 className={
                   isVisible
                     ? "animate__animated animate__slideInDown"
@@ -97,7 +97,7 @@ export default function Home() {
                 onClick={() => Router.push("/travels")}
               >
                 {sliderHome[getNextIndex(current)].title}
-              </h2>
+              </h3>
             </div>
           </VisibilitySensor>
           <Swiper
