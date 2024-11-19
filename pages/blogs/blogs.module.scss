@@ -24,7 +24,6 @@
   .itemReverse {
     background: config.$pureWhite;
     width: 100%;
-    height: fit-content;
     padding: 20px;
     @include mixins.border-radius();
 

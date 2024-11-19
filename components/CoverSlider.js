@@ -44,7 +44,7 @@ export default function CoverSlider({ covers }) {
               <div className={classes.logo}>
                 <Image
                   layout="fill"
-                  objectFit="cover"
+                  objectFit="contain"
                   src={logoWhite}
                   alt="logo"
                   as="image"

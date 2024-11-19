@@ -2,7 +2,7 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  margin: 160px 0px;
+  margin: 165px 0px;
 
   .gridBox {
     display: grid;
@@ -44,9 +44,10 @@
     transform: translateX(-50%);
     z-index: 10;
     color: config.$white;
-    width: 60%;
+    width: 50%;
     @include mixins.row-space-between-center();
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
     @include mixins.mobile {
       width: calc(100% - 24px);
@@ -66,12 +67,6 @@
 
     .navActive {
       color: config.$brand;
-    }
-
-    p {
-      @include mixins.mobile {
-        font-size: small;
-      }
     }
   }
 }

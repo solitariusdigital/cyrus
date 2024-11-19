@@ -32,7 +32,7 @@
       height: 250px;
 
       @include mixins.mobile {
-        height: 100px;
+        height: 150px;
       }
     }
   }
