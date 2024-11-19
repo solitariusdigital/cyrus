@@ -8,7 +8,7 @@
   gap: 12px;
   width: config.$content-width;
   max-width: config.$max-widthHeigh;
-  margin: 160px auto;
+  margin: 165px auto;
   direction: rtl;
 
   @include mixins.tabletPortrait {
@@ -75,7 +75,7 @@
 .blogBox,
 .blogBoxReverse {
   width: 50%;
-  margin: 160px auto;
+  margin: 165px auto;
   direction: ltr;
 
   .row {

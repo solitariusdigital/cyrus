@@ -12,16 +12,16 @@
     display: flex;
     flex-direction: column;
     width: calc(100% - 24px);
-    margin-top: 160px;
-    margin-bottom: 160px;
+    margin-top: 165px;
+    margin-bottom: 165px;
   }
   @include mixins.tabletPortrait {
     display: flex;
     flex-direction: column;
     min-height: fit-content !important;
     width: config.$content-width;
-    margin-top: 160px;
-    margin-bottom: 160px;
+    margin-top: 165px;
+    margin-bottom: 165px;
   }
 
   .infoBox {
