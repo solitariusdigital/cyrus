@@ -1,2 +1,44 @@
 @use "styles/_config.scss" as config;
 @use "styles/_mixins.scss" as mixins;
+
+.container {
+  height: 100vh;
+  background-image: url("../../assets/contactBackground.JPG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+  gap: 12px;
+  width: config.$content-width;
+  max-width: config.$max-widthHeigh;
+  color: config.$white;
+  margin: auto;
+
+  @include mixins.mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc(100% - 24px);
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 150px;
+    @include mixins.transparentBackground(0.7, config.$green);
+
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$brand;
+      }
+    }
+  }
+}
