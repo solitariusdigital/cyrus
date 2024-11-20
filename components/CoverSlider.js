@@ -1,12 +1,12 @@
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
 import Router from "next/router";
+import logoWhite from "@/assets/logoWhite.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/swiper-bundle.css";
-import logoWhite from "@/assets/logoWhite.png";
 
 export default function CoverSlider({ covers }) {
   return (

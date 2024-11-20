@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";

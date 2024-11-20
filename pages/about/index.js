@@ -1,8 +1,7 @@
-import { Fragment, useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./about.module.scss";
 import Image from "next/legacy/image";
-import logo from "@/assets/logo.png";
 
 export default function About() {
   const { language, setLanguage } = useContext(StateContext);

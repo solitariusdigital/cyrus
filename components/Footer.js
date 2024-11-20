@@ -1,4 +1,4 @@
-import { useContext, Fragment, useState } from "react";
+import { useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./Footer.module.scss";
 import Router from "next/router";
