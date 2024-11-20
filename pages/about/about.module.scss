@@ -26,37 +26,39 @@
 
   .infoBox {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    height: 350px;
+
+    h2 {
+      padding: 20px;
+      color: config.$brand;
+      @include mixins.transparentBackground(0.7, config.$green);
+    }
+
+    @include mixins.allDesktop {
+      position: relative;
+      left: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      max-width: 800px;
+    }
+
+    @include mixins.tablet {
+      position: relative;
+      left: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      max-width: 800px;
+    }
 
     .information,
     .informationReverse {
-      display: flex;
-      flex-direction: column;
-      padding: 30px;
+      padding: 20px;
       direction: rtl;
-      height: 350px;
       overflow-y: auto;
       @include mixins.transparentBackground(0.7, config.$green);
-
-      @include mixins.allDesktop {
-        position: relative;
-        left: 10%;
-        z-index: 5;
-        max-width: 800px;
-      }
-      @include mixins.tablet {
-        position: relative;
-        left: 10%;
-        z-index: 5;
-      }
-      @include mixins.mobile {
-        padding: 12px;
-      }
-
-      h2 {
-        color: config.$brand;
-        margin-bottom: 20px;
-      }
 
       p {
         color: config.$white;

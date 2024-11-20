@@ -4,7 +4,12 @@ import EmailIcon from "@mui/icons-material/Email";
 
 export default function Contact() {
   return (
-    <div className={classes.container}>
+    <div
+      className={classes.container}
+      style={{
+        fontFamily: "English",
+      }}
+    >
       <div className={classes.items}>
         <div
           className={classes.item}
