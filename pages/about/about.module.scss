@@ -52,6 +52,10 @@
       padding: 20px;
       color: config.$brand;
       @include mixins.transparentBackground(0.7, config.$green);
+
+      @include mixins.mobile {
+        padding: 12px;
+      }
     }
 
     .information,
@@ -60,6 +64,10 @@
       direction: rtl;
       overflow-y: auto;
       @include mixins.transparentBackground(0.7, config.$green);
+
+      @include mixins.mobile {
+        padding: 12px;
+      }
 
       p {
         color: config.$white;
