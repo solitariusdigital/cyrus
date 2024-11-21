@@ -129,7 +129,10 @@ export default function Blogs({ blogsData }) {
         >
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>Title</p>
+              <p className={classes.label}>
+                Title
+                <span>*</span>
+              </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -146,7 +149,7 @@ export default function Blogs({ blogsData }) {
                 fontFamily: "English",
               }}
               type="text"
-              id="title"
+              id="titleEn"
               name="title"
               onChange={(e) =>
                 setTitle((prevData) => ({
@@ -160,7 +163,10 @@ export default function Blogs({ blogsData }) {
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>Description</p>
+              <p className={classes.label}>
+                Description
+                <span>*</span>
+              </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -177,7 +183,7 @@ export default function Blogs({ blogsData }) {
                 fontFamily: "English",
               }}
               type="text"
-              id="description"
+              id="descriptionEn"
               name="description"
               onChange={(e) =>
                 setDescription((prevData) => ({
@@ -197,7 +203,10 @@ export default function Blogs({ blogsData }) {
         >
           <div className={classes.input}>
             <div className={classes.barReverse}>
-              <p className={classes.label}>عنوان</p>
+              <p className={classes.label}>
+                <span>*</span>
+                عنوان
+              </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -214,7 +223,7 @@ export default function Blogs({ blogsData }) {
                 fontFamily: "Farsi",
               }}
               type="text"
-              id="title"
+              id="titleFa"
               name="title"
               onChange={(e) =>
                 setTitle((prevData) => ({
@@ -229,7 +238,10 @@ export default function Blogs({ blogsData }) {
           </div>
           <div className={classes.input}>
             <div className={classes.barReverse}>
-              <p className={classes.label}>توضیحات</p>
+              <p className={classes.label}>
+                <span>*</span>
+                توضیحات
+              </p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -246,7 +258,7 @@ export default function Blogs({ blogsData }) {
                 fontFamily: "Farsi",
               }}
               type="text"
-              id="description"
+              id="descriptionFa"
               name="description"
               onChange={(e) =>
                 setDescription((prevData) => ({

@@ -25,18 +25,15 @@ export default function Works({ worksData }) {
   const [location, setLocation] = useState({ en: "", fa: "" });
   const [description, setDescription] = useState({ en: "", fa: "" });
   const [size, setSize] = useState({ en: "", fa: "" });
+  const [technique, setTechnique] = useState({ en: "", fa: "" });
   const [year, setYear] = useState({ en: "", fa: "" });
-  const [newMedia, setNewMedia] = useState([]);
 
   const [imagesPreview, setImagesPreview] = useState([]);
   const [videosPreview, setVideosPreview] = useState([]);
   const [uploadImages, setUploadImages] = useState([]);
   const [uploadVideos, setUploadVideos] = useState([]);
 
-  const [editMedia, setEditMedia] = useState("");
-  const [isMediaChanging, setIsMediaChanging] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
-  const [editWorks, setEditWorks] = useState(false);
   const [editWorksData, setEditWorksData] = useState(null);
   const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
@@ -105,13 +102,17 @@ export default function Works({ worksData }) {
     input.value = null;
   };
 
-  const createWorks = async () => {
+  const handleSubmit = async () => {
     const isValid = areAllStatesValid([category, subCategory]);
     if (!isValid) {
       showAlert("دسته‌ و زیر مجموعه الزامیست");
       return;
     }
-    if (imagesPreview.length === 0 && videosPreview.length === 0) {
+    if (
+      !editWorksData &&
+      imagesPreview.length === 0 &&
+      videosPreview.length === 0
+    ) {
       showAlert("انتخاب عکس یا ویدئو الزامیست");
       return;
     }
@@ -119,9 +120,11 @@ export default function Works({ worksData }) {
     setDisableButton(true);
     setLoader(true);
 
-    let mediaLinks = [];
+    let mediaLinks = editWorksData ? editWorksData.media : [];
     const mediaFolder = "works";
-    const worksId = `wor${sixGenerator()}`;
+    const worksId = editWorksData
+      ? editWorksData.worksId
+      : `wor${sixGenerator()}`;
 
     if (imagesPreview.length > 0) {
       const imageFormat = ".jpg";
@@ -159,6 +162,7 @@ export default function Works({ worksData }) {
         location: location.fa,
         description: extractParagraphs(description.fa).join("\n\n"),
         size: size.fa,
+        technique: technique.fa,
         year: year.fa,
       },
       en: {
@@ -168,50 +172,20 @@ export default function Works({ worksData }) {
         location: location.en,
         description: extractParagraphs(description.en).join("\n\n"),
         size: size.en,
+        technique: technique.en,
         year: year.en,
       },
       media: mediaLinks,
       active: false,
+      worksId: worksId,
     };
 
-    await createWorksApi(worksObject);
-    showAlert("ذخیره شد");
-    router.reload(router.asPath);
-  };
-
-  const updateWorks = async () => {
-    const isValid = areAllStatesValid([category, subCategory]);
-    if (!isValid) {
-      showAlert("دسته‌ و زیر مجموعه الزامیست");
-      return;
-    }
-
-    setLoader(true);
-    setDisableButton(true);
-
-    let mediaLink;
-    if (isMediaChanging) {
-      let mediaFormat = ".jpg";
-      let mediaFolder = "works";
-      const subFolder = `wor${sixGenerator()}`;
-      let mediaId = `img${fourGenerator()}`;
-      mediaLink = `${sourceLink}/${mediaFolder}/${subFolder}/${mediaId}${mediaFormat}`;
-      await uploadMedia(newMedia, mediaId, mediaFolder, subFolder, mediaFormat);
+    if (editWorksData) {
+      worksObject.id = editWorksData["_id"];
+      await updateWorksApi(worksObject);
     } else {
-      mediaLink = editMedia;
+      await createWorksApi(worksObject);
     }
-
-    const companyObject = {
-      ...editWorksData,
-      title: title.trim(),
-      location: location.trim(),
-      size: size.trim(),
-      year: year.trim(),
-      description: extractParagraphs(description).join("\n\n"),
-      media: mediaLink,
-    };
-
-    await updateWorksApi(companyObject);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
@@ -224,11 +198,38 @@ export default function Works({ worksData }) {
   };
 
   const selectWorks = (index) => {
-    setEditWorks(true);
     setEditWorksData(worksData[index]);
     setTitle({
       fa: worksData[index].fa.title,
       en: worksData[index].en.title,
+    });
+    setCategory({
+      fa: worksData[index].fa.category,
+      en: worksData[index].en.category,
+    });
+    setSubCategory({
+      fa: worksData[index].fa.subCategory,
+      en: worksData[index].en.subCategory,
+    });
+    setLocation({
+      fa: worksData[index].fa.location,
+      en: worksData[index].en.location,
+    });
+    setDescription({
+      fa: worksData[index].fa.description,
+      en: worksData[index].en.description,
+    });
+    setSize({
+      fa: worksData[index].fa.size,
+      en: worksData[index].en.size,
+    });
+    setTechnique({
+      fa: worksData[index].fa.technique,
+      en: worksData[index].en.technique,
+    });
+    setYear({
+      fa: worksData[index].fa.year,
+      en: worksData[index].en.year,
     });
   };
 
@@ -296,7 +297,9 @@ export default function Works({ worksData }) {
               }
             >
               <option value="default" disabled>
-                انتخاب زیر مجموعه
+                {editWorksData
+                  ? editWorksData.fa.subCategory
+                  : "انتخاب زیر مجموعه"}
               </option>
               {subCategories[category["fa"]].map((subCat, index) => (
                 <option key={index} value={subCat}>
@@ -325,7 +328,7 @@ export default function Works({ worksData }) {
               }
             >
               <option value="default" disabled>
-                انتخاب دسته
+                {editWorksData ? editWorksData.fa.category : "انتخاب دسته"}
               </option>
               {Object.keys(categories).map((category, index) => {
                 return (
@@ -362,7 +365,7 @@ export default function Works({ worksData }) {
                   fontFamily: "English",
                 }}
                 type="text"
-                id="title"
+                id="titleEn"
                 name="title"
                 onChange={(e) =>
                   setTitle((prevData) => ({
@@ -393,7 +396,7 @@ export default function Works({ worksData }) {
                   fontFamily: "English",
                 }}
                 type="text"
-                id="location"
+                id="locationEn"
                 name="location"
                 onChange={(e) =>
                   setLocation((prevData) => ({
@@ -405,37 +408,72 @@ export default function Works({ worksData }) {
                 autoComplete="off"
               ></input>
             </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
-                <p className={classes.label}>Size</p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() =>
-                    setSize((prevData) => ({
-                      ...prevData,
-                      en: "",
-                    }))
-                  }
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                style={{
-                  fontFamily: "English",
-                }}
-                type="phone"
-                id="size"
-                name="size"
-                onChange={(e) =>
-                  setSize((prevData) => ({
-                    ...prevData,
-                    en: e.target.value,
-                  }))
-                }
-                value={size.en}
-                autoComplete="off"
-              ></input>
-            </div>
+            {category.en === "Paintings" && (
+              <Fragment>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <p className={classes.label}>Size</p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() =>
+                        setSize((prevData) => ({
+                          ...prevData,
+                          en: "",
+                        }))
+                      }
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <input
+                    style={{
+                      fontFamily: "English",
+                    }}
+                    type="text"
+                    id="sizeEn"
+                    name="size"
+                    onChange={(e) =>
+                      setSize((prevData) => ({
+                        ...prevData,
+                        en: e.target.value,
+                      }))
+                    }
+                    value={size.en}
+                    autoComplete="off"
+                  ></input>
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.bar}>
+                    <p className={classes.label}>Technique</p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() =>
+                        setTechnique((prevData) => ({
+                          ...prevData,
+                          en: "",
+                        }))
+                      }
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <input
+                    style={{
+                      fontFamily: "English",
+                    }}
+                    type="text"
+                    id="techniqueEn"
+                    name="technique"
+                    onChange={(e) =>
+                      setTechnique((prevData) => ({
+                        ...prevData,
+                        en: e.target.value,
+                      }))
+                    }
+                    value={technique.en}
+                    autoComplete="off"
+                  ></input>
+                </div>
+              </Fragment>
+            )}
             <div className={classes.input}>
               <div className={classes.bar}>
                 <p className={classes.label}>Year</p>
@@ -454,8 +492,8 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "English",
                 }}
-                type="text"
-                id="year"
+                type="phone"
+                id="yearEn"
                 name="year"
                 onChange={(e) =>
                   setYear((prevData) => ({
@@ -486,7 +524,7 @@ export default function Works({ worksData }) {
                   fontFamily: "English",
                 }}
                 type="text"
-                id="description"
+                id="descriptionEn"
                 name="description"
                 onChange={(e) =>
                   setDescription((prevData) => ({
@@ -523,7 +561,7 @@ export default function Works({ worksData }) {
                   fontFamily: "Farsi",
                 }}
                 type="text"
-                id="title"
+                id="titleFa"
                 name="title"
                 onChange={(e) =>
                   setTitle((prevData) => ({
@@ -555,7 +593,7 @@ export default function Works({ worksData }) {
                   fontFamily: "Farsi",
                 }}
                 type="text"
-                id="location"
+                id="locationFa"
                 name="location"
                 onChange={(e) =>
                   setLocation((prevData) => ({
@@ -568,38 +606,74 @@ export default function Works({ worksData }) {
                 autoComplete="off"
               ></input>
             </div>
-            <div className={classes.input}>
-              <div className={classes.barReverse}>
-                <p className={classes.label}>اندازه</p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() =>
-                    setSize((prevData) => ({
-                      ...prevData,
-                      fa: "",
-                    }))
-                  }
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                style={{
-                  fontFamily: "Farsi",
-                }}
-                type="phone"
-                id="size"
-                name="size"
-                onChange={(e) =>
-                  setSize((prevData) => ({
-                    ...prevData,
-                    fa: e.target.value,
-                  }))
-                }
-                value={size.fa}
-                dir="rtl"
-                autoComplete="off"
-              ></input>
-            </div>
+            {category.fa === "نقاشی‌" && (
+              <Fragment>
+                <div className={classes.input}>
+                  <div className={classes.barReverse}>
+                    <p className={classes.label}>اندازه</p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() =>
+                        setSize((prevData) => ({
+                          ...prevData,
+                          fa: "",
+                        }))
+                      }
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <input
+                    style={{
+                      fontFamily: "Farsi",
+                    }}
+                    type="text"
+                    id="sizeFa"
+                    name="size"
+                    onChange={(e) =>
+                      setSize((prevData) => ({
+                        ...prevData,
+                        fa: e.target.value,
+                      }))
+                    }
+                    value={size.fa}
+                    dir="rtl"
+                    autoComplete="off"
+                  ></input>
+                </div>
+                <div className={classes.input}>
+                  <div className={classes.barReverse}>
+                    <p className={classes.label}>تکنیک</p>
+                    <CloseIcon
+                      className="icon"
+                      onClick={() =>
+                        setTechnique((prevData) => ({
+                          ...prevData,
+                          fa: "",
+                        }))
+                      }
+                      sx={{ fontSize: 16 }}
+                    />
+                  </div>
+                  <input
+                    style={{
+                      fontFamily: "Farsi",
+                    }}
+                    type="text"
+                    id="techniqueFa"
+                    name="technique"
+                    onChange={(e) =>
+                      setTechnique((prevData) => ({
+                        ...prevData,
+                        fa: e.target.value,
+                      }))
+                    }
+                    value={technique.fa}
+                    dir="rtl"
+                    autoComplete="off"
+                  ></input>
+                </div>
+              </Fragment>
+            )}
             <div className={classes.input}>
               <div className={classes.barReverse}>
                 <p className={classes.label}>سال</p>
@@ -618,8 +692,8 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "Farsi",
                 }}
-                type="text"
-                id="year"
+                type="phone"
+                id="yearFa"
                 name="year"
                 onChange={(e) =>
                   setYear((prevData) => ({
@@ -651,7 +725,7 @@ export default function Works({ worksData }) {
                   fontFamily: "Farsi",
                 }}
                 type="text"
-                id="description"
+                id="descriptionFa"
                 name="description"
                 onChange={(e) =>
                   setDescription((prevData) => ({
@@ -750,9 +824,9 @@ export default function Works({ worksData }) {
               fontFamily: "Farsi",
             }}
             disabled={disableButton}
-            onClick={() => (editWorks ? updateWorks() : createWorks())}
+            onClick={() => handleSubmit()}
           >
-            {editWorks ? "ویرایش داده" : "ذخیره داده"}
+            {editWorksData ? "ویرایش داده" : "ذخیره داده"}
           </button>
           <div className={classes.logout} onClick={() => logOut()}>
             <p>خروج از پورتال</p>

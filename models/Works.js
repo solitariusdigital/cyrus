@@ -9,7 +9,7 @@ const WorksSchema = new Schema(
       location: String,
       description: String,
       size: String,
-      material: String,
+      technique: String,
       year: Number,
     },
     en: {
@@ -19,11 +19,12 @@ const WorksSchema = new Schema(
       location: String,
       description: String,
       size: String,
-      material: String,
+      technique: String,
       year: Number,
     },
     media: [],
     active: Boolean,
+    worksId: String,
   },
   { timestamps: true }
 );
