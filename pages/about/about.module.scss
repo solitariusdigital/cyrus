@@ -44,8 +44,12 @@
     @include mixins.mobile {
       left: 0%;
     }
+    @include mixins.tablet {
+      height: 400px;
+    }
     @include mixins.tabletPortrait {
       left: 0%;
+      height: 500px;
     }
 
     h2 {
@@ -55,6 +59,13 @@
 
       @include mixins.mobile {
         padding: 12px;
+        width: calc(100% - 24px);
+        margin: auto;
+      }
+      @include mixins.tabletPortrait {
+        margin: auto;
+        width: config.$content-width;
+        max-width: config.$max-widthHeigh;
       }
     }
 
@@ -65,7 +76,14 @@
       overflow-y: auto;
       @include mixins.transparentBackground(0.7, config.$green);
 
+      @include mixins.tabletPortrait {
+        margin: auto;
+        width: config.$content-width;
+        max-width: config.$max-widthHeigh;
+      }
       @include mixins.mobile {
+        margin: auto;
+        width: calc(100% - 24px);
         padding: 12px;
       }
 
