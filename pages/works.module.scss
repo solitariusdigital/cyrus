@@ -66,6 +66,12 @@
           flex-direction: column;
           width: calc(100% - 24px);
         }
+
+        h2 {
+          @include mixins.mobile {
+            font-size: 1.5rem;
+          }
+        }
       }
     }
 
