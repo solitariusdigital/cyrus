@@ -97,16 +97,16 @@ export default function RootLayout({ children }) {
       ) : (
         <div className="appload">
           <Image
-            className="animate__animated animate__fadeInDown"
+            className="animate__animated animate__zoomIn"
             width={50}
-            height={500}
+            height={400}
             src={logo}
             alt="logo"
             as="image"
             priority
           />
           <h1
-            className="animate__animated animate__pulse"
+            className="animate__animated animate__fadeIn"
             style={{
               fontFamily: language ? "EnglishLight" : "EnglishLight",
             }}

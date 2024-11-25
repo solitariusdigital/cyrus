@@ -8,64 +8,39 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/swiper-bundle.css";
 
-export default function CoverSlider({ covers }) {
+export default function CoverSlider() {
+  const togglePlay = (videoElement) => {
+    if (videoElement.paused) {
+      videoElement.play();
+    } else {
+      videoElement.pause();
+    }
+    videoElement.muted = !videoElement.muted;
+  };
+
   return (
-    <div className={classes.slider}>
-      <Swiper
-        spaceBetween={0}
-        navigation={false}
-        loop={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        modules={[EffectFade, Navigation]}
-        effect="fade"
-      >
-        {covers.map((project, index) => (
-          <SwiperSlide key={index}>
-            <div
-              className={classes.media}
-              onClick={() => Router.push(project.link)}
-            >
-              {/* {project.coverMedia.type === "image" ? ( */}
-              <Image
-                className={classes.image}
-                src={project}
-                blurDataURL={project}
-                placeholder="blur"
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                as="image"
-                priority
-              />
-              <div className={classes.fadeOverlay}></div>
-              <div className={classes.logo}>
-                <Image
-                  layout="fill"
-                  objectFit="contain"
-                  src={logoWhite}
-                  alt="logo"
-                  as="image"
-                  priority
-                />
-              </div>
-              {/* ) : (
-                  <video
-                    className={classes.video}
-                    src={project.coverMedia.link + "#t=0.1"}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                  />
-                )} */}
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className={classes.cover}>
+      <video
+        className={classes.video}
+        src={"https://cyrus.storage.c2.liara.space/assets/intro.mp4" + "#t=0.1"}
+        autoPlay
+        loop
+        playsInline
+        preload="metadata"
+        muted
+        onClick={(e) => togglePlay(e.currentTarget)}
+      />
+      <div className={`${classes.logo} animate__animated animate__fadeOut`}>
+        <Image
+          layout="fill"
+          objectFit="contain"
+          src={logoWhite}
+          alt="logo"
+          as="image"
+          priority
+        />
+      </div>
+      <div className="fadeOverlay"></div>
     </div>
   );
 }

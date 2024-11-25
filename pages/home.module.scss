@@ -6,54 +6,76 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 165px;
 }
 
 .cover {
   width: 100%;
-  height: 100vh;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
 
   @include mixins.mobile {
-    height: 500px;
+    margin-bottom: 0px;
   }
 }
 
-.swiperContainer {
+.imageBox {
   position: relative;
-  height: 400px;
-  @include mixins.row-space-between-center();
-  justify-content: center;
+  height: 100vh;
+  width: 100%;
 
-  @include mixins.mobile {
-    width: calc(100% - 24px);
-    height: 200px;
-  }
-
-  h3 {
-    display: flex;
-    justify-content: center;
-    color: config.$brand;
-  }
-
-  .swiperBox {
-    position: relative;
-    width: 800px;
+  .image {
+    width: 100%;
     height: 100%;
 
     @include mixins.mobile {
-      width: 100%;
+      object-position: 100% 0%;
+    }
+    @include mixins.tabletPortrait {
+      object-position: 100% 0%;
     }
   }
 
-  .titleBox {
-    @include mixins.row-space-between-center();
+  .items,
+  .itemsReverse {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    gap: 12px;
+    width: config.$content-width;
+    max-width: config.$max-widthHeigh;
+    color: config.$white;
+    margin: auto;
+    direction: ltr;
+
+    @include mixins.mobile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: calc(100% - 24px);
+      top: 50%;
+    }
+
+    .item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      height: 120px;
+      @include mixins.transparentBackground(0.7, config.$green);
+
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$brand;
+        }
+      }
+    }
   }
 
-  .swiper {
-    height: 100%;
-    margin-top: 20px;
-    cursor: grab;
+  .items {
+    direction: rtl;
   }
 }
 

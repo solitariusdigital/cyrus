@@ -33,11 +33,10 @@ export default function About() {
       <div className={classes.imageBox}>
         <div className={classes.image}>
           <Image
-            src={
-              "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG"
-            }
+            className={classes.image}
+            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG"}
             blurDataURL={
-              "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG"
+              "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG"
             }
             placeholder="blur"
             alt="image"

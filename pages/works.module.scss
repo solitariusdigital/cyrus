@@ -37,36 +37,70 @@
     }
   }
 
-  .navigation {
-    position: fixed;
-    top: 115px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    color: config.$white;
-    width: 50%;
-    @include mixins.row-space-between-center();
-    justify-content: space-between;
-    flex-wrap: wrap;
-
-    @include mixins.mobile {
-      width: calc(100% - 24px);
-    }
-
-    .nav,
-    .navActive {
+  .coverBox {
+    .items,
+    .itemsReverse {
+      position: absolute;
+      left: 50%;
+      top: 70%;
+      transform: translate(-50%, -50%);
       color: config.$white;
+      width: 100%;
+      direction: ltr;
+      @include mixins.transparentBackground(0.9, config.$green);
 
-      @include mixins.allDesktop {
-        &:hover {
-          color: config.$brand;
-          cursor: pointer;
+      @include mixins.mobile {
+        top: 60%;
+        padding: 12px 0px;
+      }
+
+      .item {
+        height: 170px;
+        width: config.$content-width;
+        max-width: config.$max-widthHeigh;
+        margin: auto;
+        @include mixins.row-space-between-center();
+
+        @include mixins.mobile {
+          display: flex;
+          flex-direction: column;
+          width: calc(100% - 24px);
         }
       }
     }
 
-    .navActive {
-      color: config.$brand;
+    .items {
+      direction: rtl;
+    }
+  }
+
+  .swiperContainer {
+    width: 100%;
+
+    .swiper {
+      width: 70%;
+      height: 170px;
+
+      @include mixins.mobile {
+        height: 130px;
+        width: 100%;
+      }
+    }
+
+    .imageBox {
+      position: relative;
+      height: 100%;
+
+      h3 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        @include mixins.mobile {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 }

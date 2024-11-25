@@ -56,13 +56,14 @@ export default function Works({ worksData }) {
     },
   };
   const subCategories = {
-    نقاشی‌: ["نمایشگاه", "آرشیو"],
+    نقاشی‌: ["رنگ روغن", "اکریلیک", "آبرنگ"],
     سینما: ["سینما", "تئاتر", "سریال", "فیلم کوتاه", "جشنواره", "جوایز"],
     سفر: ["ایران گردی", "جهان گردی"],
   };
   const englishSubCategoreis = {
-    نمایشگاه: "Exhibition",
-    آرشیو: "Archive",
+    اکریلیک: "Acrylic",
+    اکریلیک: "Oil color",
+    آبرنگ: "Watercolor",
     سینما: "Cinema",
     تئاتر: "Theatre",
     سریال: "Series",

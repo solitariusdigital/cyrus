@@ -10,7 +10,7 @@
 
   @include mixins.mobile {
     height: 100vh;
-    background-image: url("../../assets/contactBackground.JPG");
+    background-image: url("https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -20,7 +20,7 @@
 
   @include mixins.tabletPortrait {
     height: 100vh;
-    background-image: url("../../assets/contactBackground.JPG");
+    background-image: url("https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -37,19 +37,19 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 5;
+    width: 640px;
 
-    @include mixins.allDesktop {
-      max-width: 800px;
-    }
     @include mixins.mobile {
       left: 0%;
     }
     @include mixins.tablet {
+      width: 600px;
       height: 400px;
     }
     @include mixins.tabletPortrait {
       left: 0%;
       height: 500px;
+      width: 100%;
     }
 
     h2 {
@@ -97,11 +97,10 @@
     }
   }
 
-  .imageBox {
-    .image {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+  .image {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-position: 50% 0%;
   }
 }
