@@ -46,20 +46,6 @@ export function convertFaToEn(date) {
     .replace(/\//g, "-");
 }
 
-export function sortPricesByDate(prices) {
-  const sortedKeys = Object.keys(prices).sort((a, b) => {
-    return (
-      new Date(a.replace(/-/g, "/")).getTime() -
-      new Date(b.replace(/-/g, "/")).getTime()
-    );
-  });
-  const sortedPrices = {};
-  sortedKeys.forEach((key) => {
-    sortedPrices[key] = prices[key];
-  });
-  return sortedPrices;
-}
-
 export function getCurrentDate(isYesterday = false) {
   const now = new Date();
   if (isYesterday) {
@@ -69,38 +55,6 @@ export function getCurrentDate(isYesterday = false) {
     timeZone: "Asia/Tehran",
   });
   return date;
-}
-
-export function findPriceDates(price, isYesterday) {
-  let todayDate = getCurrentDate(isYesterday);
-  let value;
-  for (const key in price) {
-    if (key === convertFaToEn(todayDate)) {
-      value = price[key];
-    }
-  }
-  return value ? value : "-";
-}
-
-export function calculatePriceChange(priceObject) {
-  let today = findPriceDates(priceObject, false);
-  let yesterday = findPriceDates(priceObject, true);
-  const changeAmount = today - yesterday;
-  const percentageChange = ((changeAmount / yesterday) * 100).toFixed(2);
-  const direction = changeAmount > 0 ? "+" : changeAmount < 0 ? null : " ";
-  if (today !== "-" && yesterday !== "-") {
-    return {
-      percentageChange: percentageChange + "%",
-      changeAmount: changeAmount,
-      direction: direction,
-    };
-  } else {
-    return {
-      percentageChange: "-",
-      changeAmount: "-",
-      direction: " ",
-    };
-  }
 }
 
 export function onlyLettersAndNumbers(str) {

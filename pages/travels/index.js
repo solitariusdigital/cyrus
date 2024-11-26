@@ -5,6 +5,8 @@ import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Router from "next/router";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -63,7 +65,16 @@ export default function Travels() {
               >
                 {travelTypes.map((type, index) => (
                   <SwiperSlide key={index}>
-                    <div className={classes.imageBox}>
+                    <div
+                      className={classes.imageBox}
+                      onClick={() =>
+                        Router.push(
+                          `/travels/${replaceSpacesAndHyphens(
+                            type[languageType]
+                          )}`
+                        )
+                      }
+                    >
                       <Image
                         src={type.media}
                         blurDataURL={type.media}

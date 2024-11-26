@@ -4,6 +4,8 @@ import classes from "../works.module.scss";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
+import Router from "next/router";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
@@ -72,7 +74,16 @@ export default function Movies() {
               >
                 {cinemaTypes.map((type, index) => (
                   <SwiperSlide key={index}>
-                    <div className={classes.imageBox}>
+                    <div
+                      className={classes.imageBox}
+                      onClick={() =>
+                        Router.push(
+                          `/cinema/${replaceSpacesAndHyphens(
+                            type[languageType]
+                          )}`
+                        )
+                      }
+                    >
                       <Image
                         src={type.media}
                         blurDataURL={type.media}

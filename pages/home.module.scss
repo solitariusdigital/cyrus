@@ -44,7 +44,6 @@
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     gap: 40px;
     width: config.$content-width;
-    max-width: config.$max-widthHeigh;
     color: config.$white;
     margin: auto;
     direction: ltr;
@@ -55,6 +54,12 @@
       justify-content: center;
       width: calc(100% - 24px);
       top: 50%;
+    }
+    @include mixins.tablet {
+      top: 62%;
+    }
+    @include mixins.tabletPortrait {
+      top: 60%;
     }
 
     .item {

@@ -4,39 +4,6 @@
 .container {
   margin: 165px 0px;
 
-  .gridBox {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    gap: 4px;
-    margin: auto;
-    height: 100%;
-    width: config.$content-width;
-
-    @include mixins.mobile {
-      grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-      width: calc(100% - 24px);
-    }
-
-    .imageBox {
-      position: relative;
-
-      &::before {
-        content: "";
-        display: block;
-        padding-top: 75%;
-      }
-
-      .image {
-        @include mixins.allDesktop {
-          &:hover {
-            cursor: pointer;
-            @include mixins.background-anime();
-          }
-        }
-      }
-    }
-  }
-
   .coverBox {
     .items,
     .itemsReverse {
@@ -110,6 +77,46 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+      }
+
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          color: config.$green;
+        }
+      }
+    }
+  }
+}
+
+.gridBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  margin: auto;
+  height: 100%;
+  width: config.$content-width;
+
+  @include mixins.mobile {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    width: calc(100% - 24px);
+  }
+
+  .imageBox {
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      padding-top: 75%;
+    }
+
+    .image {
+      @include mixins.allDesktop {
+        &:hover {
+          cursor: pointer;
+          @include mixins.background-anime();
+        }
       }
     }
   }
