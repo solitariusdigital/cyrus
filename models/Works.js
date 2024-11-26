@@ -9,7 +9,6 @@ const WorksSchema = new Schema(
       location: String,
       description: String,
       size: String,
-      technique: String,
       year: Number,
     },
     en: {
@@ -19,7 +18,6 @@ const WorksSchema = new Schema(
       location: String,
       description: String,
       size: String,
-      technique: String,
       year: Number,
     },
     media: [],

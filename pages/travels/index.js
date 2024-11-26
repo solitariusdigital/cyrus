@@ -5,7 +5,6 @@ import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectCreative, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 

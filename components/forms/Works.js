@@ -25,7 +25,6 @@ export default function Works({ worksData }) {
   const [location, setLocation] = useState({ en: "", fa: "" });
   const [description, setDescription] = useState({ en: "", fa: "" });
   const [size, setSize] = useState({ en: "", fa: "" });
-  const [technique, setTechnique] = useState({ en: "", fa: "" });
   const [year, setYear] = useState({ en: "", fa: "" });
 
   const [imagesPreview, setImagesPreview] = useState([]);
@@ -163,7 +162,6 @@ export default function Works({ worksData }) {
         location: location.fa,
         description: extractParagraphs(description.fa).join("\n\n"),
         size: size.fa,
-        technique: technique.fa,
         year: year.fa,
       },
       en: {
@@ -173,7 +171,6 @@ export default function Works({ worksData }) {
         location: location.en,
         description: extractParagraphs(description.en).join("\n\n"),
         size: size.en,
-        technique: technique.en,
         year: year.en,
       },
       media: mediaLinks,
@@ -223,10 +220,6 @@ export default function Works({ worksData }) {
     setSize({
       fa: worksData[index].fa.size,
       en: worksData[index].en.size,
-    });
-    setTechnique({
-      fa: worksData[index].fa.technique,
-      en: worksData[index].en.technique,
     });
     setYear({
       fa: worksData[index].fa.year,
@@ -410,70 +403,37 @@ export default function Works({ worksData }) {
               ></input>
             </div>
             {category.en === "Paintings" && (
-              <Fragment>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>Size</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() =>
-                        setSize((prevData) => ({
-                          ...prevData,
-                          en: "",
-                        }))
-                      }
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    style={{
-                      fontFamily: "English",
-                    }}
-                    type="text"
-                    id="sizeEn"
-                    name="size"
-                    onChange={(e) =>
+              <div className={classes.input}>
+                <div className={classes.bar}>
+                  <p className={classes.label}>Size</p>
+                  <CloseIcon
+                    className="icon"
+                    onClick={() =>
                       setSize((prevData) => ({
                         ...prevData,
-                        en: e.target.value,
+                        en: "",
                       }))
                     }
-                    value={size.en}
-                    autoComplete="off"
-                  ></input>
+                    sx={{ fontSize: 16 }}
+                  />
                 </div>
-                <div className={classes.input}>
-                  <div className={classes.bar}>
-                    <p className={classes.label}>Technique</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() =>
-                        setTechnique((prevData) => ({
-                          ...prevData,
-                          en: "",
-                        }))
-                      }
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    style={{
-                      fontFamily: "English",
-                    }}
-                    type="text"
-                    id="techniqueEn"
-                    name="technique"
-                    onChange={(e) =>
-                      setTechnique((prevData) => ({
-                        ...prevData,
-                        en: e.target.value,
-                      }))
-                    }
-                    value={technique.en}
-                    autoComplete="off"
-                  ></input>
-                </div>
-              </Fragment>
+                <input
+                  style={{
+                    fontFamily: "English",
+                  }}
+                  type="text"
+                  id="sizeEn"
+                  name="size"
+                  onChange={(e) =>
+                    setSize((prevData) => ({
+                      ...prevData,
+                      en: e.target.value,
+                    }))
+                  }
+                  value={size.en}
+                  autoComplete="off"
+                ></input>
+              </div>
             )}
             <div className={classes.input}>
               <div className={classes.bar}>
@@ -608,72 +568,38 @@ export default function Works({ worksData }) {
               ></input>
             </div>
             {category.fa === "نقاشی‌" && (
-              <Fragment>
-                <div className={classes.input}>
-                  <div className={classes.barReverse}>
-                    <p className={classes.label}>اندازه</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() =>
-                        setSize((prevData) => ({
-                          ...prevData,
-                          fa: "",
-                        }))
-                      }
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    style={{
-                      fontFamily: "Farsi",
-                    }}
-                    type="text"
-                    id="sizeFa"
-                    name="size"
-                    onChange={(e) =>
+              <div className={classes.input}>
+                <div className={classes.barReverse}>
+                  <p className={classes.label}>اندازه</p>
+                  <CloseIcon
+                    className="icon"
+                    onClick={() =>
                       setSize((prevData) => ({
                         ...prevData,
-                        fa: e.target.value,
+                        fa: "",
                       }))
                     }
-                    value={size.fa}
-                    dir="rtl"
-                    autoComplete="off"
-                  ></input>
+                    sx={{ fontSize: 16 }}
+                  />
                 </div>
-                <div className={classes.input}>
-                  <div className={classes.barReverse}>
-                    <p className={classes.label}>تکنیک</p>
-                    <CloseIcon
-                      className="icon"
-                      onClick={() =>
-                        setTechnique((prevData) => ({
-                          ...prevData,
-                          fa: "",
-                        }))
-                      }
-                      sx={{ fontSize: 16 }}
-                    />
-                  </div>
-                  <input
-                    style={{
-                      fontFamily: "Farsi",
-                    }}
-                    type="text"
-                    id="techniqueFa"
-                    name="technique"
-                    onChange={(e) =>
-                      setTechnique((prevData) => ({
-                        ...prevData,
-                        fa: e.target.value,
-                      }))
-                    }
-                    value={technique.fa}
-                    dir="rtl"
-                    autoComplete="off"
-                  ></input>
-                </div>
-              </Fragment>
+                <input
+                  style={{
+                    fontFamily: "Farsi",
+                  }}
+                  type="text"
+                  id="sizeFa"
+                  name="size"
+                  onChange={(e) =>
+                    setSize((prevData) => ({
+                      ...prevData,
+                      fa: e.target.value,
+                    }))
+                  }
+                  value={size.fa}
+                  dir="rtl"
+                  autoComplete="off"
+                ></input>
+              </div>
             )}
             <div className={classes.input}>
               <div className={classes.barReverse}>
