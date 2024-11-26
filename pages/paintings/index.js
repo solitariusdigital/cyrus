@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, Fragment } from "react";
+import { useState, useEffect, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "../works.module.scss";
 import Image from "next/legacy/image";
@@ -14,33 +14,36 @@ export default function Paintings() {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
+  const [rerender, setRerender] = useState(true);
+
+  useEffect(() => {
+    setRerender(false);
+    setTimeout(() => {
+      setRerender(true);
+    }, 10);
+  }, [language]);
 
   return (
-    <div className={classes.container}>
-      <section className={classes.coverBox}>
-        <div className={classes.image}>
-          <Image
-            className={classes.image}
-            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
-            blurDataURL={
-              "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
-            }
-            placeholder="blur"
-            alt="image"
-            layout="fill"
-            objectFit="cover"
-            as="image"
-            priority
-          />
-        </div>
-        <div
-          className={language ? classes.items : classes.itemsReverse}
-          style={{
-            fontFamily: language ? "FarsiLight" : "EnglishLight",
-          }}
-        >
-          <div className={classes.item}>
-            <h1>{language ? "نقاشی‌" : "Paintings"}</h1>
+    <section className={classes.container}>
+      <Image
+        src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
+        blurDataURL={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
+        placeholder="empty"
+        alt="image"
+        layout="fill"
+        objectFit="cover"
+        as="image"
+        priority
+      />
+      <div
+        className={language ? classes.items : classes.itemsReverse}
+        style={{
+          fontFamily: language ? "FarsiLight" : "EnglishLight",
+        }}
+      >
+        <div className={classes.item}>
+          <h1>{language ? "نقاشی‌" : "Paintings"}</h1>
+          {rerender && (
             <div className={classes.swiperContainer}>
               <Swiper
                 className={classes.swiper}
@@ -59,7 +62,7 @@ export default function Paintings() {
                       className={classes.imageBox}
                       onClick={() =>
                         Router.push(
-                          `/paintings/${replaceSpacesAndHyphens(
+                          `/cinema/${replaceSpacesAndHyphens(
                             type[languageType]
                           )}`
                         )
@@ -90,9 +93,9 @@ export default function Paintings() {
                 ))}
               </Swiper>
             </div>
-          </div>
+          )}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

@@ -1,9 +1,7 @@
-import { useState, useEffect, useContext, Fragment } from "react";
+import { useState, useEffect, useContext } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "../works.module.scss";
 import Image from "next/legacy/image";
-import GallerySlider from "@/components/GallerySlider";
-import CloseIcon from "@mui/icons-material/Close";
 import Router from "next/router";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,50 +14,36 @@ export default function Movies() {
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { cinemaTypes, setCinemaTypes } = useContext(StateContext);
-  const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
+  const [rerender, setRerender] = useState(true);
 
-  const works = [
-    "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
-    "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
-    "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
-    "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
-    "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
-    "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
-    "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
-  ];
-
-  const gallerySlider = () => {
-    setDisplayGallerySlider(true);
-    window.scrollTo(0, 0);
-    document.body.style.overflow = "hidden";
-  };
+  useEffect(() => {
+    setRerender(false);
+    setTimeout(() => {
+      setRerender(true);
+    }, 10);
+  }, [language]);
 
   return (
-    <div className={classes.container}>
-      <section className={classes.coverBox}>
-        <div className={classes.image}>
-          <Image
-            className={classes.image}
-            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
-            blurDataURL={
-              "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
-            }
-            placeholder="blur"
-            alt="image"
-            layout="fill"
-            objectFit="cover"
-            as="image"
-            priority
-          />
-        </div>
-        <div
-          className={language ? classes.items : classes.itemsReverse}
-          style={{
-            fontFamily: language ? "FarsiLight" : "EnglishLight",
-          }}
-        >
-          <div className={classes.item}>
-            <h1>{language ? "سینما" : "Cinema"}</h1>
+    <section className={classes.container}>
+      <Image
+        src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
+        blurDataURL={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
+        placeholder="empty"
+        alt="image"
+        layout="fill"
+        objectFit="cover"
+        as="image"
+        priority
+      />
+      <div
+        className={language ? classes.items : classes.itemsReverse}
+        style={{
+          fontFamily: language ? "FarsiLight" : "EnglishLight",
+        }}
+      >
+        <div className={classes.item}>
+          <h1>{language ? "سینما" : "Cinema"}</h1>
+          {rerender && (
             <div className={classes.swiperContainer}>
               <Swiper
                 className={classes.swiper}
@@ -109,44 +93,9 @@ export default function Movies() {
                 ))}
               </Swiper>
             </div>
-          </div>
+          )}
         </div>
-      </section>
-      {/* <div className={classes.gridBox}>
-      {works.map((work, index) => (
-        <div
-          key={index}
-          className={classes.imageBox}
-          onClick={() => gallerySlider()}
-        >
-          <Image
-            className={classes.image}
-            src={work}
-            blurDataURL={work}
-            placeholder="blur"
-            alt="cover"
-            layout="fill"
-            objectFit="cover"
-            as="image"
-            priority
-          />
-        </div>
-      ))}
-    </div> */}
-      {displayGallerySlider && (
-        <div className={classes.gallerySlider}>
-          <div className={classes.icon}>
-            <CloseIcon
-              className="icon"
-              onClick={() => {
-                setDisplayGallerySlider(false);
-                document.body.style.overflow = "auto";
-              }}
-            />
-          </div>
-          <GallerySlider media={works} />
-        </div>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }

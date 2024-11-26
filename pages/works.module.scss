@@ -4,49 +4,47 @@
 .container {
   margin: 165px 0px;
 
-  .coverBox {
-    .items,
-    .itemsReverse {
-      position: absolute;
-      left: 50%;
-      top: 70%;
-      transform: translate(-50%, -50%);
-      color: config.$white;
-      width: 100%;
-      direction: ltr;
-      @include mixins.transparentBackground(0.7, config.$green);
+  .items,
+  .itemsReverse {
+    position: absolute;
+    left: 50%;
+    top: 70%;
+    transform: translate(-50%, -50%);
+    color: config.$white;
+    width: 100%;
+    direction: ltr;
+    @include mixins.transparentBackground(0.7, config.$green);
+
+    @include mixins.mobile {
+      top: 60%;
+      padding: 12px 0px;
+    }
+
+    .item {
+      height: 170px;
+      width: config.$content-width;
+      max-width: config.$max-widthHeigh;
+      margin: auto;
+      @include mixins.row-space-between-center();
 
       @include mixins.mobile {
-        top: 60%;
-        padding: 12px 0px;
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 24px);
       }
 
-      .item {
-        height: 170px;
-        width: config.$content-width;
-        max-width: config.$max-widthHeigh;
-        margin: auto;
-        @include mixins.row-space-between-center();
+      h1 {
+        font-size: 4rem;
 
         @include mixins.mobile {
-          display: flex;
-          flex-direction: column;
-          width: calc(100% - 24px);
-        }
-
-        h1 {
-          font-size: 4rem;
-
-          @include mixins.mobile {
-            font-size: 1.8rem;
-          }
+          font-size: 1.8rem;
         }
       }
     }
+  }
 
-    .items {
-      direction: rtl;
-    }
+  .items {
+    direction: rtl;
   }
 
   .swiperContainer {
@@ -82,7 +80,7 @@
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;
-          color: config.$green;
+          color: config.$brand;
         }
       }
     }
