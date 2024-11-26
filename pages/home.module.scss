@@ -42,7 +42,7 @@
     transform: translate(-50%, -50%);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    gap: 12px;
+    gap: 40px;
     width: config.$content-width;
     max-width: config.$max-widthHeigh;
     color: config.$white;
@@ -62,8 +62,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-around;
-      height: 120px;
-      @include mixins.transparentBackground(0.7, config.$green);
+      height: 90px;
+      @include mixins.transparentBackground(0.5, config.$green);
 
       @include mixins.allDesktop {
         &:hover {

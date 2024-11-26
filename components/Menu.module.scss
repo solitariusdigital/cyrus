@@ -16,8 +16,11 @@
   @include mixins.row-space-between-center();
 
   h1 {
-    letter-spacing: 10px;
+    letter-spacing: 20px;
 
+    @include mixins.mobile {
+      letter-spacing: 10px;
+    }
     @include mixins.allDesktop {
       &:hover {
         color: config.$brand;

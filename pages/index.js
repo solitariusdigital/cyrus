@@ -70,7 +70,7 @@ export default function Home() {
                 className={classes.item}
                 onClick={() => activateNav(nav.link, index)}
               >
-                <h3>{nav.title[languageType]}</h3>
+                <h1>{nav.title[languageType]}</h1>
               </div>
             ))
             .slice(0, 3)}

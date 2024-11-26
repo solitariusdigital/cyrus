@@ -57,12 +57,12 @@ export default function Movies() {
           }}
         >
           <div className={classes.item}>
-            <h2>{language ? "سینما" : "Cinema"}</h2>
+            <h1>{language ? "سینما" : "Cinema"}</h1>
             <div className={classes.swiperContainer}>
               <Swiper
                 className={classes.swiper}
                 slidesPerView={3}
-                spaceBetween={10}
+                spaceBetween={screenSize === "mobile" ? 10 : 20}
                 centeredSlides={true}
                 mousewheel={true}
                 loop={true}
@@ -83,16 +83,16 @@ export default function Movies() {
                         as="type"
                         priority
                       />
-                      <h3
+                      <h2
                         style={{
                           fontSize:
                             screenSize === "mobile" && language
-                              ? "0.8rem"
-                              : "1.1rem",
+                              ? "1.2rem"
+                              : "1.3rem",
                         }}
                       >
                         {type[languageType]}
-                      </h3>
+                      </h2>
                     </div>
                   </SwiperSlide>
                 ))}

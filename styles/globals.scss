@@ -104,7 +104,7 @@ p {
   position: fixed;
   bottom: 0px;
   z-index: 10;
-  height: 50px;
+  height: 60px;
   width: 100%;
   @include mixins.transparentBackground(0.7, config.$green);
   @include mixins.row-space-between-center();
@@ -135,8 +135,8 @@ p {
   h1 {
     position: relative;
     right: 8px;
-    bottom: 200px;
-    color: config.$brand;
+    bottom: 150px;
+    color: config.$grey;
     letter-spacing: 28px;
 
     @include mixins.mobile {

@@ -53,13 +53,13 @@ export default function Travels() {
           }}
         >
           <div className={classes.item}>
-            <h2>{language ? "سفر" : "Travels"}</h2>
+            <h1>{language ? "سفر" : "Travels"}</h1>
             <div className={classes.swiperContainer}>
               <Swiper
-                style={{ width: screenSize === "mobile" ? "100%" : "45%" }}
+                style={{ width: screenSize === "mobile" ? "100%" : "100%" }}
                 className={classes.swiper}
                 slidesPerView={2}
-                spaceBetween={10}
+                spaceBetween={screenSize === "mobile" ? 10 : 20}
               >
                 {travelTypes.map((type, index) => (
                   <SwiperSlide key={index}>
@@ -74,16 +74,16 @@ export default function Travels() {
                         as="type"
                         priority
                       />
-                      <h3
+                      <h2
                         style={{
                           fontSize:
                             screenSize === "mobile" && language
-                              ? "0.8rem"
-                              : "1.1rem",
+                              ? "1.2rem"
+                              : "1.3rem",
                         }}
                       >
                         {type[languageType]}
-                      </h3>
+                      </h2>
                     </div>
                   </SwiperSlide>
                 ))}
