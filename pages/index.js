@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./home.module.scss";
 import Image from "next/legacy/image";
@@ -7,7 +7,9 @@ import CoverSlider from "@/components/CoverSlider";
 
 export default function Home() {
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -21,6 +23,18 @@ export default function Home() {
       };
     }
   }, []);
+
+  const activateNav = (link, index) => {
+    navigationTopBar.map((nav, i) => {
+      if (i === index) {
+        Router.push(link);
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+  };
 
   return (
     <div className={classes.container}>
@@ -49,18 +63,17 @@ export default function Home() {
             fontFamily: language ? "FarsiLight" : "EnglishLight",
           }}
         >
-          <div
-            className={classes.item}
-            onClick={() => Router.push("/paintings")}
-          >
-            <h3>{language ? "نقاشی‌" : "Paintings"}</h3>
-          </div>
-          <div className={classes.item} onClick={() => Router.push("/cinema")}>
-            <h3>{language ? "سینما" : "Cinema"}</h3>
-          </div>
-          <div className={classes.item} onClick={() => Router.push("/travels")}>
-            <h3>{language ? "سفر" : "Travels"}</h3>
-          </div>
+          {navigationTopBar
+            .map((nav, index) => (
+              <div
+                key={index}
+                className={classes.item}
+                onClick={() => activateNav(nav.link, index)}
+              >
+                <h3>{nav.title[languageType]}</h3>
+              </div>
+            ))
+            .slice(0, 3)}
         </div>
         <div className="fadeOverlay"></div>
       </section>

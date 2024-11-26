@@ -12,9 +12,7 @@ import "swiper/css/navigation";
 export default function Paintings() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
-  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-  const [current, setCurrent] = useState(0);
 
   const works = [
     "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
@@ -30,48 +28,21 @@ export default function Paintings() {
   const paintingTypes = [
     {
       type: language ? "رنگ روغن" : "Oil color",
-      active: false,
       link: "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
     },
     {
       type: language ? "اکریلیک" : "Acrylic",
-      active: false,
       link: "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
     },
     {
       type: language ? "رنگ روغن" : "Oil color",
-      active: false,
       link: "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
     },
     {
       type: language ? "آبرنگ" : "Watercolor",
-      active: false,
       link: "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
     },
   ];
-
-  useEffect(() => {
-    navigationTopBar.map((nav) => {
-      if (nav.link === "/paintings") {
-        nav.active = true;
-      } else {
-        nav.active = false;
-      }
-    });
-    setNavigationTopBar([...navigationTopBar]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const updateIndex = (swiperInstance) => {
-    if (swiperInstance === null) return;
-    const currentSlide = swiperInstance?.realIndex;
-    setCurrent(currentSlide);
-  };
-
-  const getNextIndex = (activeIndex) => {
-    const nextIndex = (activeIndex + 1) % sliderHome.length;
-    return nextIndex;
-  };
 
   const gallerySlider = () => {
     setDisplayGallerySlider(true);
@@ -115,7 +86,6 @@ export default function Paintings() {
                 loop={true}
                 allowTouchMove={true}
                 navigation={true}
-                onSlideChange={updateIndex}
                 modules={[Navigation, Mousewheel]}
               >
                 {paintingTypes.map((type, index) => (
@@ -131,7 +101,16 @@ export default function Paintings() {
                         as="type"
                         priority
                       />
-                      <h3>{type.type}</h3>
+                      <h3
+                        style={{
+                          fontSize:
+                            screenSize === "mobile" && language
+                              ? "0.8rem"
+                              : "1.1rem",
+                        }}
+                      >
+                        {type.type}
+                      </h3>
                     </div>
                   </SwiperSlide>
                 ))}

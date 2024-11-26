@@ -4,11 +4,14 @@ import classes from "../works.module.scss";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, EffectCreative, Mousewheel } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function Travels() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
-  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
   const works = [
@@ -18,28 +21,16 @@ export default function Travels() {
     "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
   ];
 
-  const navigationTypes = [
+  const travelTypes = [
     {
       type: language ? "جهان گردی" : "World Travel",
-      active: false,
+      link: "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
     },
     {
       type: language ? "ایران گردی" : "Iran Travel",
-      active: true,
+      link: "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
     },
   ];
-
-  useEffect(() => {
-    navigationTopBar.map((nav) => {
-      if (nav.link === "/travels") {
-        nav.active = true;
-      } else {
-        nav.active = false;
-      }
-    });
-    setNavigationTopBar([...navigationTopBar]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const gallerySlider = () => {
     setDisplayGallerySlider(true);
@@ -49,42 +40,89 @@ export default function Travels() {
 
   return (
     <div className={classes.container}>
-      <div
-        className={classes.navigation}
-        style={{
-          width: screenSize === "desktop" ? "30%" : "60%",
-        }}
-      >
-        {navigationTypes.map((nav, index) => (
-          <p
-            key={index}
-            className={!nav.active ? classes.nav : classes.navActive}
-          >
-            {nav.type}
-          </p>
-        ))}
-      </div>
-      <div className={classes.gridBox}>
-        {works.map((work, index) => (
-          <div
-            key={index}
-            className={classes.imageBox}
-            onClick={() => gallerySlider()}
-          >
-            <Image
-              className={classes.image}
-              src={work}
-              blurDataURL={work}
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
+      <section className={classes.coverBox}>
+        <div className={classes.image}>
+          <Image
+            className={classes.image}
+            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
+            blurDataURL={
+              "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
+            }
+            placeholder="blur"
+            alt="image"
+            layout="fill"
+            objectFit="cover"
+            as="image"
+            priority
+          />
+        </div>
+        <div
+          className={language ? classes.items : classes.itemsReverse}
+          style={{
+            fontFamily: language ? "FarsiLight" : "EnglishLight",
+          }}
+        >
+          <div className={classes.item}>
+            <h2>{language ? "سفر" : "Travels"}</h2>
+            <div className={classes.swiperContainer}>
+              <Swiper
+                style={{ width: screenSize === "mobile" ? "100%" : "45%" }}
+                className={classes.swiper}
+                slidesPerView={2}
+                spaceBetween={10}
+              >
+                {travelTypes.map((type, index) => (
+                  <SwiperSlide key={index}>
+                    <div className={classes.imageBox}>
+                      <Image
+                        src={type.link}
+                        blurDataURL={type.link}
+                        placeholder="blur"
+                        alt="type"
+                        layout="fill"
+                        objectFit="cover"
+                        as="type"
+                        priority
+                      />
+                      <h3
+                        style={{
+                          fontSize:
+                            screenSize === "mobile" && language
+                              ? "0.8rem"
+                              : "1.1rem",
+                        }}
+                      >
+                        {type.type}
+                      </h3>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      </section>
+      {/* <div className={classes.gridBox}>
+      {works.map((work, index) => (
+        <div
+          key={index}
+          className={classes.imageBox}
+          onClick={() => gallerySlider()}
+        >
+          <Image
+            className={classes.image}
+            src={work}
+            blurDataURL={work}
+            placeholder="blur"
+            alt="cover"
+            layout="fill"
+            objectFit="cover"
+            as="image"
+            priority
+          />
+        </div>
+      ))}
+    </div> */}
       {displayGallerySlider && (
         <div className={classes.gallerySlider}>
           <div className={classes.icon}>

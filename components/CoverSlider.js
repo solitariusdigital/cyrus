@@ -1,27 +1,8 @@
-import { useState, useContext, Fragment, useEffect } from "react";
-import { StateContext } from "@/context/stateContext";
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
-import Router from "next/router";
 import logoWhite from "@/assets/logoWhite.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/swiper-bundle.css";
 
 export default function CoverSlider() {
-  const { screenSize, setScreenSize } = useContext(StateContext);
-
-  const togglePlay = (videoElement) => {
-    if (videoElement.paused) {
-      videoElement.play();
-    } else {
-      videoElement.pause();
-    }
-    videoElement.muted = !videoElement.muted;
-  };
-
   return (
     <div className={classes.cover}>
       <video
@@ -31,8 +12,7 @@ export default function CoverSlider() {
         loop
         playsInline
         preload="metadata"
-        muted={screenSize === "mobile" ? true : false}
-        onClick={(e) => togglePlay(e.currentTarget)}
+        muted
       />
       <div className={`${classes.logo} animate__animated animate__fadeOut`}>
         <Image
