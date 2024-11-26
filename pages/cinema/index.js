@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 export default function Movies() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
+  const { cinemaTypes, setCinemaTypes } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
   const works = [
@@ -22,33 +23,6 @@ export default function Movies() {
     "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
     "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
     "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
-  ];
-
-  const cinemaTypes = [
-    {
-      type: language ? "سینما" : "Cinema",
-      link: "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
-    },
-    {
-      type: language ? "تئاتر" : "Theatre",
-      link: "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
-    },
-    {
-      type: language ? "سریال" : "TV Series",
-      link: "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
-    },
-    {
-      type: language ? "فیلم کوتاه" : "Short Film",
-      link: "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
-    },
-    {
-      type: language ? "نمایشگاه" : "Exhibitions",
-      link: "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
-    },
-    {
-      type: language ? "جوایز" : "Awards",
-      link: "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
-    },
   ];
 
   const gallerySlider = () => {
@@ -99,8 +73,8 @@ export default function Movies() {
                   <SwiperSlide key={index}>
                     <div className={classes.imageBox}>
                       <Image
-                        src={type.link}
-                        blurDataURL={type.link}
+                        src={type.media}
+                        blurDataURL={type.media}
                         placeholder="blur"
                         alt="type"
                         layout="fill"

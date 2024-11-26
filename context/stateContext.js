@@ -61,6 +61,72 @@ export const StateProvider = (props) => {
       active: false,
     },
   ]);
+  const [paintingTypes, setPaintingTypes] = useState([
+    {
+      type: language ? "رنگ روغن" : "Oil color",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    },
+    {
+      type: language ? "اکریلیک" : "Acrylic",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
+    },
+    {
+      type: language ? "رنگ روغن" : "Oil color",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    },
+    {
+      type: language ? "آبرنگ" : "Watercolor",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+    },
+  ]);
+  const [cinemaTypes, setCinemaTypes] = useState([
+    {
+      type: language ? "سینما" : "Cinema",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    },
+    {
+      type: language ? "تئاتر" : "Theatre",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
+    },
+    {
+      type: language ? "سریال" : "TV Series",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    },
+    {
+      type: language ? "فیلم کوتاه" : "Short Film",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+    },
+    {
+      type: language ? "نمایشگاه" : "Exhibitions",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    },
+    {
+      type: language ? "جوایز" : "Awards",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+    },
+  ]);
+  const [travelTypes, setTravelTypes] = useState([
+    {
+      type: language ? "جهان گردی" : "World Travel",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+    },
+    {
+      type: language ? "ایران گردی" : "Iran Travel",
+      media:
+        "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+    },
+  ]);
   const stateContext = {
     language,
     setLanguage,
@@ -78,6 +144,12 @@ export const StateProvider = (props) => {
     setNavigationTopBar,
     displayMenu,
     setDisplayMenu,
+    paintingTypes,
+    setPaintingTypes,
+    cinemaTypes,
+    setCinemaTypes,
+    travelTypes,
+    setTravelTypes,
   };
   return (
     <StateContext.Provider value={stateContext}>
