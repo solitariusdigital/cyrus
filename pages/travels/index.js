@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 export default function Travels() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { travelTypes, setTravelTypes } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
@@ -81,7 +82,7 @@ export default function Travels() {
                               : "1.1rem",
                         }}
                       >
-                        {type.type}
+                        {type[languageType]}
                       </h3>
                     </div>
                   </SwiperSlide>

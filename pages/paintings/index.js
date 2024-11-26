@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 
 export default function Paintings() {
   const { screenSize, setScreenSize } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
@@ -91,7 +92,7 @@ export default function Paintings() {
                               : "1.1rem",
                         }}
                       >
-                        {type.type}
+                        {type[languageType]}
                       </h3>
                     </div>
                   </SwiperSlide>

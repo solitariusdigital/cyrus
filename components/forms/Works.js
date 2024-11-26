@@ -61,15 +61,15 @@ export default function Works({ worksData }) {
   };
   const englishSubCategoreis = {
     اکریلیک: "Acrylic",
-    اکریلیک: "Oil color",
+    اکریلیک: "Oil Color",
     آبرنگ: "Watercolor",
     سینما: "Cinema",
     تئاتر: "Theatre",
     سریال: "Series",
-    "فیلم کوتاه": "Short film",
+    "فیلم کوتاه": "Short Film",
     جشنواره: "Festival",
     جوایز: "Awards",
-    "ایران گردی": "Iran tour",
+    "ایران گردی": "Iran Tour",
     "جهان گردی": "World Tour",
   };
 

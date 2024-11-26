@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 export default function Movies() {
   const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
   const { cinemaTypes, setCinemaTypes } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
@@ -90,7 +91,7 @@ export default function Movies() {
                               : "1.1rem",
                         }}
                       >
-                        {type.type}
+                        {type[languageType]}
                       </h3>
                     </div>
                   </SwiperSlide>
