@@ -95,7 +95,7 @@ p {
   z-index: 10;
   height: 150px;
   width: 100%;
-  @include mixins.transparentBackground(0.7, config.$green);
+  @include mixins.transparentBackground(0.5, config.$green);
   @include mixins.row-space-between-center();
   justify-content: center;
 }
@@ -106,7 +106,7 @@ p {
   z-index: 10;
   height: 60px;
   width: 100%;
-  @include mixins.transparentBackground(0.7, config.$green);
+  @include mixins.transparentBackground(0.5, config.$green);
   @include mixins.row-space-between-center();
 }
 

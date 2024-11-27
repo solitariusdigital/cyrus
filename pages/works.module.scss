@@ -13,7 +13,7 @@
     color: config.$white;
     width: 100%;
     direction: ltr;
-    @include mixins.transparentBackground(0.7, config.$green);
+    @include mixins.transparentBackground(0.5, config.$green);
 
     @include mixins.mobile {
       top: 60%;
@@ -31,11 +31,11 @@
         display: flex;
         flex-direction: column;
         width: calc(100% - 24px);
+        height: 190px;
       }
 
       h1 {
-        font-size: 4rem;
-
+        font-size: 3.8rem;
         @include mixins.mobile {
           font-size: 1.8rem;
         }

@@ -59,7 +59,7 @@
   width: 200px;
   padding: 40px 0px;
   color: config.$white;
-  @include mixins.transparentBackground(0.7, config.$green);
+  @include mixins.transparentBackground(0.5, config.$green);
 
   @include mixins.mobile {
     right: -12px;

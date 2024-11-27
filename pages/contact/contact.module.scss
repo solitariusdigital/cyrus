@@ -32,7 +32,7 @@
     align-items: center;
     justify-content: space-around;
     height: 120px;
-    @include mixins.transparentBackground(0.7, config.$green);
+    @include mixins.transparentBackground(0.5, config.$green);
 
     @include mixins.allDesktop {
       &:hover {
