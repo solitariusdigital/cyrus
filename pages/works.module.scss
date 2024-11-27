@@ -113,12 +113,14 @@
   }
 
   span {
-    color: config.$black;
+    color: config.$grey;
     margin: 0px 12px;
     height: 100%;
   }
 
   .type {
+    color: config.$grey;
+
     @include mixins.allDesktop {
       &:hover {
         cursor: pointer;
