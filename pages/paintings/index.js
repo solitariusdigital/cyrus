@@ -20,7 +20,7 @@ export default function Paintings() {
     setRerender(false);
     setTimeout(() => {
       setRerender(true);
-    }, 10);
+    }, 50);
   }, [language]);
 
   return (

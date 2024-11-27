@@ -19,7 +19,7 @@ export default function Travels() {
     setRerender(false);
     setTimeout(() => {
       setRerender(true);
-    }, 10);
+    }, 50);
   }, [language]);
 
   return (
