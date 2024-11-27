@@ -87,6 +87,51 @@
   }
 }
 
+.typesNavigation {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: config.$content-width;
+  max-width: 700px;
+  margin: auto;
+  margin-bottom: 32px;
+
+  @include mixins.mobile {
+    width: 100%;
+  }
+  @include mixins.tablet {
+    width: 100%;
+  }
+  @include mixins.tabletPortrait {
+    width: 100%;
+  }
+
+  h3 {
+    display: flex;
+    height: 30px;
+  }
+
+  span {
+    color: config.$black;
+    margin: 0px 12px;
+    height: 100%;
+  }
+
+  .type {
+    @include mixins.allDesktop {
+      &:hover {
+        cursor: pointer;
+        color: config.$brand;
+      }
+    }
+  }
+
+  .typeActive {
+    color: config.$brand;
+  }
+}
+
 .gridBox {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

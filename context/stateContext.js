@@ -67,24 +67,28 @@ export const StateProvider = (props) => {
       en: "Oil Color",
       media:
         "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+      active: false,
     },
     {
       fa: "اکریلیک",
       en: "Acrylic",
       media:
         "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
+      active: false,
     },
     {
       fa: "آبرنگ",
       en: "Watercolor",
       media:
         "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+      active: false,
     },
     {
       fa: "طرح",
       en: "Sketch",
       media:
         "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+      active: false,
     },
   ]);
   const [cinemaTypes, setCinemaTypes] = useState([
@@ -93,36 +97,42 @@ export const StateProvider = (props) => {
       en: "Cinema",
       media:
         "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+      active: false,
     },
     {
       fa: "تئاتر",
       en: "Theatre",
       media:
         "https://cyrus.storage.c2.liara.space/photos/3a57e405-bec0-45df-8b6d-4ec0af2f64ea.JPG",
+      active: false,
     },
     {
       fa: "سریال",
       en: "Series",
       media:
         "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+      active: false,
     },
     {
       fa: "فیلم کوتاه",
       en: "Short Film",
       media:
         "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+      active: false,
     },
     {
       fa: "نمایشگاه",
       en: "Exhibitions",
       media:
         "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+      active: false,
     },
     {
       fa: "جوایز",
       en: "Awards",
       media:
         "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+      active: false,
     },
   ]);
   const [travelTypes, setTravelTypes] = useState([
@@ -131,12 +141,14 @@ export const StateProvider = (props) => {
       en: "World Travel",
       media:
         "https://cyrus.storage.c2.liara.space/photos/1bc62462-716f-469a-aebe-a91f2138e902.JPG",
+      active: false,
     },
     {
       fa: "ایران گردی",
       en: "Iran Travel",
       media:
         "https://cyrus.storage.c2.liara.space/photos/6efa4ae2-fd3c-46d8-a92b-76d28f709948.JPG",
+      active: false,
     },
   ]);
   const stateContext = {

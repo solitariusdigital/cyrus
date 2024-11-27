@@ -14,8 +14,6 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "aws-sdk": "^2.1691.0",
-    "eslint": "9.15.0",
-    "eslint-config-next": "15.0.0",
     "mini-css-extract-plugin": "^2.7.6",
     "crypto-js": "^4.2.0",
     "mongodb-shell": "^1.0.1",
@@ -30,5 +28,9 @@
     "sharp": "^0.33.5",
     "swiper": "^11.1.14",
     "webpack": "^5.88.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-next": "^12.3.4"
   }
 }

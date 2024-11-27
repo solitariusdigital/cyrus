@@ -62,7 +62,7 @@ export default function Paintings() {
                       className={classes.imageBox}
                       onClick={() =>
                         Router.push(
-                          `/cinema/${replaceSpacesAndHyphens(
+                          `/paintings/${replaceSpacesAndHyphens(
                             type[languageType]
                           )}`
                         )

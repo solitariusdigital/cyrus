@@ -4,8 +4,14 @@ import classes from "../works.module.scss";
 import Image from "next/legacy/image";
 import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
+import dbConnect from "@/services/dbConnect";
+import worksModel from "@/models/Works";
+import { replaceSpacesAndHyphens } from "@/services/utility";
 
-export default function Type() {
+export default function Type({ typeTitle }) {
+  const { paintingTypes, setPaintingTypes } = useContext(StateContext);
+  const { languageType, setLanguageType } = useContext(StateContext);
+  const { language, setLanguage } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
 
   const works = [
@@ -19,6 +25,18 @@ export default function Type() {
     "https://cyrus.storage.c2.liara.space/photos/8f11eb29-0da1-41da-8342-89f05eee3c3d.JPG",
   ];
 
+  useEffect(() => {
+    paintingTypes.map((type) => {
+      if (type.fa === typeTitle || type.en === typeTitle) {
+        type.active = true;
+      } else {
+        type.active = false;
+      }
+    });
+    setPaintingTypes([...paintingTypes]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const gallerySlider = () => {
     setDisplayGallerySlider(true);
     window.scrollTo(0, 0);
@@ -27,6 +45,26 @@ export default function Type() {
 
   return (
     <div className={classes.container}>
+      <div className={classes.typesNavigation}>
+        {paintingTypes.map((type, index) => (
+          <h3
+            key={index}
+            className={type.active ? classes.typeActive : classes.type}
+            // onClick={() => setPageType(type)}
+          >
+            {type[languageType]}
+            {index !== 0 && (
+              <span
+                style={{
+                  fontFamily: language ? "EnglishLight" : "EnglishLight",
+                }}
+              >
+                |
+              </span>
+            )}
+          </h3>
+        ))}
+      </div>
       <div className={classes.gridBox}>
         {works.map((work, index) => (
           <div
@@ -64,4 +102,23 @@ export default function Type() {
       )}
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  try {
+    await dbConnect();
+    const works = await worksModel.find();
+    return {
+      props: {
+        works: JSON.parse(JSON.stringify(works)),
+        typeTitle: JSON.parse(
+          JSON.stringify(replaceSpacesAndHyphens(context.query.type))
+        ),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
