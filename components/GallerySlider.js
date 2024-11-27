@@ -24,8 +24,6 @@ export default function GallerySlider({ media }) {
         <p>info 3</p>
         <p>info 4</p>
         <p>info 5</p>
-        <p>info 6</p>
-        <p>info 7</p>
       </div>
       <div className={classes.swiper}>
         <Swiper

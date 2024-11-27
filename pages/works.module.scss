@@ -134,11 +134,16 @@
   background: config.$white;
 
   h2 {
-    margin-bottom: 20px;
+    margin-bottom: 12px;
   }
 
   .icon {
-    width: 100%;
+    width: config.$content-width;
+    max-width: config.$max-widthHeigh;
     direction: rtl;
+
+    @include mixins.mobile {
+      width: 100%;
+    }
   }
 }

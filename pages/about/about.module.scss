@@ -31,20 +31,23 @@
   .infoBox {
     display: flex;
     flex-direction: column;
-    height: 350px;
     position: relative;
     left: 10%;
-    top: 50%;
+    top: 56%;
     transform: translateY(-50%);
     z-index: 5;
-    width: 640px;
 
+    @include mixins.allDesktop {
+      width: 40vw;
+      height: 50vh;
+    }
     @include mixins.mobile {
       left: 0%;
+      height: 50vh;
     }
     @include mixins.tablet {
-      width: 600px;
-      height: 400px;
+      width: 580px;
+      height: 50vh;
     }
     @include mixins.tabletPortrait {
       left: 0%;
@@ -55,7 +58,8 @@
     h2 {
       padding: 20px;
       color: config.$brand;
-      @include mixins.transparentBackground(0.5, config.$green);
+      border-left: 5px solid config.$brand;
+      @include mixins.transparentBackground(0.7, config.$green);
 
       @include mixins.mobile {
         padding: 12px;
@@ -74,7 +78,8 @@
       padding: 20px;
       direction: rtl;
       overflow-y: auto;
-      @include mixins.transparentBackground(0.5, config.$green);
+      border-left: 5px solid config.$brand;
+      @include mixins.transparentBackground(0.7, config.$green);
 
       @include mixins.tabletPortrait {
         margin: auto;
