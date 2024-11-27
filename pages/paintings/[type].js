@@ -6,19 +6,16 @@ import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 import dbConnect from "@/services/dbConnect";
 import worksModel from "@/models/Works";
-import { replaceSpacesAndHyphens } from "@/services/utility";
+import { replaceSpacesAndHyphens, toFarsiNumber } from "@/services/utility";
 
-export default function Type({ typeTitle }) {
+export default function Type({ works, typeTitle }) {
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-
-  const works = [
-    "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
-    "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
-    "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG",
-  ];
+  const [categoryWorks, setCategoryWorks] = useState([]);
+  const [displayWorks, setDisplayWorks] = useState([]);
+  const [initialIndex, setInitialIndex] = useState(0);
 
   useEffect(() => {
     paintingTypes.map((type) => {
@@ -32,7 +29,59 @@ export default function Type({ typeTitle }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const gallerySlider = () => {
+  useEffect(() => {
+    const categoryWorks = works.filter(
+      (work) => work.en.category === "Paintings"
+    );
+    setCategoryWorks(categoryWorks);
+    const displayWorks = categoryWorks.filter(
+      (work) =>
+        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
+    );
+    let groupWorks = groupItemsByYear(displayWorks);
+    const sortWorks = Object.keys(groupWorks)
+      .sort((a, b) => a - b)
+      .map((year) => groupWorks[year]);
+    setDisplayWorks(sortWorks);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [typeTitle, works]);
+
+  const changeFilterTypes = (type) => {
+    updateCategoryActive(type);
+    const displayWorks = categoryWorks.filter(
+      (work) => work.fa.subCategory === type || work.en.subCategory === type
+    );
+    let groupWorks = groupItemsByYear(displayWorks);
+    const sortWorks = Object.keys(groupWorks)
+      .sort((a, b) => a - b)
+      .map((year) => groupWorks[year]);
+    setDisplayWorks(sortWorks);
+  };
+
+  const updateCategoryActive = (type) => {
+    paintingTypes.map((entry) => {
+      if (entry.fa === type || entry.en === type) {
+        entry.active = true;
+      } else {
+        entry.active = false;
+      }
+    });
+    setPaintingTypes([...paintingTypes]);
+  };
+
+  const groupItemsByYear = (items) => {
+    return items.reduce((acc, item) => {
+      const year = item[languageType].year;
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(item);
+      return acc;
+    }, {});
+  };
+
+  const gallerySlider = (mediaIndex) => {
+    setInitialIndex(mediaIndex);
     setDisplayGallerySlider(true);
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
@@ -45,7 +94,7 @@ export default function Type({ typeTitle }) {
           <h3
             key={index}
             className={type.active ? classes.typeActive : classes.type}
-            // onClick={() => setPageType(type)}
+            onClick={() => changeFilterTypes(type[languageType])}
           >
             {type[languageType]}
             {index !== 0 && (
@@ -60,27 +109,46 @@ export default function Type({ typeTitle }) {
           </h3>
         ))}
       </div>
-      <div className={classes.gridBox}>
-        {works.map((work, index) => (
+      {displayWorks
+        .map((work, workIndex) => (
           <div
-            key={index}
-            className={classes.imageBox}
-            onClick={() => gallerySlider()}
+            className={language ? classes.groupRow : classes.groupRowReverse}
+            key={workIndex}
           >
-            <Image
-              className={classes.image}
-              src={work}
-              blurDataURL={work}
-              placeholder="blur"
-              alt="cover"
-              layout="fill"
-              objectFit="cover"
-              as="image"
-              priority
-            />
+            <h3>
+              {language
+                ? toFarsiNumber(work[workIndex][languageType].year)
+                : work[workIndex][languageType].year}
+            </h3>
+            <div
+              className={language ? classes.gridBox : classes.gridBoxReverse}
+            >
+              {work.map((entry, entryIndex) => (
+                <Fragment key={entryIndex}>
+                  {entry.media.map((media, mediaIndex) => (
+                    <div
+                      key={mediaIndex}
+                      className={classes.imageBox}
+                      onClick={() => gallerySlider(mediaIndex)}
+                    >
+                      <Image
+                        className={classes.image}
+                        src={media.link}
+                        blurDataURL={media.link}
+                        placeholder="blur"
+                        alt="cover"
+                        layout="fill"
+                        objectFit="cover"
+                        priority
+                      />
+                    </div>
+                  ))}
+                </Fragment>
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
+        ))
+        .reverse()}
       {displayGallerySlider && (
         <div className={classes.gallerySlider}>
           <div className={classes.icon}>
@@ -92,7 +160,10 @@ export default function Type({ typeTitle }) {
               }}
             />
           </div>
-          <GallerySlider media={works} />
+          <GallerySlider
+            displayWorks={displayWorks}
+            initialIndex={initialIndex}
+          />
         </div>
       )}
     </div>

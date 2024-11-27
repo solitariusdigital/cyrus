@@ -2,7 +2,7 @@
 @use "styles/_mixins.scss" as mixins;
 
 .container {
-  margin: 165px 0px;
+  margin: 180px 0px;
 
   .items,
   .itemsReverse {
@@ -134,17 +134,41 @@
   }
 }
 
-.gridBox {
+.groupRow,
+.groupRowReverse {
+  margin-bottom: 50px;
+  width: config.$content-width;
+  margin: auto;
+  margin-bottom: 50px;
+  direction: rtl;
+
+  @include mixins.mobile {
+    width: calc(100% - 24px);
+  }
+  h3 {
+    display: flex;
+    justify-content: center;
+    width: 80px;
+    padding: 5px;
+    @include mixins.transparentBackground(0.5, config.$green);
+    margin-bottom: 12px;
+    color: config.$white;
+  }
+}
+.groupRowReverse {
+  direction: ltr;
+}
+.gridBox,
+.gridBoxReverse {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 12px;
   margin: auto;
   height: 100%;
-  width: config.$content-width;
+  direction: rtl;
 
   @include mixins.mobile {
     grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-    width: calc(100% - 24px);
   }
 
   .imageBox {
@@ -165,6 +189,9 @@
       }
     }
   }
+}
+.gridBoxReverse {
+  direction: ltr;
 }
 
 .gallerySlider {

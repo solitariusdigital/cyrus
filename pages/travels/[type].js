@@ -60,7 +60,7 @@ export default function Type({ typeTitle }) {
           </h3>
         ))}
       </div>
-      <div className={classes.gridBox}>
+      <div className={language ? classes.gridBox : classes.gridBoxReverse}>
         {works.map((work, index) => (
           <div
             key={index}

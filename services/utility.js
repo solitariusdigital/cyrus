@@ -28,22 +28,25 @@ export function abbreviateNumber(num) {
   }).format(num);
 }
 
-export function convertFaToEn(date) {
-  const persianToArabicMap = {
-    "۰": "0",
-    "۱": "1",
-    "۲": "2",
-    "۳": "3",
-    "۴": "4",
-    "۵": "5",
-    "۶": "6",
-    "۷": "7",
-    "۸": "8",
-    "۹": "9",
-  };
-  return date
-    .replace(/[۰-۹]/g, (match) => persianToArabicMap[match])
-    .replace(/\//g, "-");
+export function toFarsiNumber(number) {
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return number
+    .toString()
+    .split("")
+    .map((x) => farsiDigits[x])
+    .join("");
+}
+
+export function toEnglishNumber(number) {
+  const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return number
+    .split("")
+    .map((x) => farsiDigits.indexOf(x)) // Find the index of the Farsi digit
+    .join("");
+}
+
+export function isEnglishNumber(str) {
+  return Boolean(str.match(/^[A-Za-z0-9]*$/));
 }
 
 export function getCurrentDate(isYesterday = false) {

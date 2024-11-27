@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   width: config.$content-width;
+  border: 1px solid blue;
+  position: relative;
 
   @include mixins.mobile {
     flex-direction: column-reverse;
@@ -20,12 +22,14 @@
 }
 
 .swiper {
+  border: 1px solid red;
+
   @include mixins.allDesktop {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 100%;
   }
   @include mixins.tablet {
     position: absolute;

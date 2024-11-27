@@ -12,6 +12,8 @@ import {
   uploadMedia,
   extractParagraphs,
   areAllStatesValid,
+  isEnglishNumber,
+  toEnglishNumber,
 } from "@/services/utility";
 import { createWorksApi, updateWorksApi } from "@/services/api";
 
@@ -36,6 +38,7 @@ export default function Works({ worksData }) {
   const [editWorksData, setEditWorksData] = useState(null);
   const [loader, setLoader] = useState(false);
   const [alert, setAlert] = useState("");
+  const [progress, setProgress] = useState(0);
 
   const sourceLink = "https://cyrus.storage.c2.liara.space";
   const router = useRouter();
@@ -61,7 +64,7 @@ export default function Works({ worksData }) {
   };
   const englishSubCategoreis = {
     اکریلیک: "Acrylic",
-    اکریلیک: "Oil Color",
+    "رنگ روغن": "Oil Color",
     آبرنگ: "Watercolor",
     سینما: "Cinema",
     تئاتر: "Theatre",
@@ -120,6 +123,9 @@ export default function Works({ worksData }) {
     setDisableButton(true);
     setLoader(true);
 
+    const totalSteps = imagesPreview.length + videosPreview.length;
+    const progressIncrement = 100 / totalSteps;
+
     let mediaLinks = editWorksData ? editWorksData.media : [];
     const mediaFolder = "works";
     const worksId = editWorksData
@@ -137,6 +143,7 @@ export default function Works({ worksData }) {
           type: "image",
           active: true,
         });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
@@ -151,6 +158,7 @@ export default function Works({ worksData }) {
           type: "video",
           active: true,
         });
+        setProgress((prevProgress) => prevProgress + progressIncrement);
       }
     }
 
@@ -162,7 +170,7 @@ export default function Works({ worksData }) {
         location: location.fa,
         description: extractParagraphs(description.fa).join("\n\n"),
         size: size.fa,
-        year: year.fa,
+        year: isEnglishNumber(year.fa) ? year.fa : toEnglishNumber(year.fa),
       },
       en: {
         title: title.en,
@@ -171,7 +179,7 @@ export default function Works({ worksData }) {
         location: location.en,
         description: extractParagraphs(description.en).join("\n\n"),
         size: size.en,
-        year: year.en,
+        year: isEnglishNumber(year.en) ? year.en : toEnglishNumber(year.en),
       },
       media: mediaLinks,
       active: false,
@@ -184,6 +192,7 @@ export default function Works({ worksData }) {
     } else {
       await createWorksApi(worksObject);
     }
+    setProgress(100);
     showAlert("ذخیره شد");
     router.reload(router.asPath);
   };
@@ -596,7 +605,6 @@ export default function Works({ worksData }) {
                     }))
                   }
                   value={size.fa}
-                  dir="rtl"
                   autoComplete="off"
                 ></input>
               </div>
@@ -629,7 +637,6 @@ export default function Works({ worksData }) {
                   }))
                 }
                 value={year.fa}
-                dir="rtl"
                 autoComplete="off"
               ></input>
             </div>
@@ -742,7 +749,12 @@ export default function Works({ worksData }) {
           </div>
           <p className={classes.alert}>{alert}</p>
           {loader && (
-            <div>
+            <div
+              style={{
+                fontFamily: "English",
+              }}
+            >
+              <p>Uploading {Math.round(progress)} %</p>
               <Image width={50} height={50} src={loaderImage} alt="isLoading" />
             </div>
           )}
