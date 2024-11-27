@@ -33,7 +33,6 @@ export default function Blog({ blogs, blogTitle }) {
             <ArrowBackIosIcon
               className="icon"
               onClick={() => Router.push("/blogs")}
-              sx={{ color: "#1e3638" }}
             />
           </div>
           <p className={classes.date}>

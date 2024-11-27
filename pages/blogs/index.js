@@ -117,12 +117,12 @@ export default function Blogs({ blogsData }) {
             {language ? (
               <ArrowBackIosIcon
                 className={classes.icon}
-                sx={{ fontSize: 16, color: "#c79c6e" }}
+                sx={{ fontSize: 16, color: "#f8931f" }}
               />
             ) : (
               <ArrowForwardIosIcon
                 className={classes.icon}
-                sx={{ fontSize: 16, color: "#c79c6e" }}
+                sx={{ fontSize: 16, color: "#f8931f" }}
               />
             )}
           </div>
