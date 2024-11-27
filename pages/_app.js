@@ -1,14 +1,19 @@
-import { useState, useEffect } from "react";
-import Layout from "../components/RootLayout";
+import RootLayout from "../components/RootLayout";
 import { StateProvider } from "../context/stateContext";
-import Router from "next/router";
 import { DefaultSeo } from "next-seo";
+import Head from "next/head";
 import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }) {
   return (
     <StateProvider>
-      <Layout>
+      <RootLayout>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+          />
+        </Head>
         <DefaultSeo
           title="Pantea Cyrus"
           description="Portfolio"
@@ -20,7 +25,7 @@ export default function App({ Component, pageProps }) {
           }}
         />
         <Component {...pageProps} />
-      </Layout>
+      </RootLayout>
     </StateProvider>
   );
 }
