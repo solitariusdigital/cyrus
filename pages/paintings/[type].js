@@ -15,7 +15,8 @@ export default function Type({ works, typeTitle }) {
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [categoryWorks, setCategoryWorks] = useState([]);
   const [displayWorks, setDisplayWorks] = useState([]);
-  const [initialIndex, setInitialIndex] = useState(0);
+  const [initialIndex, setInitialIndex] = useState(null);
+  const [selectedType, setSelectedType] = useState("");
 
   useEffect(() => {
     paintingTypes.map((type) => {
@@ -30,6 +31,7 @@ export default function Type({ works, typeTitle }) {
   }, []);
 
   useEffect(() => {
+    setSelectedType(typeTitle);
     const categoryWorks = works.filter(
       (work) => work.en.category === "Paintings"
     );
@@ -39,23 +41,18 @@ export default function Type({ works, typeTitle }) {
         work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
     );
     let groupWorks = groupItemsByYear(displayWorks);
-    const sortWorks = Object.keys(groupWorks)
-      .sort((a, b) => a - b)
-      .map((year) => groupWorks[year]);
-    setDisplayWorks(sortWorks);
+    setDisplayWorks(groupWorks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeTitle, works]);
 
   const changeFilterTypes = (type) => {
+    setSelectedType(type);
     updateCategoryActive(type);
     const displayWorks = categoryWorks.filter(
       (work) => work.fa.subCategory === type || work.en.subCategory === type
     );
     let groupWorks = groupItemsByYear(displayWorks);
-    const sortWorks = Object.keys(groupWorks)
-      .sort((a, b) => a - b)
-      .map((year) => groupWorks[year]);
-    setDisplayWorks(sortWorks);
+    setDisplayWorks(groupWorks);
   };
 
   const updateCategoryActive = (type) => {
@@ -75,13 +72,28 @@ export default function Type({ works, typeTitle }) {
       if (!acc[year]) {
         acc[year] = [];
       }
-      acc[year].push(item);
+      const mediaWithData = item.media.map((media) => ({
+        ...media,
+        data: {
+          fa: item.fa,
+          en: item.en,
+        },
+        year: {
+          fa: item.fa.year,
+          en: item.en.year,
+        },
+      }));
+      acc[year] = [...acc[year], ...mediaWithData];
       return acc;
     }, {});
   };
 
-  const gallerySlider = (mediaIndex) => {
-    setInitialIndex(mediaIndex);
+  const openGallerySlider = (entryIndex, year) => {
+    changeFilterTypes(selectedType);
+    setInitialIndex({
+      entryIndex,
+      year: language ? year.fa : year.en,
+    });
     setDisplayGallerySlider(true);
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
@@ -109,40 +121,39 @@ export default function Type({ works, typeTitle }) {
           </h3>
         ))}
       </div>
-      {displayWorks
-        .map((work, workIndex) => (
+      {Object.entries(displayWorks)
+        .map(([key, entries]) => (
           <div
+            key={key}
             className={language ? classes.groupRow : classes.groupRowReverse}
-            key={workIndex}
           >
             <h3>
               {language
-                ? toFarsiNumber(work[workIndex][languageType].year)
-                : work[workIndex][languageType].year}
+                ? toFarsiNumber(entries[0].year[languageType])
+                : entries[0].year[languageType]}
             </h3>
             <div
               className={language ? classes.gridBox : classes.gridBoxReverse}
             >
-              {work.map((entry, entryIndex) => (
+              {entries.map((entry, entryIndex) => (
                 <Fragment key={entryIndex}>
-                  {entry.media.map((media, mediaIndex) => (
-                    <div
-                      key={mediaIndex}
-                      className={classes.imageBox}
-                      onClick={() => gallerySlider(mediaIndex)}
-                    >
-                      <Image
-                        className={classes.image}
-                        src={media.link}
-                        blurDataURL={media.link}
-                        placeholder="blur"
-                        alt="cover"
-                        layout="fill"
-                        objectFit="cover"
-                        priority
-                      />
-                    </div>
-                  ))}
+                  <div
+                    className={classes.imageBox}
+                    onClick={() =>
+                      openGallerySlider(entryIndex, entries[0].year)
+                    }
+                  >
+                    <Image
+                      className={classes.image}
+                      src={entry.link}
+                      blurDataURL={entry.link}
+                      placeholder="blur"
+                      alt="cover"
+                      layout="fill"
+                      objectFit="cover"
+                      priority
+                    />
+                  </div>
                 </Fragment>
               ))}
             </div>

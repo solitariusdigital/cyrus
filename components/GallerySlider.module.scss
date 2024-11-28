@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   width: config.$content-width;
-  border: 1px solid blue;
   position: relative;
 
   @include mixins.mobile {
@@ -22,21 +21,19 @@
 }
 
 .swiper {
-  border: 1px solid red;
-
   @include mixins.allDesktop {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
+    width: 60%;
   }
   @include mixins.tablet {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
+    width: 60%;
   }
   @include mixins.mobile {
     width: 100%;
@@ -46,14 +43,17 @@
   }
 }
 
-.infoBox {
-  width: 20%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
+.infoBox,
+.infoBoxReverse {
+  width: 15%;
   background: config.$grey;
   color: config.$white;
   padding: 20px;
+  direction: rtl;
+
+  p {
+    margin: 8px 0px;
+  }
 
   @include mixins.mobile {
     width: 100%;
@@ -63,6 +63,9 @@
     width: 50%;
     margin-top: 16px;
   }
+}
+.infoBoxReverse {
+  direction: ltr;
 }
 
 .imageBox {
