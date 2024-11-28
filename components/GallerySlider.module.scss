@@ -50,6 +50,7 @@
   color: config.$white;
   padding: 20px;
   direction: rtl;
+  text-align: right;
 
   p {
     margin: 8px 0px;
@@ -66,6 +67,7 @@
 }
 .infoBoxReverse {
   direction: ltr;
+  text-align: left;
 }
 
 .imageBox {

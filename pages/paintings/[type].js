@@ -101,7 +101,11 @@ export default function Type({ works, typeTitle }) {
 
   return (
     <div className={classes.container}>
-      <div className={classes.typesNavigation}>
+      <div
+        className={
+          language ? classes.typesNavigation : classes.typesNavigationReverse
+        }
+      >
         {paintingTypes.map((type, index) => (
           <h3
             key={index}
@@ -109,7 +113,16 @@ export default function Type({ works, typeTitle }) {
             onClick={() => changeFilterTypes(type[languageType])}
           >
             {type[languageType]}
-            {index !== 0 && (
+            {language && index !== 0 && (
+              <span
+                style={{
+                  fontFamily: language ? "EnglishLight" : "EnglishLight",
+                }}
+              >
+                |
+              </span>
+            )}
+            {!language && index !== paintingTypes.length - 1 && (
               <span
                 style={{
                   fontFamily: language ? "EnglishLight" : "EnglishLight",

@@ -57,11 +57,13 @@ $screen-fourK: 6000px;
   border: none;
   box-shadow: config.$button-shadow;
 
-  &:hover {
-    cursor: pointer;
-    background: $subColor;
-    color: $color;
-    border: 1px solid $subColor;
+  @include allDesktop {
+    &:hover {
+      cursor: pointer;
+      background: $subColor;
+      color: $color;
+      border: 1px solid $subColor;
+    }
   }
 }
 
@@ -76,7 +78,7 @@ $screen-fourK: 6000px;
 
   &:focus {
     outline: none;
-    border: 1px solid config.$green;
+    border: 1px solid config.$brand;
   }
 }
 

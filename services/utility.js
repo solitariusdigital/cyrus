@@ -28,13 +28,26 @@ export function abbreviateNumber(num) {
   }).format(num);
 }
 
-export function toFarsiNumber(number) {
+export function toFarsiNumber(input) {
   const farsiDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
-  return number
-    .toString()
-    .split("")
-    .map((x) => farsiDigits[x])
-    .join("");
+
+  // Function to convert a number to Farsi digits
+  const convertNumber = (number) => {
+    return number
+      .toString()
+      .split("")
+      .map((x) => farsiDigits[x])
+      .join("");
+  };
+
+  // Check if the input is a standalone number or a measurement
+  if (typeof input === "number") {
+    return convertNumber(input);
+  } else if (typeof input === "string") {
+    return input.replace(/\d+/g, (match) => convertNumber(match));
+  }
+
+  return input; // Return the input unchanged if it's neither
 }
 
 export function toEnglishNumber(number) {

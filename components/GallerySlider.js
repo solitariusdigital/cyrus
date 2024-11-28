@@ -1,7 +1,8 @@
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "@/context/stateContext";
 import Image from "next/legacy/image";
 import classes from "./GallerySlider.module.scss";
+import { toFarsiNumber } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
@@ -18,30 +19,19 @@ export default function GallerySlider({ displayWorks, initialIndex }) {
     setCurrent(currentSlide);
   };
 
+  const currentWork =
+    displayWorks[initialIndex.year][current].data[languageType];
+
   return (
     <div className={classes.slider}>
       <div className={language ? classes.infoBox : classes.infoBoxReverse}>
-        <p>
-          {displayWorks[initialIndex.year][current].data[languageType]?.title}
-        </p>
-        <p>
-          {
-            displayWorks[initialIndex.year][current].data[languageType]
-              ?.subCategory
-          }
-        </p>
-        <p>
-          {
-            displayWorks[initialIndex.year][current].data[languageType]
-              ?.location
-          }
-        </p>
+        <p>{currentWork?.title}</p>
+        <p>{currentWork?.subCategory}</p>
+        <p>{currentWork?.location}</p>
         <p style={{ direction: "ltr" }}>
-          {displayWorks[initialIndex.year][current].data[languageType]?.size}
+          {language ? toFarsiNumber(currentWork?.size) : currentWork?.size}
         </p>
-        <p style={{ direction: "ltr" }}>
-          {displayWorks[initialIndex.year][current].data[languageType]?.year}
-        </p>
+        <p>{language ? toFarsiNumber(currentWork?.year) : currentWork?.year}</p>
       </div>
       <div className={classes.swiper}>
         <Swiper
