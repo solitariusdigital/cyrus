@@ -33,7 +33,7 @@
     flex-direction: column;
     position: relative;
     left: 10%;
-    top: 56%;
+    top: 55%;
     transform: translateY(-50%);
     z-index: 5;
 
@@ -46,7 +46,7 @@
       height: 45vh;
     }
     @include mixins.tablet {
-      width: 580px;
+      width: 40vw;
       height: 50vh;
     }
     @include mixins.tabletPortrait {

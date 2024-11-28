@@ -4,7 +4,7 @@ import classes from "./blogs.module.scss";
 import dbConnect from "@/services/dbConnect";
 import blogsModel from "@/models/Blogs";
 import { replaceSpacesAndHyphens, convertDate } from "@/services/utility";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import Router from "next/router";
 
 export default function Blog({ blogs, blogTitle }) {
@@ -30,7 +30,7 @@ export default function Blog({ blogs, blogTitle }) {
         <div className={language ? classes.blogBox : classes.blogBoxReverse}>
           <div className={classes.row}>
             <h3>{displayBlog[languageType].title}</h3>
-            <ArrowBackIosIcon
+            <ArrowBackIosNewIcon
               className="icon"
               onClick={() => Router.push("/blogs")}
             />

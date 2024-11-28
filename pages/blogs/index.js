@@ -12,7 +12,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Router from "next/router";
 import { sliceString, replaceSpacesAndHyphens } from "@/services/utility";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIos";
 import {
   getSingleBlogsApi,
   updateBlogsApi,
@@ -105,22 +105,37 @@ export default function Blogs({ blogsData }) {
           <p className={classes.description}>
             {sliceString(blog[languageType].description, 150)}
           </p>
-          <div
-            className={language ? classes.more : classes.moreReverse}
-            onClick={() =>
-              Router.push(
-                `/blogs/${replaceSpacesAndHyphens(blog[languageType].title)}`
-              )
-            }
-          >
-            <p>{language ? "ادامه مطلب" : "Read more"}</p>
+          <div className={language ? classes.more : classes.moreReverse}>
+            <p
+              onClick={() =>
+                Router.push(
+                  `/blogs/${replaceSpacesAndHyphens(blog[languageType].title)}`
+                )
+              }
+            >
+              {language ? "ادامه مطلب" : "Read more"}
+            </p>
             {language ? (
-              <ArrowBackIosIcon
+              <ArrowBackIosNewIcon
+                onClick={() =>
+                  Router.push(
+                    `/blogs/${replaceSpacesAndHyphens(
+                      blog[languageType].title
+                    )}`
+                  )
+                }
                 className={classes.icon}
                 sx={{ fontSize: 16, color: "#f8931f" }}
               />
             ) : (
               <ArrowForwardIosIcon
+                onClick={() =>
+                  Router.push(
+                    `/blogs/${replaceSpacesAndHyphens(
+                      blog[languageType].title
+                    )}`
+                  )
+                }
                 className={classes.icon}
                 sx={{ fontSize: 16, color: "#f8931f" }}
               />
