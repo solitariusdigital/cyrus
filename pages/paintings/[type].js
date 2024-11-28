@@ -161,9 +161,10 @@ export default function Type({ works, typeTitle }) {
                       src={entry.link}
                       blurDataURL={entry.link}
                       placeholder="blur"
-                      alt="cover"
+                      alt={entry.data[languageType].subCategory}
                       layout="fill"
                       objectFit="cover"
+                      as="image"
                       priority
                     />
                   </div>

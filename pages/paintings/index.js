@@ -72,10 +72,10 @@ export default function Paintings() {
                         src={type.media}
                         blurDataURL={type.media}
                         placeholder="blur"
-                        alt="type"
+                        alt={type[languageType]}
                         layout="fill"
                         objectFit="cover"
-                        as="type"
+                        as="image"
                         priority
                       />
                       <h2

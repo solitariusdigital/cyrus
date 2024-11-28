@@ -51,9 +51,10 @@ export default function GallerySlider({ displayWorks, initialIndex }) {
                   src={work.link}
                   blurDataURL={work.link}
                   placeholder="blur"
-                  alt="image"
+                  alt={work.data[languageType].title}
                   layout="fill"
                   objectFit="contain"
+                  as="image"
                   priority
                 />
               </div>
