@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
 import classes from "./portal.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
@@ -8,10 +8,13 @@ import AES from "crypto-js/aes";
 import { enc } from "crypto-js";
 import { createUserApi, getUsersApi } from "@/services/api";
 import { validateEmail } from "@/services/utility";
+import { NextSeo } from "next-seo";
+import logoIcon from "@/assets/logoIcon.png";
 
 export default function Portal() {
   const { currentUser, setCurrentUser } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const { language, setLanguage } = useContext(StateContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState("");
@@ -112,68 +115,94 @@ export default function Portal() {
   };
 
   return (
-    <div
-      className={classes.container}
-      style={{
-        fontFamily: "Farsi",
-      }}
-    >
-      <h2>پورتال</h2>
-      <div className={classes.form}>
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>ایمیل</p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setEmail("")}
-              sx={{ fontSize: 16 }}
+    <Fragment>
+      <NextSeo
+        title={language ? "پورتال" : "Portal"}
+        description={language ? "هنرمند حرفه‌ای" : "Professional Artist"}
+        canonical="https://panteapaint.com/portal"
+        openGraph={{
+          type: "website",
+          locale: "fa_IR",
+          url: "https://panteapaint.com/portal",
+          title: language ? "پورتال" : "Portal",
+          description: language ? "هنرمند حرفه‌ای" : "Professional Artist",
+          siteName: language ? "پان ته آ سیروس" : "Pantea Cyrus",
+          images: {
+            url: logoIcon,
+            width: 1200,
+            height: 630,
+            alt: language ? "پان ته آ سیروس" : "Pantea Cyrus",
+          },
+        }}
+        robotsProps={{
+          maxSnippet: -1,
+          maxImagePreview: "large",
+          maxVideoPreview: -1,
+        }}
+      />
+      <div
+        className={classes.container}
+        style={{
+          fontFamily: "Farsi",
+        }}
+      >
+        <h2>پورتال</h2>
+        <div className={classes.form}>
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>ایمیل</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setEmail("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              type="email"
+              id="email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              autoComplete="off"
             />
           </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            type="email"
-            id="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            autoComplete="off"
-          />
-        </div>
-        <div className={classes.input}>
-          <div className={classes.bar}>
-            <p className={classes.label}>پسورد</p>
-            <CloseIcon
-              className="icon"
-              onClick={() => setPassword("")}
-              sx={{ fontSize: 16 }}
+          <div className={classes.input}>
+            <div className={classes.bar}>
+              <p className={classes.label}>پسورد</p>
+              <CloseIcon
+                className="icon"
+                onClick={() => setPassword("")}
+                sx={{ fontSize: 16 }}
+              />
+            </div>
+            <input
+              style={{
+                fontFamily: "English",
+              }}
+              type="password"
+              id="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              autoComplete="off"
             />
           </div>
-          <input
-            style={{
-              fontFamily: "English",
-            }}
-            type="password"
-            id="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            autoComplete="off"
-          />
-        </div>
-        <div className={classes.formAction}>
-          <p className={classes.alert}>{alert}</p>
-          <button
-            style={{
-              fontFamily: "Farsi",
-            }}
-            onClick={() => handleLogin()}
-          >
-            {formType ? <>ورود</> : <>ثبت نام</>}
-          </button>
+          <div className={classes.formAction}>
+            <p className={classes.alert}>{alert}</p>
+            <button
+              style={{
+                fontFamily: "Farsi",
+              }}
+              onClick={() => handleLogin()}
+            >
+              {formType ? <>ورود</> : <>ثبت نام</>}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 }

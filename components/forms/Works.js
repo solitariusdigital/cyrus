@@ -245,7 +245,12 @@ export default function Works({ worksData }) {
   return (
     <Fragment>
       <div className={classes.form}>
-        <div className={classes.formBox}>
+        <div
+          className={classes.formBox}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
           <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>برای ویرایش انتخاب کنید</p>
@@ -279,7 +284,12 @@ export default function Works({ worksData }) {
             </select>
           </div>
         </div>
-        <div className={classes.formBox}>
+        <div
+          className={classes.formBox}
+          style={{
+            fontFamily: "Farsi",
+          }}
+        >
           <div className={classes.input}>
             <div className={classes.barReverse}>
               <p className={classes.label}>
