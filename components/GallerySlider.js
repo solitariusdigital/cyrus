@@ -32,6 +32,7 @@ export default function GallerySlider({ displayWorks, initialIndex }) {
           {language ? toFarsiNumber(currentWork?.size) : currentWork?.size}
         </p>
         <p>{language ? toFarsiNumber(currentWork?.year) : currentWork?.year}</p>
+        <p>{currentWork?.description}</p>
       </div>
       <div className={classes.swiper}>
         <Swiper
