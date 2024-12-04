@@ -106,9 +106,9 @@ export default function Works({ worksData }) {
   };
 
   const handleSubmit = async () => {
-    const isValid = areAllStatesValid([category, subCategory]);
+    const isValid = areAllStatesValid([category, subCategory, year]);
     if (!isValid) {
-      showAlert("دسته‌ و زیر مجموعه الزامیست");
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
     if (
@@ -440,6 +440,7 @@ export default function Works({ worksData }) {
                   style={{
                     fontFamily: "English",
                   }}
+                  placeholder="200 x 150 cm"
                   type="text"
                   id="sizeEn"
                   name="size"
@@ -456,7 +457,10 @@ export default function Works({ worksData }) {
             )}
             <div className={classes.input}>
               <div className={classes.bar}>
-                <p className={classes.label}>Year</p>
+                <p className={classes.label}>
+                  Year
+                  <span>*</span>
+                </p>
                 <CloseIcon
                   className="icon"
                   onClick={() =>
@@ -472,6 +476,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="2024"
                 type="phone"
                 id="yearEn"
                 name="year"
@@ -483,6 +488,7 @@ export default function Works({ worksData }) {
                 }
                 value={year.en}
                 autoComplete="off"
+                maxLength={4}
               ></input>
             </div>
             <div className={classes.input}>
@@ -603,8 +609,9 @@ export default function Works({ worksData }) {
                 </div>
                 <input
                   style={{
-                    fontFamily: "Farsi",
+                    fontFamily: "English",
                   }}
+                  placeholder="200 x 150 cm"
                   type="text"
                   id="sizeFa"
                   name="size"
@@ -621,7 +628,10 @@ export default function Works({ worksData }) {
             )}
             <div className={classes.input}>
               <div className={classes.barReverse}>
-                <p className={classes.label}>سال</p>
+                <p className={classes.label}>
+                  <span>*</span>
+                  سال
+                </p>
                 <CloseIcon
                   className="icon"
                   onClick={() =>
@@ -635,8 +645,9 @@ export default function Works({ worksData }) {
               </div>
               <input
                 style={{
-                  fontFamily: "Farsi",
+                  fontFamily: "English",
                 }}
+                placeholder="1403"
                 type="phone"
                 id="yearFa"
                 name="year"
@@ -648,6 +659,7 @@ export default function Works({ worksData }) {
                 }
                 value={year.fa}
                 autoComplete="off"
+                maxLength={4}
               ></input>
             </div>
             <div className={classes.input}>

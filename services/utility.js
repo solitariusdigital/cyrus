@@ -59,7 +59,8 @@ export function toEnglishNumber(number) {
 }
 
 export function isEnglishNumber(str) {
-  return Boolean(str.match(/^[A-Za-z0-9]*$/));
+  const stringValue = String(str);
+  return Boolean(stringValue.match(/^[A-Za-z0-9]*$/));
 }
 
 export function getCurrentDate(isYesterday = false) {
