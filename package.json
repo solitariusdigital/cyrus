@@ -14,7 +14,7 @@
     "@mui/icons-material": "^5.16.7",
     "@mui/material": "^5.16.7",
     "aws-sdk": "^2.1691.0",
-    "mini-css-extract-plugin": "^2.7.6",
+    "mini-css-extract-plugin": "^2.9.2",
     "crypto-js": "^4.2.0",
     "mongodb-shell": "^1.0.1",
     "mongoose": "^8.7.0",
