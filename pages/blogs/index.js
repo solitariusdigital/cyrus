@@ -58,7 +58,7 @@ export default function Blogs({ blogsData }) {
     let confirmationMessage = "حذف مطمئنی؟";
     let confirm = window.confirm(confirmationMessage);
     if (confirm) {
-      await deleteBlogsApi(blogs[index]["_id"]);
+      await deleteBlogsApi(blogsData[index]["_id"]);
       router.replace(router.asPath);
     }
   };
