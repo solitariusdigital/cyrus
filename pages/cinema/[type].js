@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, Fragment } from "react";
 import { StateContext } from "@/context/stateContext";
+import { useRouter } from "next/router";
 import classes from "../works.module.scss";
 import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
@@ -8,17 +9,22 @@ import GallerySlider from "@/components/GallerySlider";
 import CloseIcon from "@mui/icons-material/Close";
 import dbConnect from "@/services/dbConnect";
 import worksModel from "@/models/Works";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Tooltip from "@mui/material/Tooltip";
 import { replaceSpacesAndHyphens, toFarsiNumber } from "@/services/utility";
+import { updateWorksApi } from "@/services/api";
 
 export default function Type({ works, typeTitle }) {
   const { cinemaTypes, setCinemaTypes } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [categoryWorks, setCategoryWorks] = useState([]);
   const [displayWorks, setDisplayWorks] = useState([]);
   const [initialIndex, setInitialIndex] = useState(null);
   const [selectedType, setSelectedType] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     cinemaTypes.map((type) => {
@@ -72,7 +78,7 @@ export default function Type({ works, typeTitle }) {
       if (!acc[year]) {
         acc[year] = [];
       }
-      const mediaWithData = item.media.map((media) => ({
+      const mediaWithData = item.media.map((media, index) => ({
         ...media,
         data: {
           fa: item.fa,
@@ -82,6 +88,8 @@ export default function Type({ works, typeTitle }) {
           fa: item.fa.year,
           en: item.en.year,
         },
+        worksId: item.worksId,
+        mediaIndex: index,
       }));
       acc[year] = [...acc[year], ...mediaWithData];
       return acc;
@@ -97,6 +105,17 @@ export default function Type({ works, typeTitle }) {
     setDisplayGallerySlider(true);
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
+  };
+
+  const deleteImage = async (index, id) => {
+    let confirmationMessage = "حذف عکس مطمئنی؟";
+    let confirm = window.confirm(confirmationMessage);
+    if (confirm) {
+      let work = works.find((work) => work.worksId === id);
+      work.media.splice(index, 1);
+      await updateWorksApi(work);
+      router.replace(router.asPath);
+    }
   };
 
   return (
@@ -169,24 +188,24 @@ export default function Type({ works, typeTitle }) {
               key={key}
               className={language ? classes.groupRow : classes.groupRowReverse}
             >
-              <h3>
-                {language
-                  ? toFarsiNumber(entries[0].year[languageType])
-                  : entries[0].year[languageType]}
-              </h3>
+              {entries[0] && (
+                <h3>
+                  {language
+                    ? toFarsiNumber(entries[0].year[languageType])
+                    : entries[0].year[languageType]}
+                </h3>
+              )}
               <div
                 className={language ? classes.gridBox : classes.gridBoxReverse}
               >
                 {entries.map((entry, entryIndex) => (
                   <Fragment key={entryIndex}>
-                    <div
-                      className={classes.imageBox}
-                      onClick={() =>
-                        openGallerySlider(entryIndex, entries[0].year)
-                      }
-                    >
+                    <div className={classes.imageBox}>
                       <Image
                         className={classes.image}
+                        onClick={() =>
+                          openGallerySlider(entryIndex, entries[0].year)
+                        }
                         src={entry.link}
                         blurDataURL={entry.link}
                         placeholder="blur"
@@ -196,6 +215,19 @@ export default function Type({ works, typeTitle }) {
                         as="image"
                         priority
                       />
+                      {permissionControl === "admin" && (
+                        <div className={classes.control}>
+                          <Tooltip title="Delete">
+                            <DeleteIcon
+                              className="icon"
+                              sx={{ color: "#d40d12" }}
+                              onClick={() =>
+                                deleteImage(entry.mediaIndex, entry.worksId)
+                              }
+                            />
+                          </Tooltip>
+                        </div>
+                      )}
                     </div>
                   </Fragment>
                 ))}

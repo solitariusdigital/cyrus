@@ -177,18 +177,9 @@ label.file input[type="file"] {
   cursor: pointer;
 }
 .file:hover {
-  color: config.$green;
-  border: 1px solid config.$green;
+  color: config.$brand;
+  border: 1px solid config.$brand;
 }
-
-// .works_swiper__tLvOM {
-//   .swiper-slide {
-//     opacity: 0.5;
-//   }
-//   .swiper-slide-active {
-//     opacity: 1;
-//   }
-// }
 
 .swiper-button-prev {
   color: config.$brand !important;

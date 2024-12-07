@@ -377,6 +377,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="..."
                 type="text"
                 id="titleEn"
                 name="title"
@@ -408,6 +409,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="..."
                 type="text"
                 id="locationEn"
                 name="location"
@@ -428,8 +430,8 @@ export default function Works({ worksData }) {
                   <CloseIcon
                     className="icon"
                     onClick={() =>
-                      setSize((prevData) => ({
-                        ...prevData,
+                      setSize(() => ({
+                        fa: "",
                         en: "",
                       }))
                     }
@@ -445,8 +447,8 @@ export default function Works({ worksData }) {
                   id="sizeEn"
                   name="size"
                   onChange={(e) =>
-                    setSize((prevData) => ({
-                      ...prevData,
+                    setSize(() => ({
+                      fa: e.target.value,
                       en: e.target.value,
                     }))
                   }
@@ -509,6 +511,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "English",
                 }}
+                placeholder="..."
                 type="text"
                 id="descriptionEn"
                 name="description"
@@ -546,6 +549,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "Farsi",
                 }}
+                placeholder="..."
                 type="text"
                 id="titleFa"
                 name="title"
@@ -578,6 +582,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "Farsi",
                 }}
+                placeholder="..."
                 type="text"
                 id="locationFa"
                 name="location"
@@ -596,33 +601,17 @@ export default function Works({ worksData }) {
               <div className={classes.input}>
                 <div className={classes.barReverse}>
                   <p className={classes.label}>اندازه</p>
-                  <CloseIcon
-                    className="icon"
-                    onClick={() =>
-                      setSize((prevData) => ({
-                        ...prevData,
-                        fa: "",
-                      }))
-                    }
-                    sx={{ fontSize: 16 }}
-                  />
                 </div>
                 <input
                   style={{
                     fontFamily: "English",
                   }}
-                  placeholder="200 x 150 cm"
                   type="text"
                   id="sizeFa"
                   name="size"
-                  onChange={(e) =>
-                    setSize((prevData) => ({
-                      ...prevData,
-                      fa: e.target.value,
-                    }))
-                  }
                   value={size.fa}
                   autoComplete="off"
+                  disabled
                 ></input>
               </div>
             )}
@@ -680,6 +669,7 @@ export default function Works({ worksData }) {
                 style={{
                   fontFamily: "Farsi",
                 }}
+                placeholder="..."
                 type="text"
                 id="descriptionFa"
                 name="description"
