@@ -604,8 +604,9 @@ export default function Works({ worksData }) {
                 </div>
                 <input
                   style={{
-                    fontFamily: "English",
+                    fontFamily: "Farsi",
                   }}
+                  placeholder="اندازه در قسمت انگلیسی وارد کنید"
                   type="text"
                   id="sizeFa"
                   name="size"
