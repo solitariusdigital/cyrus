@@ -119,7 +119,7 @@ export default function RootLayout({ children }) {
           <Image
             className="animate__animated animate__zoomIn"
             width={50}
-            height={400}
+            height={600}
             src={logo}
             alt="logo"
             as="image"

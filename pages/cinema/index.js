@@ -72,12 +72,13 @@ export default function Movies() {
         >
           <div className={classes.item}>
             <h1>{language ? "سینما" : "Cinema"}</h1>
+            <div className={classes.border}></div>
             {rerender && (
               <div className={classes.swiperContainer}>
                 <Swiper
                   className={classes.swiper}
                   slidesPerView={3}
-                  spaceBetween={screenSize === "mobile" ? 10 : 20}
+                  spaceBetween={10}
                   centeredSlides={true}
                   mousewheel={true}
                   loop={true}

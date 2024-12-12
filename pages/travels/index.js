@@ -71,13 +71,14 @@ export default function Travels() {
         >
           <div className={classes.item}>
             <h1>{language ? "سفر" : "Travels"}</h1>
+            <div className={classes.border}></div>
             {rerender && (
               <div className={classes.swiperContainer}>
                 <Swiper
                   style={{ width: screenSize === "mobile" ? "100%" : "100%" }}
                   className={classes.swiper}
                   slidesPerView={2}
-                  spaceBetween={screenSize === "mobile" ? 10 : 20}
+                  spaceBetween={10}
                 >
                   {travelTypes.map((type, index) => (
                     <SwiperSlide key={index}>

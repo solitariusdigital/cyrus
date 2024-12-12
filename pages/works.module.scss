@@ -40,6 +40,15 @@
           font-size: 1.8rem;
         }
       }
+
+      .border {
+        width: 100px;
+        border-bottom: 1px solid config.$brand;
+
+        @include mixins.tabletPortrait {
+          width: 70px;
+        }
+      }
     }
   }
 
@@ -49,17 +58,17 @@
 
   .swiperContainer {
     width: 70%;
+    background: config.$green;
 
     @include mixins.mobile {
       width: 100%;
     }
     .swiper {
       height: 170px;
-      padding: 20px 0px;
+      padding: 10px;
 
       @include mixins.mobile {
         height: 130px;
-        padding: 0px;
       }
     }
 
@@ -137,6 +146,7 @@
 .typesNavigationReverse {
   flex-direction: row;
 }
+
 .groupRow,
 .groupRowReverse {
   margin-bottom: 50px;
