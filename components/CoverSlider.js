@@ -41,9 +41,9 @@ export default function CoverSlider() {
       </div>
       <div className={classes.control} onClick={handleVideoClick}>
         {isMuted ? (
-          <MusicOffIcon sx={{ color: "#fafbf6" }} />
+          <MusicOffIcon className="icon" sx={{ color: "#fafbf6" }} />
         ) : (
-          <AudiotrackIcon sx={{ color: "#fafbf6" }} />
+          <AudiotrackIcon className="icon" sx={{ color: "#fafbf6" }} />
         )}
       </div>
       <div className="fadeOverlay"></div>
