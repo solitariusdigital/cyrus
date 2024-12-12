@@ -72,7 +72,7 @@ export default function Movies() {
         >
           <div className={classes.item}>
             <h1>{language ? "سینما" : "Cinema"}</h1>
-            <div className={classes.border}></div>
+            {rerender && <div className={classes.border}></div>}
             {rerender && (
               <div className={classes.swiperContainer}>
                 <Swiper

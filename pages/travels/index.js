@@ -71,7 +71,7 @@ export default function Travels() {
         >
           <div className={classes.item}>
             <h1>{language ? "سفر" : "Travels"}</h1>
-            <div className={classes.border}></div>
+            {rerender && <div className={classes.border}></div>}
             {rerender && (
               <div className={classes.swiperContainer}>
                 <Swiper

@@ -1,5 +1,4 @@
-import { useContext, useRef, useState } from "react";
-import { StateContext } from "@/context/stateContext";
+import { useRef, useState } from "react";
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
 import logoWhite from "@/assets/logoWhite.png";
@@ -7,8 +6,7 @@ import AudiotrackIcon from "@mui/icons-material/Audiotrack";
 import MusicOffIcon from "@mui/icons-material/MusicOff";
 
 export default function CoverSlider() {
-  const { screenSize, setScreenSize } = useContext(StateContext);
-  const [isMuted, setIsMuted] = useState(screenSize !== "desktop");
+  const [isMuted, setIsMuted] = useState(true);
 
   const videoRef = useRef(null);
   const handleVideoClick = () => {
