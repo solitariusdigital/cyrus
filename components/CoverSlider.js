@@ -1,8 +1,23 @@
+import { useContext, useRef, useState } from "react";
+import { StateContext } from "@/context/stateContext";
 import classes from "./CoverSlider.module.scss";
 import Image from "next/legacy/image";
 import logoWhite from "@/assets/logoWhite.png";
+import AudiotrackIcon from "@mui/icons-material/Audiotrack";
+import MusicOffIcon from "@mui/icons-material/MusicOff";
 
 export default function CoverSlider() {
+  const { screenSize, setScreenSize } = useContext(StateContext);
+  const [isMuted, setIsMuted] = useState(screenSize !== "desktop");
+
+  const videoRef = useRef(null);
+  const handleVideoClick = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
+
   return (
     <div className={classes.cover}>
       <video
@@ -12,7 +27,9 @@ export default function CoverSlider() {
         loop
         playsInline
         preload="metadata"
-        muted
+        muted={isMuted}
+        onClick={handleVideoClick}
+        ref={videoRef}
       />
       <div className={`${classes.logo} animate__animated animate__fadeOut`}>
         <Image
@@ -23,6 +40,13 @@ export default function CoverSlider() {
           as="image"
           priority
         />
+      </div>
+      <div className={classes.control} onClick={handleVideoClick}>
+        {isMuted ? (
+          <MusicOffIcon sx={{ color: "#fafbf6" }} />
+        ) : (
+          <AudiotrackIcon sx={{ color: "#fafbf6" }} />
+        )}
       </div>
       <div className="fadeOverlay"></div>
     </div>
