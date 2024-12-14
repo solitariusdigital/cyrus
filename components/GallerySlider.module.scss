@@ -46,11 +46,11 @@
 .infoBox,
 .infoBoxReverse {
   width: 15%;
-  background: config.$grey;
   color: config.$white;
   padding: 20px;
   direction: rtl;
   text-align: right;
+  @include mixins.transparentBackground(0.5, config.$green);
 
   p {
     margin: 8px 0px;
