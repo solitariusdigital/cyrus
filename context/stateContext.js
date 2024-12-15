@@ -63,12 +63,6 @@ export const StateProvider = (props) => {
   ]);
   const [paintingTypes, setPaintingTypes] = useState([
     {
-      fa: "رنگ روغن",
-      en: "Oil Color",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
-      active: false,
-    },
-    {
       fa: "اکریلیک",
       en: "Acrylic",
       media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
@@ -78,6 +72,12 @@ export const StateProvider = (props) => {
       fa: "آبرنگ",
       en: "Watercolor",
       media: "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
+      active: false,
+    },
+    {
+      fa: "ماژیک",
+      en: "Marker",
+      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
       active: false,
     },
     {
@@ -127,14 +127,14 @@ export const StateProvider = (props) => {
   ]);
   const [travelTypes, setTravelTypes] = useState([
     {
-      fa: "جهان گردی",
-      en: "World Travel",
+      fa: "جهان",
+      en: "World",
       media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
       active: false,
     },
     {
-      fa: "ایران گردی",
-      en: "Iran Travel",
+      fa: "ایران",
+      en: "Iran",
       media: "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
       active: false,
     },

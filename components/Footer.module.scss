@@ -13,6 +13,12 @@
   }
 }
 
+.admin {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
 .navigation,
 .navigationReverse {
   @include mixins.row-space-between-center();

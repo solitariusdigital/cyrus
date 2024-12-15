@@ -38,6 +38,7 @@ export default function Footer() {
           ))
           .slice(0, 3)}
       </div>
+      <p className={classes.admin} onClick={() => Router.push("/admin")}></p>
     </footer>
   );
 }

@@ -58,13 +58,13 @@ export default function Works({ worksData }) {
     },
   };
   const subCategories = {
-    نقاشی‌: ["رنگ روغن", "اکریلیک", "آبرنگ"],
+    نقاشی‌: ["ماژیک", "اکریلیک", "آبرنگ"],
     سینما: ["سینما", "تئاتر", "سریال", "فیلم کوتاه", "جشنواره", "جوایز"],
-    سفر: ["ایران گردی", "جهان گردی"],
+    سفر: ["ایران", "جهان"],
   };
   const englishSubCategoreis = {
     اکریلیک: "Acrylic",
-    "رنگ روغن": "Oil Color",
+    ماژیک: "Marker",
     آبرنگ: "Watercolor",
     سینما: "Cinema",
     تئاتر: "Theatre",
@@ -72,8 +72,8 @@ export default function Works({ worksData }) {
     "فیلم کوتاه": "Short Film",
     جشنواره: "Festival",
     جوایز: "Awards",
-    "ایران گردی": "Iran Tour",
-    "جهان گردی": "World Tour",
+    ایران: "Iran",
+    جهان: "World",
   };
 
   const handleImageChange = (event) => {
