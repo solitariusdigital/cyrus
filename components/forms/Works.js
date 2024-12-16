@@ -324,7 +324,7 @@ export default function Works({ worksData }) {
             <div className={classes.barReverse}>
               <p className={classes.label}>
                 <span>*</span>
-                دسته
+                مجموعه
               </p>
             </div>
             <select
@@ -340,7 +340,7 @@ export default function Works({ worksData }) {
               }
             >
               <option value="default" disabled>
-                {editWorksData ? editWorksData.fa.category : "انتخاب دسته"}
+                {editWorksData ? editWorksData.fa.category : "انتخاب مجموعه"}
               </option>
               {Object.keys(categories).map((category, index) => {
                 return (
@@ -358,6 +358,42 @@ export default function Works({ worksData }) {
               fontFamily: "English",
             }}
           >
+            <div className={classes.input}>
+              <div className={classes.bar}>
+                <p className={classes.label}>
+                  Year
+                  <span>*</span>
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setYear((prevData) => ({
+                      ...prevData,
+                      en: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="2024"
+                type="phone"
+                id="yearEn"
+                name="year"
+                onChange={(e) =>
+                  setYear((prevData) => ({
+                    ...prevData,
+                    en: e.target.value,
+                  }))
+                }
+                value={year.en}
+                autoComplete="off"
+                maxLength={4}
+              ></input>
+            </div>
             <div className={classes.input}>
               <div className={classes.bar}>
                 <p className={classes.label}>Title</p>
@@ -458,42 +494,6 @@ export default function Works({ worksData }) {
             )}
             <div className={classes.input}>
               <div className={classes.bar}>
-                <p className={classes.label}>
-                  Year
-                  <span>*</span>
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() =>
-                    setYear((prevData) => ({
-                      ...prevData,
-                      en: "",
-                    }))
-                  }
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                style={{
-                  fontFamily: "English",
-                }}
-                placeholder="2024"
-                type="phone"
-                id="yearEn"
-                name="year"
-                onChange={(e) =>
-                  setYear((prevData) => ({
-                    ...prevData,
-                    en: e.target.value,
-                  }))
-                }
-                value={year.en}
-                autoComplete="off"
-                maxLength={4}
-              ></input>
-            </div>
-            <div className={classes.input}>
-              <div className={classes.bar}>
                 <p className={classes.label}>Description</p>
                 <CloseIcon
                   className="icon"
@@ -530,6 +530,42 @@ export default function Works({ worksData }) {
               fontFamily: "Farsi",
             }}
           >
+            <div className={classes.input}>
+              <div className={classes.barReverse}>
+                <p className={classes.label}>
+                  <span>*</span>
+                  سال
+                </p>
+                <CloseIcon
+                  className="icon"
+                  onClick={() =>
+                    setYear((prevData) => ({
+                      ...prevData,
+                      fa: "",
+                    }))
+                  }
+                  sx={{ fontSize: 16 }}
+                />
+              </div>
+              <input
+                style={{
+                  fontFamily: "English",
+                }}
+                placeholder="1403"
+                type="phone"
+                id="yearFa"
+                name="year"
+                onChange={(e) =>
+                  setYear((prevData) => ({
+                    ...prevData,
+                    fa: e.target.value,
+                  }))
+                }
+                value={year.fa}
+                autoComplete="off"
+                maxLength={4}
+              ></input>
+            </div>
             <div className={classes.input}>
               <div className={classes.barReverse}>
                 <p className={classes.label}>عنوان</p>
@@ -615,42 +651,6 @@ export default function Works({ worksData }) {
                 ></input>
               </div>
             )}
-            <div className={classes.input}>
-              <div className={classes.barReverse}>
-                <p className={classes.label}>
-                  <span>*</span>
-                  سال
-                </p>
-                <CloseIcon
-                  className="icon"
-                  onClick={() =>
-                    setYear((prevData) => ({
-                      ...prevData,
-                      fa: "",
-                    }))
-                  }
-                  sx={{ fontSize: 16 }}
-                />
-              </div>
-              <input
-                style={{
-                  fontFamily: "English",
-                }}
-                placeholder="1403"
-                type="phone"
-                id="yearFa"
-                name="year"
-                onChange={(e) =>
-                  setYear((prevData) => ({
-                    ...prevData,
-                    fa: e.target.value,
-                  }))
-                }
-                value={year.fa}
-                autoComplete="off"
-                maxLength={4}
-              ></input>
-            </div>
             <div className={classes.input}>
               <div className={classes.barReverse}>
                 <p className={classes.label}>توضیحات</p>
