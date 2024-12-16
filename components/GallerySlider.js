@@ -62,7 +62,7 @@ export default function GallerySlider({ displayWorks, initialIndex }) {
                 ) : (
                   <video
                     className={classes.video}
-                    src={work.link}
+                    src={work.link + "#t=0.1"}
                     controls
                     playsInline
                     preload="metadata"

@@ -224,7 +224,7 @@ export default function Type({ works, typeTitle }) {
                           onClick={() =>
                             openGallerySlider(entryIndex, entries[0].year)
                           }
-                          src={entry.link}
+                          src={entry.link + "#t=0.1"}
                           playsInline
                           preload="metadata"
                         />
