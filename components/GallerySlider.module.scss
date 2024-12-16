@@ -79,6 +79,11 @@
   @include mixins.tabletPortrait {
     height: 60vh;
   }
+
+  .video {
+    width: 100%;
+    object-fit: cover;
+  }
 }
 
 .video {

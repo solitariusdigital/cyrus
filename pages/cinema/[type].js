@@ -201,20 +201,32 @@ export default function Type({ works, typeTitle }) {
                 {entries.map((entry, entryIndex) => (
                   <Fragment key={entryIndex}>
                     <div className={classes.imageBox}>
-                      <Image
-                        className={classes.image}
-                        onClick={() =>
-                          openGallerySlider(entryIndex, entries[0].year)
-                        }
-                        src={entry.link}
-                        blurDataURL={entry.link}
-                        placeholder="blur"
-                        alt={entry.data[languageType].subCategory}
-                        layout="fill"
-                        objectFit="cover"
-                        as="image"
-                        priority
-                      />
+                      {entry.type === "image" ? (
+                        <Image
+                          className={classes.image}
+                          onClick={() =>
+                            openGallerySlider(entryIndex, entries[0].year)
+                          }
+                          src={entry.link}
+                          blurDataURL={entry.link}
+                          placeholder="blur"
+                          alt={entry.data[languageType].subCategory}
+                          layout="fill"
+                          objectFit="cover"
+                          as="image"
+                          priority
+                        />
+                      ) : (
+                        <video
+                          className={classes.video}
+                          onClick={() =>
+                            openGallerySlider(entryIndex, entries[0].year)
+                          }
+                          src={entry.link}
+                          playsInline
+                          preload="metadata"
+                        />
+                      )}
                       {permissionControl === "admin" && (
                         <div className={classes.control}>
                           <Tooltip title="Delete">

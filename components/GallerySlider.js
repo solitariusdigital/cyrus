@@ -48,16 +48,26 @@ export default function GallerySlider({ displayWorks, initialIndex }) {
           {displayWorks[initialIndex.year].map((work, workIndex) => (
             <SwiperSlide key={workIndex}>
               <div className={classes.imageBox}>
-                <Image
-                  src={work.link}
-                  blurDataURL={work.link}
-                  placeholder="blur"
-                  alt={work.data[languageType].title}
-                  layout="fill"
-                  objectFit="contain"
-                  as="image"
-                  priority
-                />
+                {work.type === "image" ? (
+                  <Image
+                    src={work.link}
+                    blurDataURL={work.link}
+                    placeholder="blur"
+                    alt={work.data[languageType].title}
+                    layout="fill"
+                    objectFit="contain"
+                    as="image"
+                    priority
+                  />
+                ) : (
+                  <video
+                    className={classes.video}
+                    src={work.link}
+                    controls
+                    playsInline
+                    preload="metadata"
+                  />
+                )}
               </div>
             </SwiperSlide>
           ))}
