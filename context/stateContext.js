@@ -86,6 +86,12 @@ export const StateProvider = (props) => {
       media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
       active: false,
     },
+    {
+      fa: "روند",
+      en: "Process",
+      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
+      active: false,
+    },
   ]);
   const [cinemaTypes, setCinemaTypes] = useState([
     {

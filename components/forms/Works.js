@@ -19,8 +19,6 @@ import { createWorksApi, updateWorksApi } from "@/services/api";
 
 export default function Works({ worksData }) {
   const { currentUser, setCurrentUser } = useContext(StateContext);
-  const { language, setLanguage } = useContext(StateContext);
-  const { languageType, setLanguageType } = useContext(StateContext);
   const [title, setTitle] = useState({ en: "", fa: "" });
   const [category, setCategory] = useState({ en: "Paintings", fa: "نقاشی‌" });
   const [subCategory, setSubCategory] = useState({ en: "", fa: "" });
@@ -58,7 +56,7 @@ export default function Works({ worksData }) {
     },
   };
   const subCategories = {
-    نقاشی‌: ["ماژیک", "اکریلیک", "آبرنگ"],
+    نقاشی‌: ["ماژیک", "اکریلیک", "آبرنگ", "روند"],
     سینما: ["سینما", "تئاتر", "سریال", "فیلم کوتاه", "جشنواره", "جوایز"],
     سفر: ["ایران", "جهان"],
   };
@@ -66,6 +64,7 @@ export default function Works({ worksData }) {
     اکریلیک: "Acrylic",
     ماژیک: "Marker",
     آبرنگ: "Watercolor",
+    روند: "Process",
     سینما: "Cinema",
     تئاتر: "Theatre",
     سریال: "Series",
@@ -164,21 +163,21 @@ export default function Works({ worksData }) {
 
     const worksObject = {
       fa: {
-        title: title.fa,
+        title: title.fa.trim(),
         category: category.fa,
         subCategory: subCategory.fa,
-        location: location.fa,
+        location: location.fa.trim(),
         description: extractParagraphs(description.fa).join("\n\n"),
-        size: size.fa,
+        size: size.fa.trim(),
         year: isEnglishNumber(year.fa) ? year.fa : toEnglishNumber(year.fa),
       },
       en: {
-        title: title.en,
+        title: title.en.trim(),
         category: category.en,
         subCategory: subCategory.en,
-        location: location.en,
+        location: location.en.trim(),
         description: extractParagraphs(description.en).join("\n\n"),
-        size: size.en,
+        size: size.en.trim(),
         year: isEnglishNumber(year.en) ? year.en : toEnglishNumber(year.en),
       },
       media: mediaLinks,

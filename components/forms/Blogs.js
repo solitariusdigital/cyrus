@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import classes from "./Form.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { extractParagraphs, areAllStatesValid } from "@/services/utility";
+import { extractParagraphs } from "@/services/utility";
 import { createBlogsApi, updateBlogsApi } from "@/services/api";
 
 export default function Blogs({ blogsData }) {
@@ -15,9 +15,8 @@ export default function Blogs({ blogsData }) {
   const router = useRouter();
 
   const createBlog = async () => {
-    const isValid = areAllStatesValid([title, description]);
-    if (!isValid) {
-      showAlert("همه موارد الزامیست");
+    if (!title.fa && !description.fa) {
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 
@@ -25,11 +24,11 @@ export default function Blogs({ blogsData }) {
 
     const blogObject = {
       fa: {
-        title: title.fa,
+        title: title.fa.trim(),
         description: extractParagraphs(description.fa).join("\n\n"),
       },
       en: {
-        title: title.en,
+        title: title.en.trim(),
         description: extractParagraphs(description.en).join("\n\n"),
       },
       active: false,
@@ -40,9 +39,8 @@ export default function Blogs({ blogsData }) {
   };
 
   const updateBlog = async () => {
-    const isValid = areAllStatesValid([title, description]);
-    if (!isValid) {
-      showAlert("همه موارد الزامیست");
+    if (!title.fa && !description.fa) {
+      showAlert("موارد ستاره‌دار الزامیست");
       return;
     }
 
@@ -51,11 +49,11 @@ export default function Blogs({ blogsData }) {
     const blogObject = {
       ...editBlogData,
       fa: {
-        title: title.fa,
+        title: title.fa.trim(),
         description: extractParagraphs(description.fa).join("\n\n"),
       },
       en: {
-        title: title.en,
+        title: title.en.trim(),
         description: extractParagraphs(description.en).join("\n\n"),
       },
       active: true,
@@ -129,10 +127,7 @@ export default function Blogs({ blogsData }) {
         >
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Title
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Title</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
@@ -163,10 +158,7 @@ export default function Blogs({ blogsData }) {
           </div>
           <div className={classes.input}>
             <div className={classes.bar}>
-              <p className={classes.label}>
-                Description
-                <span>*</span>
-              </p>
+              <p className={classes.label}>Description</p>
               <CloseIcon
                 className="icon"
                 onClick={() =>
