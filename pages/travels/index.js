@@ -102,16 +102,7 @@ export default function Travels() {
                           as="image"
                           priority
                         />
-                        <h2
-                          style={{
-                            fontSize:
-                              screenSize === "mobile" && language
-                                ? "1.2rem"
-                                : "1.3rem",
-                          }}
-                        >
-                          {type[languageType]}
-                        </h2>
+                        <h3>{type[languageType]}</h3>
                       </div>
                     </SwiperSlide>
                   ))}

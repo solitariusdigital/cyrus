@@ -19,6 +19,7 @@ export default function Type({ works, typeTitle }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
+  const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [categoryWorks, setCategoryWorks] = useState([]);
   const [displayWorks, setDisplayWorks] = useState([]);
@@ -118,6 +119,8 @@ export default function Type({ works, typeTitle }) {
     }
   };
 
+  const HeadingTag = screenSize === "mobile" ? "h4" : "h3";
+
   return (
     <Fragment>
       <NextSeo
@@ -155,7 +158,7 @@ export default function Type({ works, typeTitle }) {
           }
         >
           {cinemaTypes.map((type, index) => (
-            <h3
+            <HeadingTag
               key={index}
               className={type.active ? classes.typeActive : classes.type}
               onClick={() => changeFilterTypes(type[languageType])}
@@ -179,7 +182,7 @@ export default function Type({ works, typeTitle }) {
                   |
                 </span>
               )}
-            </h3>
+            </HeadingTag>
           ))}
         </div>
         {Object.entries(displayWorks)
@@ -189,7 +192,7 @@ export default function Type({ works, typeTitle }) {
               className={language ? classes.groupRow : classes.groupRowReverse}
             >
               {entries[0] && (
-                <h3>
+                <h3 onClick={() => openGallerySlider(0, entries[0].year)}>
                   {language
                     ? toFarsiNumber(entries[0].year[languageType])
                     : entries[0].year[languageType]}
