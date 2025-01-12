@@ -13,7 +13,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function Movies() {
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { cinemaTypes, setCinemaTypes } = useContext(StateContext);
@@ -126,7 +125,8 @@ export default function Movies() {
         <section className={classes.container}>
           <div className={classes.development}>
             <div
-              className={`${classes.image} animate__animated animate__jello`}
+              className={`${classes.image} animate__animated animate__pulse`}
+              onClick={() => Router.push("/paintings")}
             >
               <Image
                 src={developmentImage}
@@ -141,8 +141,14 @@ export default function Movies() {
             </div>
             <p>
               {language
-                ? "این مجموعه در حال آماده سازی است"
-                : "This collection is being prepared"}
+                ? "مجموعه سینما در حال آماده سازی است"
+                : "Cinema collection is being prepared"}
+            </p>
+            <p
+              className={classes.link}
+              onClick={() => Router.push("/paintings")}
+            >
+              {language ? "برو به مجموعه نقاشی" : "Go to Paintings collection"}
             </p>
           </div>
         </section>

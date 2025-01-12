@@ -12,10 +12,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function Paintings() {
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
+  const { navigationTopBar, setNavigationTopBar } = useContext(StateContext);
   const [rerender, setRerender] = useState(true);
 
   useEffect(() => {
@@ -24,6 +24,18 @@ export default function Paintings() {
       setRerender(true);
     }, 50);
   }, [language]);
+
+  useEffect(() => {
+    navigationTopBar.map((nav, i) => {
+      if (i === 0) {
+        nav.active = true;
+      } else {
+        nav.active = false;
+      }
+    });
+    setNavigationTopBar([...navigationTopBar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Fragment>

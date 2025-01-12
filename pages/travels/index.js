@@ -12,7 +12,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function Travels() {
-  const { screenSize, setScreenSize } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { travelTypes, setTravelTypes } = useContext(StateContext);
@@ -78,7 +77,6 @@ export default function Travels() {
               {rerender && (
                 <div className={classes.swiperContainer}>
                   <Swiper
-                    style={{ width: screenSize === "mobile" ? "100%" : "100%" }}
                     className={classes.swiper}
                     slidesPerView={2}
                     spaceBetween={10}
@@ -120,7 +118,8 @@ export default function Travels() {
         <section className={classes.container}>
           <div className={classes.development}>
             <div
-              className={`${classes.image} animate__animated animate__jello`}
+              className={`${classes.image} animate__animated animate__pulse`}
+              onClick={() => Router.push("/paintings")}
             >
               <Image
                 src={developmentImage}
@@ -135,8 +134,14 @@ export default function Travels() {
             </div>
             <p>
               {language
-                ? "این مجموعه در حال آماده سازی است"
-                : "This collection is being prepared"}
+                ? "مجموعه سفر در حال آماده سازی است"
+                : "Travel collection is being prepared"}
+            </p>
+            <p
+              className={classes.link}
+              onClick={() => Router.push("/paintings")}
+            >
+              {language ? "برو به مجموعه نقاشی" : "Go to Paintings collection"}
             </p>
           </div>
         </section>
