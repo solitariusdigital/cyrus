@@ -83,13 +83,13 @@ export const StateProvider = (props) => {
     {
       fa: "طرح",
       en: "Sketch",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
+      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
       active: false,
     },
     {
       fa: "روند",
       en: "Process",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
+      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
       active: false,
     },
   ]);

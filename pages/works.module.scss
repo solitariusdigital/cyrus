@@ -94,6 +94,18 @@
       }
     }
   }
+
+  .development {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: config.$green;
+
+    .image {
+      position: relative;
+      height: 300px;
+    }
+  }
 }
 
 .typesNavigation,

@@ -4,6 +4,7 @@ import classes from "../works.module.scss";
 import Image from "next/legacy/image";
 import { NextSeo } from "next-seo";
 import logoIcon from "@/assets/logoIcon.png";
+import developmentImage from "@/assets/developmentImage.png";
 import Router from "next/router";
 import { replaceSpacesAndHyphens } from "@/services/utility";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,6 +17,7 @@ export default function Travels() {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { travelTypes, setTravelTypes } = useContext(StateContext);
   const [rerender, setRerender] = useState(true);
+  const [development, setDevelopment] = useState(true);
 
   useEffect(() => {
     setRerender(false);
@@ -50,68 +52,95 @@ export default function Travels() {
           maxVideoPreview: -1,
         }}
       />
-      <section className={classes.container}>
-        <Image
-          src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
-          blurDataURL={
-            "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
-          }
-          placeholder="empty"
-          alt="image"
-          layout="fill"
-          objectFit="cover"
-          as="image"
-          priority
-        />
-        <div
-          className={language ? classes.items : classes.itemsReverse}
-          style={{
-            fontFamily: language ? "FarsiLight" : "EnglishLight",
-          }}
-        >
-          <div className={classes.item}>
-            <h1>{language ? "سفر" : "Travels"}</h1>
-            {rerender && <div className={classes.border}></div>}
-            {rerender && (
-              <div className={classes.swiperContainer}>
-                <Swiper
-                  style={{ width: screenSize === "mobile" ? "100%" : "100%" }}
-                  className={classes.swiper}
-                  slidesPerView={2}
-                  spaceBetween={10}
-                >
-                  {travelTypes.map((type, index) => (
-                    <SwiperSlide key={index}>
-                      <div
-                        className={classes.imageBox}
-                        onClick={() =>
-                          Router.push(
-                            `/travels/${replaceSpacesAndHyphens(
-                              type[languageType]
-                            )}`
-                          )
-                        }
-                      >
-                        <Image
-                          src={type.media}
-                          blurDataURL={type.media}
-                          placeholder="blur"
-                          alt={type[languageType]}
-                          layout="fill"
-                          objectFit="cover"
-                          as="image"
-                          priority
-                        />
-                        <h3>{type[languageType]}</h3>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </div>
-            )}
+      {!development && (
+        <section className={classes.container}>
+          <Image
+            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
+            blurDataURL={
+              "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
+            }
+            placeholder="empty"
+            alt="image"
+            layout="fill"
+            objectFit="cover"
+            as="image"
+            priority
+          />
+          <div
+            className={language ? classes.items : classes.itemsReverse}
+            style={{
+              fontFamily: language ? "FarsiLight" : "EnglishLight",
+            }}
+          >
+            <div className={classes.item}>
+              <h1>{language ? "سفر" : "Travels"}</h1>
+              {rerender && <div className={classes.border}></div>}
+              {rerender && (
+                <div className={classes.swiperContainer}>
+                  <Swiper
+                    style={{ width: screenSize === "mobile" ? "100%" : "100%" }}
+                    className={classes.swiper}
+                    slidesPerView={2}
+                    spaceBetween={10}
+                  >
+                    {travelTypes.map((type, index) => (
+                      <SwiperSlide key={index}>
+                        <div
+                          className={classes.imageBox}
+                          onClick={() =>
+                            Router.push(
+                              `/travels/${replaceSpacesAndHyphens(
+                                type[languageType]
+                              )}`
+                            )
+                          }
+                        >
+                          <Image
+                            src={type.media}
+                            blurDataURL={type.media}
+                            placeholder="blur"
+                            alt={type[languageType]}
+                            layout="fill"
+                            objectFit="cover"
+                            as="image"
+                            priority
+                          />
+                          <h3>{type[languageType]}</h3>
+                        </div>
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+      {development && (
+        <section className={classes.container}>
+          <div className={classes.development}>
+            <div
+              className={`${classes.image} animate__animated animate__jello`}
+            >
+              <Image
+                src={developmentImage}
+                blurDataURL={developmentImage}
+                placeholder="empty"
+                alt="image"
+                layout="fill"
+                objectFit="contain"
+                as="image"
+                priority
+              />
+            </div>
+            <p>
+              {language
+                ? "این مجموعه در حال آماده سازی است"
+                : "This collection is being prepared"}
+            </p>
+          </div>
+        </section>
+      )}
     </Fragment>
   );
 }
