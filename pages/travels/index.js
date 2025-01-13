@@ -134,7 +134,7 @@ export default function Travels() {
             </div>
             <p>
               {language
-                ? "مجموعه سفر در حال آماده سازی است"
+                ? "مجموعه سفر در حال آماده‌سازی است"
                 : "Travel collection is being prepared"}
             </p>
             <p

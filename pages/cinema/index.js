@@ -141,7 +141,7 @@ export default function Movies() {
             </div>
             <p>
               {language
-                ? "مجموعه سینما در حال آماده سازی است"
+                ? "مجموعه سینما در حال آماده‌سازی است"
                 : "Cinema collection is being prepared"}
             </p>
             <p
