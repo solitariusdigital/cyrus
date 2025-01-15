@@ -77,7 +77,7 @@ export const StateProvider = (props) => {
     {
       fa: "ماژیک",
       en: "Marker",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+      media: "https://cyrus.storage.c2.liara.space/assets/IMG_3854.JPG",
       active: false,
     },
     {
