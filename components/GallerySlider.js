@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 export default function GallerySlider({ displayWorks, initialIndex }) {
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
+  const { permissionControl, setPermissionControl } = useContext(StateContext);
   const [current, setCurrent] = useState(0);
 
   const updateIndex = (swiperInstance) => {
@@ -25,7 +26,7 @@ export default function GallerySlider({ displayWorks, initialIndex }) {
   return (
     <div className={classes.slider}>
       <div className={language ? classes.infoBox : classes.infoBoxReverse}>
-        <p>{currentWork?.title}</p>
+        {permissionControl === "admin" && <p>{currentWork?.title}</p>}
         <p>{currentWork?.subCategory}</p>
         <p>{currentWork?.location}</p>
         <p style={{ direction: "ltr" }}>
