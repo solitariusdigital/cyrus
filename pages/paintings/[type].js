@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext, Fragment } from "react";
+/* eslint-disable react/display-name */
+import { useState, useEffect, useContext, Fragment, memo } from "react";
 import { StateContext } from "@/context/stateContext";
 import { useRouter } from "next/router";
 import classes from "../works.module.scss";
@@ -153,6 +154,71 @@ export default function Type({ works, typeTitle }) {
     openGallerySlider(index, year);
   };
 
+  // Memoized Image Component
+  const MemoizedImage = memo(({ src, alt, onClick }) => (
+    <Image
+      className={classes.image}
+      onClick={onClick}
+      src={src}
+      blurDataURL={src}
+      placeholder="blur"
+      alt={alt}
+      layout="fill"
+      objectFit="cover"
+    />
+  ));
+
+  // Memoized Video Component
+  const MemoizedVideo = memo(({ src, onClick }) => (
+    <video
+      className={classes.video}
+      onClick={onClick}
+      src={src + "#t=0.1"}
+      playsInline
+      preload="metadata"
+    />
+  ));
+
+  // Memoized Entry Component
+  const MemoizedEntry = memo(
+    ({
+      entry,
+      entryIndex,
+      entries,
+      handleImageClick,
+      deleteImage,
+      permissionControl,
+    }) => (
+      <Fragment key={entryIndex}>
+        <div className={classes.imageBox}>
+          {entry.type === "image" ? (
+            <MemoizedImage
+              src={entry.link}
+              alt={entry.data[languageType].subCategory}
+              onClick={() => handleImageClick(entryIndex, entries[0].year)}
+            />
+          ) : (
+            <MemoizedVideo
+              src={entry.link}
+              onClick={() => handleImageClick(entryIndex, entries[0].year)}
+            />
+          )}
+          {permissionControl === "admin" && (
+            <div className={classes.control}>
+              <Tooltip title="Delete">
+                <DeleteIcon
+                  className="icon"
+                  sx={{ color: "#d40d12" }}
+                  onClick={() => deleteImage(entry.mediaIndex, entry.worksId)}
+                />
+              </Tooltip>
+            </div>
+          )}
+        </div>
+      </Fragment>
+    )
+  );
+
   return (
     <Fragment>
       <NextSeo
@@ -234,47 +300,15 @@ export default function Type({ works, typeTitle }) {
                 className={language ? classes.gridBox : classes.gridBoxReverse}
               >
                 {entries.map((entry, entryIndex) => (
-                  <Fragment key={entryIndex}>
-                    <div className={classes.imageBox}>
-                      {entry.type === "image" ? (
-                        <Image
-                          className={classes.image}
-                          onClick={() =>
-                            handleImageClick(entryIndex, entries[0].year)
-                          }
-                          src={entry.link}
-                          blurDataURL={entry.link}
-                          placeholder="blur"
-                          alt={entry.data[languageType].subCategory}
-                          layout="fill"
-                          objectFit="cover"
-                        />
-                      ) : (
-                        <video
-                          className={classes.video}
-                          onClick={() =>
-                            openGallerySlider(entryIndex, entries[0].year)
-                          }
-                          src={entry.link + "#t=0.1"}
-                          playsInline
-                          preload="metadata"
-                        />
-                      )}
-                      {permissionControl === "admin" && (
-                        <div className={classes.control}>
-                          <Tooltip title="Delete">
-                            <DeleteIcon
-                              className="icon"
-                              sx={{ color: "#d40d12" }}
-                              onClick={() =>
-                                deleteImage(entry.mediaIndex, entry.worksId)
-                              }
-                            />
-                          </Tooltip>
-                        </div>
-                      )}
-                    </div>
-                  </Fragment>
+                  <MemoizedEntry
+                    key={entryIndex}
+                    entry={entry}
+                    entries={entries}
+                    entryIndex={entryIndex}
+                    handleImageClick={handleImageClick}
+                    deleteImage={deleteImage}
+                    permissionControl={permissionControl}
+                  />
                 ))}
               </div>
             </div>
