@@ -25,6 +25,7 @@ export default function Type({ works, typeTitle }) {
   const [displayWorks, setDisplayWorks] = useState([]);
   const [initialIndex, setInitialIndex] = useState(null);
   const [selectedType, setSelectedType] = useState("");
+  const [reqNumber, setReqNumber] = useState(1);
   const router = useRouter();
 
   useEffect(() => {
@@ -54,6 +55,29 @@ export default function Type({ works, typeTitle }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeTitle, works]);
 
+  useEffect(() => {
+    reqNumberTimer(1000);
+    window.addEventListener("scroll", loadMore);
+    return () => {
+      window.removeEventListener("scroll", loadMore);
+    };
+  }, []);
+
+  const reqNumberTimer = (time) => {
+    setTimeout(() => {
+      setReqNumber((prev) => prev + 1);
+    }, time);
+  };
+
+  const loadMore = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight
+    ) {
+      setReqNumber((prev) => prev + 1);
+    }
+  };
+
   const changeFilterTypes = (type) => {
     setSelectedType(type);
     updateCategoryActive(type);
@@ -62,6 +86,8 @@ export default function Type({ works, typeTitle }) {
     );
     let groupWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupWorks);
+    setReqNumber(0);
+    reqNumberTimer(50);
   };
 
   const updateCategoryActive = (type) => {
@@ -253,7 +279,8 @@ export default function Type({ works, typeTitle }) {
               </div>
             </div>
           ))
-          .reverse()}
+          .reverse()
+          .slice(0, reqNumber)}
         {displayGallerySlider && (
           <div className={classes.gallerySlider}>
             <div className={classes.icon}>
