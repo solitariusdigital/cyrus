@@ -123,6 +123,10 @@ export default function Type({ works, typeTitle }) {
 
   const HeadingTag = screenSize === "mobile" ? "h4" : "h3";
 
+  const handleImageClick = (index, year) => {
+    openGallerySlider(index, year);
+  };
+
   return (
     <Fragment>
       <NextSeo
@@ -210,7 +214,7 @@ export default function Type({ works, typeTitle }) {
                         <Image
                           className={classes.image}
                           onClick={() =>
-                            openGallerySlider(entryIndex, entries[0].year)
+                            handleImageClick(entryIndex, entries[0].year)
                           }
                           src={entry.link}
                           blurDataURL={entry.link}
@@ -218,8 +222,6 @@ export default function Type({ works, typeTitle }) {
                           alt={entry.data[languageType].subCategory}
                           layout="fill"
                           objectFit="cover"
-                          as="image"
-                          priority
                         />
                       ) : (
                         <video
