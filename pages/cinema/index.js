@@ -123,10 +123,12 @@ export default function Movies() {
       )}
       {development && (
         <section className={classes.container}>
-          <div className={classes.development}>
+          <div
+            className={classes.development}
+            onClick={() => Router.push("/paintings")}
+          >
             <div
               className={`${classes.image} animate__animated animate__pulse`}
-              onClick={() => Router.push("/paintings")}
             >
               <Image
                 src={developmentImage}
@@ -141,13 +143,10 @@ export default function Movies() {
             </div>
             <p>
               {language
-                ? "مجموعه سینما در حال آماده‌سازی است"
+                ? "مجموعه سینما در حال آماده‌سازی"
                 : "Cinema collection is being prepared"}
             </p>
-            <p
-              className={classes.link}
-              onClick={() => Router.push("/paintings")}
-            >
+            <p className={classes.link}>
               {language ? "برو به مجموعه نقاشی" : "Go to Paintings collection"}
             </p>
           </div>

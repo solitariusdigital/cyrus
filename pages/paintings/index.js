@@ -91,11 +91,11 @@ export default function Paintings() {
                   className={classes.swiper}
                   slidesPerView={3}
                   spaceBetween={10}
-                  centeredSlides={true}
-                  mousewheel={true}
-                  loop={true}
-                  allowTouchMove={true}
-                  navigation={true}
+                  // centeredSlides={true}
+                  // mousewheel={true}
+                  // loop={true}
+                  // allowTouchMove={true}
+                  // navigation={true}
                   modules={[Navigation, Mousewheel]}
                 >
                   {paintingTypes.map((type, index) => (
