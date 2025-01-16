@@ -56,16 +56,16 @@ export default function Type({ works, typeTitle }) {
   }, [typeTitle, works]);
 
   useEffect(() => {
-    reqNumberTimer(1000);
+    reqNumberTimer(500, 1);
     window.addEventListener("scroll", loadMore);
     return () => {
       window.removeEventListener("scroll", loadMore);
     };
   }, []);
 
-  const reqNumberTimer = (time) => {
+  const reqNumberTimer = (time, count) => {
     setTimeout(() => {
-      setReqNumber((prev) => prev + 1);
+      setReqNumber((prev) => prev + count);
     }, time);
   };
 
@@ -87,7 +87,7 @@ export default function Type({ works, typeTitle }) {
     let groupWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupWorks);
     setReqNumber(0);
-    reqNumberTimer(50);
+    reqNumberTimer(100, 2);
   };
 
   const updateCategoryActive = (type) => {
