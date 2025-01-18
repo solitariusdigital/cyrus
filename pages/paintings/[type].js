@@ -15,12 +15,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { replaceSpacesAndHyphens, toFarsiNumber } from "@/services/utility";
 import { updateWorksApi } from "@/services/api";
 
-export default function Type({
-  works,
-  categoryWorks,
-  filterTypeWorks,
-  typeTitle,
-}) {
+export default function Type({ works, filterTypes, typeTitle }) {
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
@@ -29,6 +24,7 @@ export default function Type({
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayWorks, setDisplayWorks] = useState([]);
   const [initialIndex, setInitialIndex] = useState(null);
+  const [selectedType, setSelectedType] = useState("");
   const [reqNumber, setReqNumber] = useState(1);
   const router = useRouter();
 
@@ -45,11 +41,19 @@ export default function Type({
   }, []);
 
   useEffect(() => {
-    const groupedWorks = groupItemsByYear(filterTypeWorks);
+    // Set the selected type based on the current typeTitle
+    setSelectedType(typeTitle);
+    // Filter for display works based on the selected type
+    const displayWorks = filterTypes.filter(
+      (work) =>
+        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
+    );
+    // Group works by year and update displayWorks state
+    const groupedWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupedWorks);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [typeTitle, works]);
 
   useEffect(() => {
     reqNumberTimer(500, 1);
@@ -76,15 +80,16 @@ export default function Type({
       ) {
         setReqNumber((prev) => prev + 1);
       }
-    }, 200); // Adjust the timeout as necessary
+    }, 200);
   };
 
   const changeFilterTypes = (type) => {
+    setSelectedType(type);
     updateCategoryActive(type);
-    const filterTypeWorks = categoryWorks.filter(
+    const displayWorks = filterTypes.filter(
       (work) => work.fa.subCategory === type || work.en.subCategory === type
     );
-    let groupWorks = groupItemsByYear(filterTypeWorks);
+    let groupWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupWorks);
     setReqNumber(0);
     reqNumberTimer(100, 2);
@@ -130,7 +135,7 @@ export default function Type({
   };
 
   const openGallerySlider = (entryIndex, year) => {
-    changeFilterTypes(typeTitle);
+    changeFilterTypes(selectedType);
     setInitialIndex({
       entryIndex,
       year: language ? year.fa : year.en,
@@ -355,19 +360,13 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const works = await worksModel.find();
-    const categoryWorks = works.filter(
+    const filterTypes = works.filter(
       (work) => work.en.category === "Paintings"
-    );
-    const filterTypeWorks = categoryWorks.filter(
-      (work) =>
-        work.fa.subCategory === replaceSpacesAndHyphens(context.query.type) ||
-        work.en.subCategory === replaceSpacesAndHyphens(context.query.type)
     );
     return {
       props: {
         works: JSON.parse(JSON.stringify(works)),
-        categoryWorks: JSON.parse(JSON.stringify(categoryWorks)),
-        filterTypeWorks: JSON.parse(JSON.stringify(filterTypeWorks)),
+        filterTypes: JSON.parse(JSON.stringify(filterTypes)),
         typeTitle: JSON.parse(
           JSON.stringify(replaceSpacesAndHyphens(context.query.type))
         ),
