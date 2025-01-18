@@ -15,14 +15,13 @@ import Tooltip from "@mui/material/Tooltip";
 import { replaceSpacesAndHyphens, toFarsiNumber } from "@/services/utility";
 import { updateWorksApi } from "@/services/api";
 
-export default function Type({ works, typeTitle }) {
+export default function Type({ works, filterCategories, typeTitle }) {
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-  const [categoryWorks, setCategoryWorks] = useState([]);
   const [displayWorks, setDisplayWorks] = useState([]);
   const [initialIndex, setInitialIndex] = useState(null);
   const [selectedType, setSelectedType] = useState("");
@@ -44,20 +43,15 @@ export default function Type({ works, typeTitle }) {
   useEffect(() => {
     // Set the selected type based on the current typeTitle
     setSelectedType(typeTitle);
-    // Filter works for the selected category
-    const categoryWorks = works.filter(
-      (work) => work.en.category === "Paintings"
-    );
-    // Update categoryWorks state whenever typeTitle changes
-    setCategoryWorks(categoryWorks);
     // Filter for display works based on the selected type
-    const displayWorks = categoryWorks.filter(
+    const displayWorks = filterCategories.filter(
       (work) =>
         work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
     );
     // Group works by year and update displayWorks state
     const groupedWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupedWorks);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeTitle, works]);
 
@@ -67,6 +61,7 @@ export default function Type({ works, typeTitle }) {
     return () => {
       window.removeEventListener("scroll", loadMore);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const reqNumberTimer = (time, count) => {
@@ -75,19 +70,23 @@ export default function Type({ works, typeTitle }) {
     }, time);
   };
 
+  let debounceTimeout;
   const loadMore = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.scrollHeight
-    ) {
-      setReqNumber((prev) => prev + 1);
-    }
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.scrollHeight
+      ) {
+        setReqNumber((prev) => prev + 1);
+      }
+    }, 200);
   };
 
   const changeFilterTypes = (type) => {
     setSelectedType(type);
     updateCategoryActive(type);
-    const displayWorks = categoryWorks.filter(
+    const displayWorks = filterCategories.filter(
       (work) => work.fa.subCategory === type || work.en.subCategory === type
     );
     let groupWorks = groupItemsByYear(displayWorks);
@@ -123,10 +122,12 @@ export default function Type({ works, typeTitle }) {
         worksId: item.worksId,
         mediaIndex: index,
       }));
+
       // Initialize the array for the year if it doesn't exist
       if (!acc[year]) {
         acc[year] = [];
       }
+
       // Append media data to the corresponding year
       acc[year].push(...mediaWithData);
       return acc;
@@ -322,6 +323,7 @@ export default function Type({ works, typeTitle }) {
                     <MemoizedEntry
                       key={entryIndex}
                       entry={entry}
+                      entryIndex={entryIndex}
                       entries={entries}
                       handleImageClick={handleImageClick}
                       deleteImage={deleteImage}
@@ -358,9 +360,13 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const works = await worksModel.find();
+    const filterCategories = works.filter(
+      (work) => work.en.category === "Paintings"
+    );
     return {
       props: {
         works: JSON.parse(JSON.stringify(works)),
+        filterCategories: JSON.parse(JSON.stringify(filterCategories)),
         typeTitle: JSON.parse(
           JSON.stringify(replaceSpacesAndHyphens(context.query.type))
         ),
