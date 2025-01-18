@@ -46,15 +46,44 @@ export default function About() {
             {language ? "درباره" : "About"}
           </h2>
           <div
-            className={
-              language ? classes.information : classes.informationReverse
-            }
+            className={classes.information}
+            style={{
+              fontFamily: "English",
+            }}
           >
-            <p>
-              {language
-                ? "زمانی که هنوز هلیوم شناخته نشده بود، ستاره‌شناس فرانسوی ژول ژانسن در جریان خورشیدگرفتگی سال ۱۸۶۸ برای نخستین بار در طیف‌بینی نور خورشید، خط زرد طیفی هلیوم را دید. در جریان همان خورشیدگرفتگی، نورمن لاکیر پیشنهاد کرد این خط زرد می‌تواند به دلیل یک عنصر تازه باشد. دو شیمی‌دان سوئدی با نام‌های پر تئودر کلیو و نیلز آبراهام لانگلت در سال ۱۸۹۵ این عنصر را شناسایی و اعلام کردند. آن‌ها هلیوم را از سنگ کلویت که کانی اورانیوم است، به‌دست آوردند. در سال ۱۹۰۳ منابع بزرگ هلیوم در میدان‌های گازی ایالات متحده پیدا شد. هلیوم، بعد از هیدروژن، هم از نظر سبکی و هم از نظر فراوانی، دومین عنصر کیهان است، گرچه با وجود کاربردهای بسیار مهم و حیاتی که دارد، بر روی زمین بسیار کمیاب است. نزدیک به ۲۴٪ از جرم گیتی، سهم این عنصر است که این مقدار بیش از ۱۲ برابر ترکیب تمام عنصرهای سنگین است. زمانی که هنوز هلیوم شناخته نشده بود، ستاره‌شناس فرانسوی ژول ژانسن در جریان خورشیدگرفتگی سال ۱۸۶۸ برای نخستین بار در طیف‌بینی نور خورشید، خط زرد طیفی هلیوم را دید. در جریان همان خورشیدگرفتگی، نورمن لاکیر پیشنهاد کرد این خط زرد می‌تواند به دلیل یک عنصر تازه باشد. دو شیمی‌دان سوئدی با نام‌های پر تئودر کلیو و نیلز آبراهام لانگلت در سال ۱۸۹۵ این عنصر را شناسایی و اعلام کردند. آن‌ها هلیوم را از سنگ کلویت که کانی اورانیوم است، به‌دست آوردند. در سال ۱۹۰۳ منابع بزرگ هلیوم در میدان‌های گازی ایالات متحده پیدا شد. هلیوم، بعد از هیدروژن، هم از نظر سبکی و هم از نظر فراوانی، دومین عنصر کیهان است، گرچه با وجود کاربردهای بسیار مهم و حیاتی که دارد، بر روی زمین بسیار کمیاب است. نزدیک به ۲۴٪ از جرم گیتی، سهم این عنصر است که این مقدار بیش از ۱۲ برابر ترکیب تمام عنصرهای سنگین است."
-                : "There is no generally agreed definition of what constitutes art, and its interpretation has varied greatly throughout history and across cultures. In the Western tradition, the three classical branches ofv isual art are painting, sculpture, and architecture. Theatre, dance, and other performing arts, as well as literature, music, film and other media such as interactive media, are included in a broader definition of art. Until the 17th century, art referred to any skill or mastery and was not differentiated from crafts or sciences. I modern usage after the 17th century, where aesthetic considerations are paramount, the fine arts are separated and distinguished from acquired skills in general, such as the decorative or applied arts. There is no generally agreed definition of what constitutes art, and its interpretation has varied greatly throughout history and across cultures. In the Western tradition, the three classical branches ofv isual art are painting, sculpture, and architecture. Theatre, dance, and other performing arts, as well as literature, music, film and other media such as interactive media, are included in a broader definition of art. Until the 17th century, art referred to any skill or mastery and was not differentiated from crafts or sciences. I modern usage after the 17th century, where aesthetic considerations are paramount, the fine arts are separated and distinguished from acquired skills in general, such as the decorative or applied arts. Across cultures. In the Western tradition, the three classical branches ofv isual art are painting, sculpture, and architecture. Theatre, dance, and other performing arts, as well as literature, music, film and other media such as interactive media, are included in a broader definition of art. Until the 17th century, art referred to any skill or mastery and was not differentiated from crafts or sciences. I modern usage after the 17th century, where aesthetic considerations are paramount, the fine arts are separated and distinguished from acquired skills in general, such as the decorative or applied arts. art referred to any skill or mastery and was not differentiated from crafts or sciences. I modern usage after the 17th century, where aesthetic considerations are paramount, the fine arts are separated and distinguished from acquired skills in general, such as the decorative or applied arts."}
-            </p>
+            <div className={classes.items}>
+              <h3>Pantea Cyrus</h3>
+              <p>1974 - Tehran-Iran</p>
+            </div>
+            <div className={classes.items}>
+              <h3>Group Exhibitions</h3>
+              <p>1998 Mojdeh Art Gallery, Tehran</p>
+              <p>
+                1999 The first annual charity exhibition for the benefit of
+                handicapped girls, Tehran
+              </p>
+              <p>
+                2000 Charity exhibition for the benefit of haemophilia children,
+                Tehran
+              </p>
+              <p>
+                2001 Persia 2001, Iran-Australia Cultural institute,
+                Sydney-Melburne
+              </p>
+              <p>2002 Niavaran Cultural Center, Tehran</p>
+              <p>2004 Tehran Art Expo, Tehran</p>
+              <p>2004 Golestan Art Gallery</p>
+              <p>2007 Baran Art Gallery</p>
+            </div>
+            <div className={classes.items}>
+              <h3>Solo Exhibition</h3>
+              <p>2005 Niavaran Art Gallery</p>
+              <p>2006 Pasargad Art Gallery</p>
+              <p>2008 Shirin Art Gallery</p>
+              <p>2010 Shirin Art Gallery</p>
+              <p>2012 Jorjani Art Gallery</p>
+              <p>2016 26 Art Gallery</p>
+            </div>
           </div>
         </div>
         <div className={classes.imageBox}>
