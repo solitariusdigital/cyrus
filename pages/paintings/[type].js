@@ -29,7 +29,6 @@ export default function Type({
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
   const [displayWorks, setDisplayWorks] = useState([]);
   const [initialIndex, setInitialIndex] = useState(null);
-  const [selectedType, setSelectedType] = useState("");
   const [reqNumber, setReqNumber] = useState(1);
   const router = useRouter();
 
@@ -46,11 +45,10 @@ export default function Type({
   }, []);
 
   useEffect(() => {
-    setSelectedType(typeTitle);
     const groupedWorks = groupItemsByYear(filterTypeWorks);
     setDisplayWorks(groupedWorks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [typeTitle, works]);
+  }, []);
 
   useEffect(() => {
     reqNumberTimer(500, 1);
@@ -76,7 +74,6 @@ export default function Type({
   };
 
   const changeFilterTypes = (type) => {
-    setSelectedType(type);
     updateCategoryActive(type);
     const filterTypeWorks = categoryWorks.filter(
       (work) => work.fa.subCategory === type || work.en.subCategory === type
@@ -125,7 +122,7 @@ export default function Type({
   };
 
   const openGallerySlider = (entryIndex, year) => {
-    changeFilterTypes(selectedType);
+    changeFilterTypes(typeTitle);
     setInitialIndex({
       entryIndex,
       year: language ? year.fa : year.en,
