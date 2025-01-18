@@ -15,14 +15,13 @@ import Tooltip from "@mui/material/Tooltip";
 import { replaceSpacesAndHyphens, toFarsiNumber } from "@/services/utility";
 import { updateWorksApi } from "@/services/api";
 
-export default function Type({ works, typeTitle }) {
+export default function Type({ works, categoryWorks, typeTitle }) {
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
   const { permissionControl, setPermissionControl } = useContext(StateContext);
   const { screenSize, setScreenSize } = useContext(StateContext);
   const [displayGallerySlider, setDisplayGallerySlider] = useState(false);
-  const [categoryWorks, setCategoryWorks] = useState([]);
   const [displayWorks, setDisplayWorks] = useState([]);
   const [initialIndex, setInitialIndex] = useState(null);
   const [selectedType, setSelectedType] = useState("");
@@ -42,20 +41,11 @@ export default function Type({ works, typeTitle }) {
   }, []);
 
   useEffect(() => {
-    // Set the selected type based on the current typeTitle
     setSelectedType(typeTitle);
-    // Filter works for the selected category
-    const categoryWorks = works.filter(
-      (work) => work.en.category === "Paintings"
-    );
-    // Update categoryWorks state whenever typeTitle changes
-    setCategoryWorks(categoryWorks);
-    // Filter for display works based on the selected type
     const displayWorks = categoryWorks.filter(
       (work) =>
         work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
     );
-    // Group works by year and update displayWorks state
     const groupedWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupedWorks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -358,9 +348,13 @@ export async function getServerSideProps(context) {
   try {
     await dbConnect();
     const works = await worksModel.find();
+    const categoryWorks = works.filter(
+      (work) => work.en.category === "Paintings"
+    );
     return {
       props: {
         works: JSON.parse(JSON.stringify(works)),
+        categoryWorks: JSON.parse(JSON.stringify(categoryWorks)),
         typeTitle: JSON.parse(
           JSON.stringify(replaceSpacesAndHyphens(context.query.type))
         ),
