@@ -15,7 +15,12 @@ import Tooltip from "@mui/material/Tooltip";
 import { replaceSpacesAndHyphens, toFarsiNumber } from "@/services/utility";
 import { updateWorksApi } from "@/services/api";
 
-export default function Type({ works, categoryWorks, typeTitle }) {
+export default function Type({
+  works,
+  categoryWorks,
+  filterTypeWorks,
+  typeTitle,
+}) {
   const { paintingTypes, setPaintingTypes } = useContext(StateContext);
   const { languageType, setLanguageType } = useContext(StateContext);
   const { language, setLanguage } = useContext(StateContext);
@@ -42,11 +47,7 @@ export default function Type({ works, categoryWorks, typeTitle }) {
 
   useEffect(() => {
     setSelectedType(typeTitle);
-    const displayWorks = categoryWorks.filter(
-      (work) =>
-        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
-    );
-    const groupedWorks = groupItemsByYear(displayWorks);
+    const groupedWorks = groupItemsByYear(filterTypeWorks);
     setDisplayWorks(groupedWorks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeTitle, works]);
@@ -77,10 +78,10 @@ export default function Type({ works, categoryWorks, typeTitle }) {
   const changeFilterTypes = (type) => {
     setSelectedType(type);
     updateCategoryActive(type);
-    const displayWorks = categoryWorks.filter(
+    const filterTypeWorks = categoryWorks.filter(
       (work) => work.fa.subCategory === type || work.en.subCategory === type
     );
-    let groupWorks = groupItemsByYear(displayWorks);
+    let groupWorks = groupItemsByYear(filterTypeWorks);
     setDisplayWorks(groupWorks);
     setReqNumber(0);
     reqNumberTimer(100, 2);
@@ -351,10 +352,16 @@ export async function getServerSideProps(context) {
     const categoryWorks = works.filter(
       (work) => work.en.category === "Paintings"
     );
+    const filterTypeWorks = categoryWorks.filter(
+      (work) =>
+        work.fa.subCategory === replaceSpacesAndHyphens(context.query.type) ||
+        work.en.subCategory === replaceSpacesAndHyphens(context.query.type)
+    );
     return {
       props: {
         works: JSON.parse(JSON.stringify(works)),
         categoryWorks: JSON.parse(JSON.stringify(categoryWorks)),
+        filterTypeWorks: JSON.parse(JSON.stringify(filterTypeWorks)),
         typeTitle: JSON.parse(
           JSON.stringify(replaceSpacesAndHyphens(context.query.type))
         ),
