@@ -56,6 +56,7 @@ export default function Type({
     return () => {
       window.removeEventListener("scroll", loadMore);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const reqNumberTimer = (time, count) => {
@@ -64,13 +65,17 @@ export default function Type({
     }, time);
   };
 
+  let debounceTimeout;
   const loadMore = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.scrollHeight
-    ) {
-      setReqNumber((prev) => prev + 1);
-    }
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.scrollHeight
+      ) {
+        setReqNumber((prev) => prev + 1);
+      }
+    }, 200); // Adjust the timeout as necessary
   };
 
   const changeFilterTypes = (type) => {
