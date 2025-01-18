@@ -42,17 +42,22 @@ export default function Type({ works, typeTitle }) {
   }, []);
 
   useEffect(() => {
+    // Set the selected type based on the current typeTitle
     setSelectedType(typeTitle);
+    // Filter works for the selected category
     const categoryWorks = works.filter(
       (work) => work.en.category === "Paintings"
     );
+    // Update categoryWorks state whenever typeTitle changes
     setCategoryWorks(categoryWorks);
+    // Filter for display works based on the selected type
     const displayWorks = categoryWorks.filter(
       (work) =>
         work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
     );
-    let groupWorks = groupItemsByYear(displayWorks);
-    setDisplayWorks(groupWorks);
+    // Group works by year and update displayWorks state
+    const groupedWorks = groupItemsByYear(displayWorks);
+    setDisplayWorks(groupedWorks);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeTitle, works]);
 
@@ -105,9 +110,6 @@ export default function Type({ works, typeTitle }) {
   const groupItemsByYear = (items) => {
     return items.reduce((acc, item) => {
       const year = item[languageType].year;
-      if (!acc[year]) {
-        acc[year] = [];
-      }
       const mediaWithData = item.media.map((media, index) => ({
         ...media,
         data: {
@@ -121,7 +123,12 @@ export default function Type({ works, typeTitle }) {
         worksId: item.worksId,
         mediaIndex: index,
       }));
-      acc[year] = [...acc[year], ...mediaWithData];
+      // Initialize the array for the year if it doesn't exist
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      // Append media data to the corresponding year
+      acc[year].push(...mediaWithData);
       return acc;
     }, {});
   };
@@ -284,37 +291,47 @@ export default function Type({ works, typeTitle }) {
           ))}
         </div>
         {Object.entries(displayWorks)
-          .map(([key, entries]) => (
-            <div
-              key={key}
-              className={language ? classes.groupRow : classes.groupRowReverse}
-            >
-              {entries[0] && (
-                <h3 onClick={() => openGallerySlider(0, entries[0].year)}>
-                  {language
-                    ? toFarsiNumber(entries[0].year[languageType])
-                    : entries[0].year[languageType]}
-                </h3>
-              )}
-              <div
-                className={language ? classes.gridBox : classes.gridBoxReverse}
-              >
-                {entries.map((entry, entryIndex) => (
-                  <MemoizedEntry
-                    key={entryIndex}
-                    entry={entry}
-                    entries={entries}
-                    entryIndex={entryIndex}
-                    handleImageClick={handleImageClick}
-                    deleteImage={deleteImage}
-                    permissionControl={permissionControl}
-                  />
-                ))}
-              </div>
-            </div>
-          ))
           .reverse()
-          .slice(0, reqNumber)}
+          .slice(0, reqNumber)
+          .map(([key, entries]) => {
+            if (!entries.length) return null;
+
+            const firstEntry = entries[0];
+            const yearDisplay = language
+              ? toFarsiNumber(firstEntry.year[languageType])
+              : firstEntry.year[languageType];
+
+            return (
+              <div
+                key={key}
+                className={
+                  language ? classes.groupRow : classes.groupRowReverse
+                }
+              >
+                {firstEntry && (
+                  <h3 onClick={() => openGallerySlider(0, firstEntry.year)}>
+                    {yearDisplay}
+                  </h3>
+                )}
+                <div
+                  className={
+                    language ? classes.gridBox : classes.gridBoxReverse
+                  }
+                >
+                  {entries.map((entry, entryIndex) => (
+                    <MemoizedEntry
+                      key={entryIndex}
+                      entry={entry}
+                      entries={entries}
+                      handleImageClick={handleImageClick}
+                      deleteImage={deleteImage}
+                      permissionControl={permissionControl}
+                    />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         {displayGallerySlider && (
           <div className={classes.gallerySlider}>
             <div className={classes.icon}>
