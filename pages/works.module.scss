@@ -216,7 +216,7 @@
   direction: rtl;
 
   @include mixins.mobile {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
   }
 
   .imageBox {
@@ -226,6 +226,10 @@
       content: "";
       display: block;
       padding-top: 75%;
+
+      @include mixins.mobile {
+        padding-top: 100%;
+      }
     }
 
     .image {
