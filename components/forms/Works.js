@@ -639,7 +639,7 @@ export default function Works({ worksData }) {
                 </div>
                 <input
                   style={{
-                    fontFamily: "Farsi",
+                    fontFamily: "English",
                   }}
                   placeholder="اندازه در قسمت انگلیسی وارد کنید"
                   type="text"
