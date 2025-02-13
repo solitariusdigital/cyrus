@@ -236,7 +236,6 @@
       @include mixins.allDesktop {
         &:hover {
           cursor: pointer;
-          @include mixins.background-anime();
         }
       }
     }
