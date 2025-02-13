@@ -172,7 +172,7 @@ export default function Type({ works, filterTypes, typeTitle }) {
       placeholder="blur"
       alt={alt}
       layout="fill"
-      objectFit="cover"
+      objectFit="contain"
     />
   ));
 
