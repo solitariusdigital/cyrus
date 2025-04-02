@@ -27,7 +27,7 @@
     "sass": "^1.84.0",
     "sharp": "^0.33.5",
     "webpack": "^5.98.0",
-    "swiper": "^11.2.2"
+    "swiper": "^11.2.5"
   },
   "devDependencies": {
     "eslint": "^8.23.0",
