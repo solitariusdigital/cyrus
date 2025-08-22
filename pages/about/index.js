@@ -53,7 +53,7 @@ export default function About() {
           >
             <div className={classes.items}>
               <h3>Pantea Cyrus</h3>
-              <p>1974 - Tehran-Iran</p>
+              <p>1974 Tehran, Iran</p>
             </div>
             <div className={classes.items}>
               <h3>Group Exhibitions</h3>
@@ -67,8 +67,7 @@ export default function About() {
                 Tehran
               </p>
               <p>
-                2001 Persia 2001, Iran-Australia Cultural institute,
-                Sydney-Melburne
+                2001 Persia, Iran-Australia Cultural Institute, Sydney-Melbourne
               </p>
               <p>2002 Niavaran Cultural Center, Tehran</p>
               <p>2004 Tehran Art Expo, Tehran</p>
@@ -76,7 +75,7 @@ export default function About() {
               <p>2007 Baran Art Gallery</p>
             </div>
             <div className={classes.items}>
-              <h3>Solo Exhibition</h3>
+              <h3>Solo Exhibitions</h3>
               <p>2005 Niavaran Art Gallery</p>
               <p>2006 Pasargad Art Gallery</p>
               <p>2008 Shirin Art Gallery</p>
