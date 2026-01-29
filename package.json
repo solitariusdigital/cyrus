@@ -18,7 +18,7 @@
     "mini-css-extract-plugin": "^2.9.2",
     "mongodb-shell": "^1.0.1",
     "mongoose": "^8.15.0",
-    "next": "^15.3.3",
+    "next": "^16.1.5",
     "next-pwa": "^5.6.0",
     "next-seo": "^6.8.0",
     "react": "18.3.1",
