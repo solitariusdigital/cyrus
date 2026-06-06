@@ -9,7 +9,7 @@ export const StateProvider = (props) => {
   const [permissionControl, setPermissionControl] = useState("user" || "admin");
   const [displayMenu, setDisplayMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(
-    "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile"
+    "desktop" || "tablet-landscape" || "tablet-portrait" || "mobile",
   );
   const [navigationTopBar, setNavigationTopBar] = useState([
     {
@@ -65,31 +65,31 @@ export const StateProvider = (props) => {
     {
       fa: "اکریلیک",
       en: "Acrylic",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2853.JPG",
       active: false,
     },
     {
       fa: "آبرنگ",
       en: "Watercolor",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2854.JPG",
       active: false,
     },
     {
       fa: "ماژیک",
       en: "Marker",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_3854.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_3854.JPG",
       active: false,
     },
     // {
     //   fa: "طرح",
     //   en: "Sketch",
-    //   media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+    //   media: "https://bucket.panteapaint.com/assets/IMG_2852.JPG",
     //   active: false,
     // },
     // {
     //   fa: "روند",
     //   en: "Process",
-    //   media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+    //   media: "https://bucket.panteapaint.com/assets/IMG_2852.JPG",
     //   active: false,
     // },
   ]);
@@ -97,37 +97,37 @@ export const StateProvider = (props) => {
     {
       fa: "سینما",
       en: "Cinema",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2852.JPG",
       active: false,
     },
     {
       fa: "تئاتر",
       en: "Theatre",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2853.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2853.JPG",
       active: false,
     },
     {
       fa: "سریال",
       en: "Series",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2852.JPG",
       active: false,
     },
     {
       fa: "فیلم کوتاه",
       en: "Short Film",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2854.JPG",
       active: false,
     },
     {
       fa: "نمایشگاه",
       en: "Exhibitions",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2852.JPG",
       active: false,
     },
     {
       fa: "جوایز",
       en: "Awards",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2854.JPG",
       active: false,
     },
   ]);
@@ -135,13 +135,13 @@ export const StateProvider = (props) => {
     {
       fa: "جهان",
       en: "World",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2852.JPG",
       active: false,
     },
     {
       fa: "ایران",
       en: "Iran",
-      media: "https://cyrus.storage.c2.liara.space/assets/IMG_2854.JPG",
+      media: "https://bucket.panteapaint.com/assets/IMG_2854.JPG",
       active: false,
     },
   ]);

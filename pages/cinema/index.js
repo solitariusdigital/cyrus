@@ -55,10 +55,8 @@ export default function Movies() {
       {!development && (
         <section className={classes.container}>
           <Image
-            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
-            blurDataURL={
-              "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
-            }
+            src={"https://bucket.panteapaint.com/assets/IMG_2851.JPG"}
+            blurDataURL={"https://bucket.panteapaint.com/assets/IMG_2851.JPG"}
             placeholder="empty"
             alt="image"
             layout="fill"
@@ -95,8 +93,8 @@ export default function Movies() {
                           onClick={() =>
                             Router.push(
                               `/cinema/${replaceSpacesAndHyphens(
-                                type[languageType]
-                              )}`
+                                type[languageType],
+                              )}`,
                             )
                           }
                         >

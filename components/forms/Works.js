@@ -38,7 +38,7 @@ export default function Works({ worksData }) {
   const [alert, setAlert] = useState("");
   const [progress, setProgress] = useState(0);
 
-  const sourceLink = "https://cyrus.storage.c2.liara.space";
+  const sourceLink = "https://bucket.panteapaint.com";
   const router = useRouter();
 
   const categories = {
@@ -82,7 +82,7 @@ export default function Works({ worksData }) {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
   const handleVideoChange = (event) => {
@@ -92,7 +92,7 @@ export default function Works({ worksData }) {
       array.map((item) => ({
         file: item,
         link: URL.createObjectURL(item),
-      }))
+      })),
     );
   };
   const removeImageInputFile = () => {

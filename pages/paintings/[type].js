@@ -44,9 +44,17 @@ export default function Type({ works, filterTypes, typeTitle }) {
     // Set the selected type based on the current typeTitle
     setSelectedType(typeTitle);
     // Filter for display works based on the selected type
+    filterTypes.forEach((work) => {
+      if (work.media[0]?.link) {
+        work.media[0].link = work.media[0].link.replace(
+          "https://cyrus.storage.c2.liara.space",
+          "https://bucket.panteapaint.com",
+        );
+      }
+    });
     const displayWorks = filterTypes.filter(
       (work) =>
-        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
+        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle,
     );
     // Group works by year and update displayWorks state
     const groupedWorks = groupItemsByYear(displayWorks);
@@ -87,7 +95,7 @@ export default function Type({ works, filterTypes, typeTitle }) {
     setSelectedType(type);
     updateCategoryActive(type);
     const displayWorks = filterTypes.filter(
-      (work) => work.fa.subCategory === type || work.en.subCategory === type
+      (work) => work.fa.subCategory === type || work.en.subCategory === type,
     );
     let groupWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupWorks);
@@ -224,7 +232,7 @@ export default function Type({ works, filterTypes, typeTitle }) {
           )}
         </div>
       </Fragment>
-    )
+    ),
   );
 
   return (
@@ -233,13 +241,13 @@ export default function Type({ works, filterTypes, typeTitle }) {
         title={typeTitle}
         description={language ? "هنرمند حرفه‌ای" : "Professional Artist"}
         canonical={`https://panteapaint.com/paintings/${replaceSpacesAndHyphens(
-          typeTitle
+          typeTitle,
         )}`}
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: `https://panteapaint.com/paintings/${replaceSpacesAndHyphens(
-            typeTitle
+            typeTitle,
           )}`,
           title: typeTitle,
           description: language ? "هنرمند حرفه‌ای" : "Professional Artist",
@@ -361,14 +369,14 @@ export async function getServerSideProps(context) {
     await dbConnect();
     const works = await worksModel.find();
     const filterTypes = works.filter(
-      (work) => work.en.category === "Paintings"
+      (work) => work.en.category === "Paintings",
     );
     return {
       props: {
         works: JSON.parse(JSON.stringify(works)),
         filterTypes: JSON.parse(JSON.stringify(filterTypes)),
         typeTitle: JSON.parse(
-          JSON.stringify(replaceSpacesAndHyphens(context.query.type))
+          JSON.stringify(replaceSpacesAndHyphens(context.query.type)),
         ),
       },
     };

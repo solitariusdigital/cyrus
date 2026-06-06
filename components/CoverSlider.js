@@ -20,7 +20,7 @@ export default function CoverSlider() {
     <div className={classes.cover}>
       <video
         className={classes.video}
-        src={"https://cyrus.storage.c2.liara.space/assets/intro.mp4" + "#t=0.1"}
+        src={"https://bucket.panteapaint.com/assets/intro.mp4" + "#t=0.1"}
         autoPlay
         loop
         playsInline

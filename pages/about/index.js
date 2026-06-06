@@ -89,10 +89,8 @@ export default function About() {
           <div className={classes.image}>
             <Image
               className={classes.image}
-              src={"https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG"}
-              blurDataURL={
-                "https://cyrus.storage.c2.liara.space/assets/IMG_2852.JPG"
-              }
+              src={"https://bucket.panteapaint.com/assets/IMG_2852.JPG"}
+              blurDataURL={"https://bucket.panteapaint.com/assets/IMG_2852.JPG"}
               placeholder="blur"
               alt="image"
               layout="fill"

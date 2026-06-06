@@ -54,10 +54,8 @@ export default function Travels() {
       {!development && (
         <section className={classes.container}>
           <Image
-            src={"https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"}
-            blurDataURL={
-              "https://cyrus.storage.c2.liara.space/assets/IMG_2851.JPG"
-            }
+            src={"https://bucket.panteapaint.com/assets/IMG_2851.JPG"}
+            blurDataURL={"https://bucket.panteapaint.com/assets/IMG_2851.JPG"}
             placeholder="empty"
             alt="image"
             layout="fill"
@@ -88,8 +86,8 @@ export default function Travels() {
                           onClick={() =>
                             Router.push(
                               `/travels/${replaceSpacesAndHyphens(
-                                type[languageType]
-                              )}`
+                                type[languageType],
+                              )}`,
                             )
                           }
                         >

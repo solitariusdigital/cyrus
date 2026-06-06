@@ -45,7 +45,7 @@ export default function Type({ works, typeTitle }) {
     setCategoryWorks(categoryWorks);
     const displayWorks = categoryWorks.filter(
       (work) =>
-        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle
+        work.fa.subCategory === typeTitle || work.en.subCategory === typeTitle,
     );
     let groupWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupWorks);
@@ -56,7 +56,7 @@ export default function Type({ works, typeTitle }) {
     setSelectedType(type);
     updateCategoryActive(type);
     const displayWorks = categoryWorks.filter(
-      (work) => work.fa.subCategory === type || work.en.subCategory === type
+      (work) => work.fa.subCategory === type || work.en.subCategory === type,
     );
     let groupWorks = groupItemsByYear(displayWorks);
     setDisplayWorks(groupWorks);
@@ -131,13 +131,13 @@ export default function Type({ works, typeTitle }) {
         title={typeTitle}
         description={language ? "هنرپیشه سینما" : "Professional Actress"}
         canonical={`https://panteapaint.com/cinema/${replaceSpacesAndHyphens(
-          typeTitle
+          typeTitle,
         )}`}
         openGraph={{
           type: "website",
           locale: "fa_IR",
           url: `https://panteapaint.com/cinema/${replaceSpacesAndHyphens(
-            typeTitle
+            typeTitle,
           )}`,
           title: typeTitle,
           description: language ? "هنرپیشه سینما" : "Professional Actress",
@@ -282,7 +282,7 @@ export async function getServerSideProps(context) {
       props: {
         works: JSON.parse(JSON.stringify(works)),
         typeTitle: JSON.parse(
-          JSON.stringify(replaceSpacesAndHyphens(context.query.type))
+          JSON.stringify(replaceSpacesAndHyphens(context.query.type)),
         ),
       },
     };

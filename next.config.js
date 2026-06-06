@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cyrus.storage.c2.liara.space",
+        hostname: "bucket.panteapaint.com",
         pathname: "**",
       },
     ],
